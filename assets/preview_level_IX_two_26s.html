@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Preview · Level IX (proposed) · Two Twenty-Sixes — Ler face only</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{
+  --tiffany:#0ABAB5; --tiffany-soft:#9cf3ef; --tiffany-deep:#022b2a;
+  --br-gold:#c8a24a; --br-gold-soft:#ffe7a0; --br-white:#f2efe4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background:#05080a;color:#eaeaea;line-height:1.55;
+  font-family:"EB Garamond","Georgia","Cambria",serif;font-size:16px;
+  min-height:100vh;padding:30px 0;
+}
+em{font-style:italic}
+.preview-caption{
+  max-width:1280px;margin:0 auto 18px;padding:0 30px;
+  font-family:"Playfair Display",serif;font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--tiffany);opacity:.6;
+}
+.level-title{
+  max-width:1280px;margin:8px auto 22px;padding:0 30px;
+}
+.level-title .tag{
+  font-family:"Playfair Display",serif;font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;opacity:.7;color:var(--tiffany);
+}
+.level-title h1{
+  font-family:"Playfair Display","Didot",serif;font-size:32px;margin-top:6px;
+  background:linear-gradient(90deg,var(--tiffany) 0%, var(--br-gold) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.level-title .sub{font-size:14px;font-style:italic;opacity:.75;margin-top:4px}
+
+/* Per-Level face block — one of the four faces of a Level body. */
+.level-face{
+  margin:18px auto;max-width:1280px;
+  border:1px solid #2a2a2a;border-left:4px solid;
+  border-radius:10px;overflow:hidden;
+  background:linear-gradient(180deg,#080c10,#05080b);
+}
+.level-face.face-c{border-left-color:#4a9eff}
+.level-face.face-k{border-left-color:#e05a3a}
+.level-face.face-f{border-left-color:#50c878}
+.level-face.face-u{border-left-color:#c084fc}
+.face-strip{
+  display:flex;align-items:baseline;gap:14px;
+  padding:14px 22px;border-bottom:1px solid #1a1a1a;background:#02060a;
+}
+.face-strip .pt{
+  font-family:"Playfair Display",serif;font-size:22px;font-weight:700;letter-spacing:.02em;
+}
+.face-c .face-strip .pt{color:#9cc6ff}
+.face-k .face-strip .pt{color:#f4a28a}
+.face-f .face-strip .pt{color:#9ee2b4}
+.face-u .face-strip .pt{color:#d9b7ff}
+.face-strip .ipa{font-family:"JetBrains Mono",monospace;font-size:12px;opacity:.5;letter-spacing:.04em}
+.face-strip .en{font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.7}
+.face-strip .role{
+  margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:11px;opacity:.55;
+}
+.face-c .face-strip .role{color:#9cc6ff}
+
+.face-body{display:grid;grid-template-columns:1fr 1fr;gap:26px;padding:20px 24px}
+@media (max-width:980px){.face-body{grid-template-columns:1fr}}
+.face-body .side.en{color:#d8fffd}
+.face-body .side.br{color:#efeadd}
+.face-body .side h3{font-family:"Playfair Display",serif;font-size:16px;margin-bottom:8px;letter-spacing:.02em}
+.face-body .side.en h3{color:var(--tiffany)}
+.face-body .side.br h3{color:var(--br-gold)}
+.face-body .side p{font-size:14.5px;line-height:1.72;margin:9px 0}
+.face-body .side em{font-style:italic}
+.face-body .side.en em{color:var(--tiffany-soft)}
+.face-body .side.br em{color:var(--br-gold-soft)}
+.eq{
+  display:block;font-family:"JetBrains Mono",monospace;
+  font-size:13.5px;padding:8px 12px;margin:8px 0;
+  background:#000a09;border-radius:5px;overflow-x:auto;color:var(--tiffany-soft);
+}
+.side.br .eq{background:#030805;color:var(--br-gold-soft)}
+
+.disclaimer{
+  margin:0 24px 18px;padding:11px 14px;
+  border-left:3px solid var(--br-gold);background:rgba(200,162,74,.05);
+  font-style:italic;font-size:13.5px;line-height:1.7;color:#f0dda8;
+}
+.disclaimer .pt{color:#a6eee9;margin-top:6px;display:block}
+
+pre.lean{
+  background:#0a0a0d;border:1px solid #2a2a2a;border-left:3px solid #9ee2b4;
+  padding:11px 14px;margin:10px 0;border-radius:6px;overflow-x:auto;
+  font-family:"JetBrains Mono","Fira Code",monospace;font-size:12.5px;
+  color:#cfeee9;line-height:1.5;white-space:pre;
+}
+.side.br pre.lean{border-left-color:var(--br-gold)}
+pre.lean .kw{color:#ffb86c}
+pre.lean .tp{color:#8be9fd}
+pre.lean .cm{color:#6272a4;font-style:italic}
+pre.lean .ax{color:#e05a3a;font-weight:700}
+
+.corr-table{
+  margin:10px 0;border-collapse:collapse;width:100%;font-size:13.5px;
+}
+.corr-table th, .corr-table td{
+  padding:7px 10px;border-bottom:1px solid #1a1a1a;vertical-align:top;
+  text-align:left;line-height:1.55;
+}
+.corr-table th{
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;opacity:.65;
+}
+.side.en .corr-table th{color:var(--tiffany-soft)}
+.side.br .corr-table th{color:var(--br-gold-soft)}
+.corr-table td .lhs{color:#9cc6ff;font-style:italic}
+.corr-table td .rhs{color:#d9b7ff;font-style:italic}
+.corr-table tr.sharp td{background:rgba(80,200,120,.04)}
+.corr-table tr.sharp td .lhs{color:#9ee2b4}
+.corr-table tr.sharp td .rhs{color:#9ee2b4}
+
+.callout-open{
+  margin:14px 0 4px;padding:12px 16px;
+  border-left:3px solid #c084fc;background:rgba(192,132,252,.05);
+  font-style:italic;font-size:13.5px;line-height:1.7;color:#e5d4ff;
+}
+.callout-honest{
+  margin:14px 0 4px;padding:12px 16px;
+  border-left:3px solid #c8a24a;background:rgba(200,162,74,.05);
+  font-style:italic;font-size:13.5px;line-height:1.7;color:#f0dda8;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-caption">Preview · Level IX (proposed) · Ler face only · placement option (c) — sibling to §8.6 of GTCT-2026-001</div>
+
+<div class="level-title">
+  <div class="tag">Level IX · proposed · Two Twenty-Sixes / Os Dois Vinte-e-Seis</div>
+  <h1>Two 26s, one numeral.</h1>
+  <div class="sub">The didactic shadow of §8.6 of GTCT-2026-001 — convergence-on-the-same-quantity-from-independent-starting-points, named and held open.</div>
+</div>
+
+<section class="level-face face-c" id="level-9-ler">
+  <header class="face-strip">
+    <span class="pt">Ler</span>
+    <span class="ipa">/leɾ/</span>
+    <span class="en">Read</span>
+    <span class="role">C · Contract · "what the book states, before any face acts on it"</span>
+  </header>
+
+  <div class="face-body">
+    <div class="side en">
+      <h3>What the two 26s are.</h3>
+      <p>The number 26 appears twice in this book. The first time, as <em>Dcrit(13)</em> — the critical dimension associated with the Tribonacci ring of size 13. Here, 26 is <em>arithmetic</em>. It is the result of one calculation:</p>
+      <span class="eq">Dcrit(13) = 2 · (13 − 1) + 2 = 26.</span>
+      <p>That one line is the entire proof. There is nothing more to show.</p>
+      <p>The second time, as the <em>bosonic-string critical dimension</em> — the unique value of D for which the Virasoro algebra is anomaly-free, with ghost central charge c<sub>b,c</sub> = −26. Here, 26 is the answer to a different question, computed by a different machinery: normal-ordering anomalies in two-dimensional conformal field theory. The question is <em>"for which D is the algebra consistent?"</em> not <em>"what is 2(13−1)+2?"</em>.</p>
+      <p>Both numbers are 26. <em>No identity between the two calculations is claimed.</em> What you are looking at is two unrelated derivations that happen to land on the same numeral — until someone proves otherwise.</p>
+      <p>This Level borrows its register from Remark 2.4 of the parent working paper, GTCT-2026-001: <em>"the notation g⁶ : 33 … denotes association, not equality. It is a descriptor of the same kind as 'D₆ symmetry: 6-fold' or 'E₈ lattice: rank 8'."</em> The two-26s situation is the higher-stakes sibling of that same discipline, and we will hold ourselves to it for the rest of this Level.</p>
+      <p>What follows, in the three faces below this one, is the honest unpacking. <em>Simular</em> shows what each side lets you compute, on each side separately. <em>Provar</em> states what is actually proved on each side, and where the gap between them currently sits — including which proof can be written today, and which one is waiting on infrastructure that does not yet exist in Mathlib4. <em>Ensinar</em> hands you the open problem this Level is built around: a functor from one side to the other, sending c* = 3 to c<sub>Virasoro</sub> = 26. Whether such a functor exists is currently unknown. That is the camará's question.</p>
+    </div>
+
+    <div class="side br">
+      <h3>O que são os dois 26.</h3>
+      <p>O número 26 aparece duas vezes neste livro. A primeira vez, como <em>Dcrit(13)</em> — a dimensão crítica associada ao anel de Tribonacci de tamanho 13. Aqui, 26 é <em>aritmética</em>. É o resultado de uma única conta:</p>
+      <span class="eq">Dcrit(13) = 2 · (13 − 1) + 2 = 26.</span>
+      <p>Essa linha é a prova inteira. Não há mais nada a mostrar.</p>
+      <p>A segunda vez, como a <em>dimensão crítica da corda bosônica</em> — o único valor de D para o qual a álgebra de Virasoro é livre de anomalia, com carga central de fantasmas c<sub>b,c</sub> = −26. Aqui, 26 é a resposta a uma pergunta diferente, calculada por uma maquinaria diferente: anomalias de ordenamento normal em teoria de campo conforme bidimensional. A pergunta é <em>"para qual D a álgebra é consistente?"</em>, e não <em>"quanto vale 2(13−1)+2?"</em>.</p>
+      <p>Ambos os números são 26. <em>Nenhuma identidade entre os dois cálculos é afirmada.</em> O que você está vendo são duas derivações sem relação que, por ora, recaem sobre o mesmo numeral — até que alguém prove o contrário.</p>
+      <p>Este Nível toma seu registro emprestado da Observação 2.4 do trabalho-pai, GTCT-2026-001: <em>"a notação g⁶ : 33 … denota associação, não igualdade. É um descritor da mesma espécie que 'simetria D₆: de ordem 6' ou 'reticulado E₈: rank 8'."</em> A situação dos dois 26 é a irmã mais grave da mesma disciplina, e vamos nos manter à altura dela pelo resto deste Nível.</p>
+      <p>O que vem a seguir, nas três faces abaixo desta, é a desconstrução honesta. <em>Simular</em> mostra o que cada lado permite computar, em cada lado separadamente. <em>Provar</em> declara o que está, de fato, demonstrado em cada lado, e onde está hoje a lacuna entre os dois — inclusive qual prova pode ser escrita já, e qual depende de infraestrutura ainda inexistente no Mathlib4. <em>Ensinar</em> entrega a você o problema em aberto em torno do qual este Nível foi construído: um functor de um lado para o outro, enviando c* = 3 a c<sub>Virasoro</sub> = 26. Se tal functor existe, hoje não se sabe. Esta é a pergunta do camará.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    "The notation g⁶ : 33 … denotes association, not equality. No algebraic identity g⁶ = 33 is claimed." — Remark 2.4, GTCT-2026-001.
+    <span class="pt">"A notação g⁶ : 33 … denota associação, não igualdade. Nenhuma identidade algébrica g⁶ = 33 é afirmada." — Observação 2.4, GTCT-2026-001.</span>
+  </div>
+</section>
+
+<!-- ═══ SIMULAR · K · Curvature ═══ -->
+<section class="level-face face-k" id="level-9-simular">
+  <header class="face-strip">
+    <span class="pt">Simular</span>
+    <span class="ipa">/simuˈlaɾ/</span>
+    <span class="en">Simulate</span>
+    <span class="role">K · Curvature · "what each side lets you compute, separately"</span>
+  </header>
+
+  <div class="face-body">
+    <div class="side en">
+      <h3>Run each side, separately, and watch them land on 26.</h3>
+      <p>The discipline of this face is to compute on each side <em>without crossing</em>. No assumed connection. No borrowed quantity. Each script produces 26 from its own ingredients, and the fact that both produce 26 is observed at the end, not asserted at the start.</p>
+
+      <h3>Side A — the W_c / Tribonacci side.</h3>
+      <p>Three arithmetic steps. Pick the rank, get the Tribonacci ring size, apply the dimension formula:</p>
+<pre class="lean"><span class="cm">-- Side A · arithmetic only · runs in your head</span>
+<span class="kw">def</span> tribSeq : <span class="tp">ℕ → ℕ</span>
+  | 0 =&gt; 1 | 1 =&gt; 1 | 2 =&gt; 2 | n+3 =&gt; tribSeq (n+2) + tribSeq (n+1) + tribSeq n
+<span class="kw">def</span> Dcrit (N : <span class="tp">ℕ</span>) : <span class="tp">ℕ</span> := 2 * (N - 1) + 2
+
+<span class="cm">#eval tribSeq 7   -- 13</span>
+<span class="cm">#eval Dcrit 13    -- 26</span></pre>
+
+      <h3>Side B — the Virasoro side.</h3>
+      <p>The algebra is given, the ghost contribution is given, the cancellation is enforced. The 26 you obtain is the answer to a different question — <em>"for which D is the worldsheet algebra anomaly-free?"</em> — answered by the algebra itself:</p>
+<pre class="lean"><span class="cm">-- Side B · operator-algebra only · runs in your hand</span>
+[Lₘ, Lₙ]  =  (m − n) · Lₘ₊ₙ  +  (c / 12) · (m³ − m) · δₘ₊ₙ,₀
+
+c_total  =  D · c_scalar  +  c_ghost
+         =  D · (+1)      +  (−26)
+
+<span class="cm">anomaly cancellation:  c_total = 0  ⟹  D = 26</span></pre>
+
+      <p>Two scripts. Two languages. Two unrelated derivations. Both land on 26. The simulation does not yet declare any connection between them, and that restraint is what lets the next face — <em>Provar</em> — propose one honestly.</p>
+
+      <div class="callout-honest">A note on what Side B borrows. The number c<sub>ghost</sub> = −26 is itself the result of a normal-ordering calculation in 2d CFT (the b,c-ghost stress tensor) that is not reproduced inside this face. We use it as a given, the way Side A uses 2(N−1)+2 as a given. Both sides are <em>conditional simulations</em>. Both load-bearing inputs are made explicit in <em>Provar</em>.</div>
+    </div>
+
+    <div class="side br">
+      <h3>Rode cada lado, separadamente, e veja ambos pousarem em 26.</h3>
+      <p>A disciplina desta face é computar de cada lado <em>sem cruzar</em>. Sem conexão assumida. Sem grandeza emprestada. Cada script produz 26 a partir de seus próprios ingredientes, e o fato de ambos produzirem 26 é uma <em>observação</em> ao final, não uma <em>afirmação</em> no início.</p>
+
+      <h3>Lado A — o lado W_c / Tribonacci.</h3>
+      <p>Três passos aritméticos. Escolha o rank, obtenha o tamanho do anel de Tribonacci, aplique a fórmula da dimensão:</p>
+<pre class="lean"><span class="cm">-- Lado A · só aritmética · roda na sua cabeça</span>
+<span class="kw">def</span> tribSeq : <span class="tp">ℕ → ℕ</span>
+  | 0 =&gt; 1 | 1 =&gt; 1 | 2 =&gt; 2 | n+3 =&gt; tribSeq (n+2) + tribSeq (n+1) + tribSeq n
+<span class="kw">def</span> Dcrit (N : <span class="tp">ℕ</span>) : <span class="tp">ℕ</span> := 2 * (N - 1) + 2
+
+<span class="cm">#eval tribSeq 7   -- 13</span>
+<span class="cm">#eval Dcrit 13    -- 26</span></pre>
+
+      <h3>Lado B — o lado de Virasoro.</h3>
+      <p>A álgebra é dada, a contribuição dos fantasmas é dada, o cancelamento é imposto. O 26 que você obtém aqui responde a uma pergunta diferente — <em>"para qual D a álgebra na folha-mundo é livre de anomalia?"</em> — respondida pela própria álgebra:</p>
+<pre class="lean"><span class="cm">-- Lado B · só álgebra de operadores · roda na sua mão</span>
+[Lₘ, Lₙ]  =  (m − n) · Lₘ₊ₙ  +  (c / 12) · (m³ − m) · δₘ₊ₙ,₀
+
+c_total  =  D · c_escalar  +  c_fantasma
+         =  D · (+1)       +  (−26)
+
+<span class="cm">cancelamento de anomalia:  c_total = 0  ⟹  D = 26</span></pre>
+
+      <p>Dois scripts. Duas linguagens. Duas derivações sem relação. Ambos pousam em 26. A simulação ainda <em>não</em> declara qualquer conexão entre os dois, e essa contenção é o que permite à próxima face — <em>Provar</em> — propor uma honestamente.</p>
+
+      <div class="callout-honest">Uma nota sobre o que o Lado B toma emprestado. O número c<sub>fantasma</sub> = −26 é, ele próprio, resultado de um cálculo de ordenamento normal em CFT 2d (o tensor de tensão dos fantasmas b,c) que não está reproduzido nesta face. Usamos como dado, do mesmo modo que o Lado A usa 2(N−1)+2 como dado. Ambos os lados são <em>simulações condicionais</em>. Ambas as entradas que sustentam tudo são explicitadas em <em>Provar</em>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROVAR · F · Filter ═══ -->
+<section class="level-face face-f" id="level-9-provar">
+  <header class="face-strip">
+    <span class="pt">Provar</span>
+    <span class="ipa">/pɾoˈvaɾ/</span>
+    <span class="en">Prove · taste · try-on</span>
+    <span class="role">F · Filter · "what is provable today, and what is filed as obligation"</span>
+  </header>
+
+  <div class="face-body">
+    <div class="side en">
+      <h3>The conditional theorem, and the named axiom under it.</h3>
+      <p>What can be proved today is the <em>conditional</em>: <em>given</em> a stated relationship between fold rank and worldsheet central charge, the equality at rank 3 follows in a single rewrite. The deep physics — that this stated relationship is the right one — is held as a named axiom and filed as an open verification target.</p>
+
+      <p>The Lean stub:</p>
+<pre class="lean"><span class="cm">-- Working axiom. The deep physics lives here.</span>
+<span class="ax">axiom</span> fold_central_charge (k : <span class="tp">ℕ</span>) :
+    centralCharge (foldTheory k) = Dcrit (tribSeq (2 * k + 1))
+
+<span class="kw">theorem</span> rank3_gives_c26 :
+    centralCharge (foldTheory 3) = 26 := <span class="kw">by</span>
+  rw [fold_central_charge]
+  simp [tribSeq_7, Dcrit_rank3]</pre>
+
+      <p>What this stub does is honest in the same way the parent paper is honest at Remark 2.3. It separates the <em>structural claim</em> (the fold-to-central-charge correspondence) from the <em>arithmetic consequence</em> (D = 26 in the rank-3 case). The arithmetic is mechanically verified. The structural claim is named, dated, and filed as an AXLE issue — not pretended-proved, not demoted to numerology, not collapsed into the consequence.</p>
+
+      <h3>Direction 2 — modular invariance — held alongside, not collapsed in.</h3>
+      <p>The W_c double-root condition selects c* = 3 by a special-value mechanism: a polynomial coefficient hits zero, two roots coincide, and the moduli space pinches off. The bosonic-string partition function selects D = 26 by a structurally identical mechanism: the unique D for which the Dedekind-η factors cancel and the 1-loop integrand is modular-invariant under SL(2,ℤ). Both are <em>special-value selections under a self-consistency condition</em>. We hold them side by side in this face, not because they have been shown equivalent, but because the parallel is sharp enough to write down — and sharpening parallels into theorems is the work of <em>Ensinar</em>.</p>
+
+      <div class="callout-honest">What is <em>not</em> proved by anything in this face: that <code>foldTheory k</code> can be defined inside Mathlib4. It cannot, today. The definition presupposes a Lean development of 2d CFT (stress tensors, OPEs, mode expansions, the b,c-ghost normal-ordering calculation) that does not yet exist in the library. Until it does, <code>foldTheory</code> is a placeholder symbol. The honest reader notes this; the <em>Ensinar</em> face turns the noting into the open problem.</div>
+    </div>
+
+    <div class="side br">
+      <h3>O teorema condicional, e o axioma nomeado sob ele.</h3>
+      <p>O que pode ser provado hoje é o <em>condicional</em>: <em>dada</em> uma relação declarada entre o rank do dobramento e a carga central da folha-mundo, a igualdade no rank 3 segue por uma única reescrita. A física profunda — de que essa relação é a relação certa — é mantida como axioma nomeado e arquivada como alvo de verificação aberto.</p>
+
+      <p>O esqueleto em Lean:</p>
+<pre class="lean"><span class="cm">-- Axioma de trabalho. A física profunda vive aqui.</span>
+<span class="ax">axiom</span> fold_central_charge (k : <span class="tp">ℕ</span>) :
+    centralCharge (foldTheory k) = Dcrit (tribSeq (2 * k + 1))
+
+<span class="kw">theorem</span> rank3_gives_c26 :
+    centralCharge (foldTheory 3) = 26 := <span class="kw">by</span>
+  rw [fold_central_charge]
+  simp [tribSeq_7, Dcrit_rank3]</pre>
+
+      <p>O que este esqueleto faz é honesto no mesmo sentido em que a Observação 2.3 do trabalho-pai é honesta. Ele separa a <em>afirmação estrutural</em> (a correspondência dobramento ↔ carga central) da <em>consequência aritmética</em> (D = 26 no caso rank 3). A aritmética é verificada mecanicamente. A afirmação estrutural é nomeada, datada e arquivada como issue da AXLE — não falsamente demonstrada, não rebaixada a numerologia, não engolida pela consequência.</p>
+
+      <h3>Direção 2 — invariância modular — mantida ao lado, não fundida.</h3>
+      <p>A condição da raiz dupla em W_c seleciona c* = 3 por um mecanismo de valor especial: um coeficiente polinomial vai a zero, duas raízes coincidem, o espaço de moduli aperta. A função de partição da corda bosônica seleciona D = 26 por um mecanismo estruturalmente idêntico: o único D para o qual os fatores de Dedekind-η cancelam e o integrando de um laço é invariante modular sob SL(2,ℤ). Ambos são <em>seleções de valor especial sob uma condição de auto-consistência</em>. Mantemo-los lado a lado nesta face, não porque tenham sido mostrados equivalentes, mas porque o paralelo é nítido o bastante para se escrever — e afiar paralelos até virarem teoremas é o trabalho do <em>Ensinar</em>.</p>
+
+      <div class="callout-honest">O que <em>não</em> é provado por nada nesta face: que <code>foldTheory k</code> possa sequer ser definido dentro do Mathlib4. Hoje, não pode. A definição pressupõe um desenvolvimento em Lean da CFT 2d (tensores de tensão, OPEs, expansões em modos, cálculo de ordenamento normal dos fantasmas b,c) que ainda não existe na biblioteca. Até que exista, <code>foldTheory</code> é símbolo de espera. O leitor honesto registra isso; a face <em>Ensinar</em> transforma o registro em problema em aberto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENSINAR · U · Unfold ═══ -->
+<section class="level-face face-u" id="level-9-ensinar">
+  <header class="face-strip">
+    <span class="pt">Ensinar</span>
+    <span class="ipa">/ẽsiˈnaɾ/</span>
+    <span class="en">Teach · point out</span>
+    <span class="role">U · Unfold · "what the book hands the camará, unfinished"</span>
+  </header>
+
+  <div class="face-body">
+    <div class="side en">
+      <h3>The open verification target.</h3>
+      <p>The question this Level hands you, camará, is a single one: <em>prove or disprove the axiom <code>fold_central_charge</code></em>. That is the work.</p>
+      <p>If <code>fold_central_charge</code> is true, the chain Tribonacci → fold → free-scalar worldsheet → ghost-cancelled Virasoro becomes a single mathematical object, and the two 26s become one 26 by a stated functorial route — F : C → V, sending the rank-3 fold of W_c to the c = 26 vacuum representation of the Virasoro algebra, with structural data preserved as set out below. If it is false, the two 26s remain a coincidence — and we will say so, in this same book, replacing the Lean stub with its negation and adding the sentence that explains why. Either outcome is honest. Either outcome is publishable. Neither outcome is foreclosed by the writing in this Level.</p>
+
+      <h3>The four structural correspondences F is expected to preserve.</h3>
+      <p>To narrow the search, here are the four maps the candidate functor F : C → V is required to carry. Each is a hypothesis. Each is potentially a thesis chapter on its own.</p>
+      <table class="corr-table">
+        <thead><tr><th>Source side (C — catastrophe / Tribonacci)</th><th>Target side (V — Virasoro / 2d CFT)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="lhs">Double-root condition  W_c'(1) = 0</span></td><td><span class="rhs">Marginally deformed theory (operator neither relevant nor irrelevant)</span></td></tr>
+          <tr><td><span class="lhs">Distinct branch at q = −2</span></td><td><span class="rhs">Existence of a second vacuum / non-perturbative sector</span></td></tr>
+          <tr><td><span class="lhs">Tribonacci recurrence  η³ = η² + η + 1</span></td><td><span class="rhs">Rank-3 OPE algebra closing on itself (stress-tensor OPE)</span></td></tr>
+          <tr class="sharp"><td><span class="lhs">det(T₃) = 1, with T₃ ∈ SL(3,ℤ)</span></td><td><span class="rhs">Modular invariance, with worldsheet group Sp(2g,ℤ)</span></td></tr>
+        </tbody>
+      </table>
+      <p>Of the four, the last one — highlighted — is the sharpest. SL(3,ℤ) and Sp(2g,ℤ) are both groups of integer volume-preserving transformations. <em>det = 1 is the same statement on both sides.</em> Begin there. (3) is the next sharpest, but the fold-as-stress-tensor identification is delicate; (4) lets you exhibit a structurally honest map first, before that delicacy is addressed.</p>
+
+      <h3>The status of the formula 2(N−1) + 2 itself, plainly.</h3>
+      <p>The formula <code>Dcrit(N) = 2(N − 1) + 2</code> is, today, an <em>ansatz</em>. To make it a theorem rather than a label, the count "N − 1 = 12" must <em>mean</em> something — perhaps "12 transverse oscillators, fixed after the two light-cone directions are chosen," perhaps something else — and the +2 must be the same +2 as the bosonic-string light-cone count. If that decomposition holds, the formula reproduces the standard string count from the rank-3 algebra. If it does not, the formula is a coincidence with a memorable look. Either outcome is honest. Either outcome moves the project forward. The current writing forecloses neither.</p>
+
+      <div class="callout-open">Cross-references for the camará: §8.6 of GTCT-2026-001 names the convergence-from-independent-starting-points genre this Level lives in (Navrátil η⁻ᵏ as the prior art); the Lean stub above will be filed as <code>AXLE Issue # tba</code> (alongside Issue #12, the κ-Lipschitz obligation from the Vol IV Session S3 mini-curso); the Mathlib4 prerequisites still missing are 2d CFT, stress-tensor formalism, and the b,c-ghost system. The camará is welcome at any of those entrances.</div>
+    </div>
+
+    <div class="side br">
+      <h3>O alvo de verificação aberto.</h3>
+      <p>A pergunta que este Nível entrega a você, camará, é uma só: <em>prove ou refute o axioma <code>fold_central_charge</code></em>. Esse é o trabalho.</p>
+      <p>Se <code>fold_central_charge</code> for verdadeiro, a cadeia Tribonacci → dobramento → folha-mundo de escalares livres → Virasoro com fantasmas cancelados torna-se um único objeto matemático, e os dois 26 tornam-se um 26 por uma rota functorial declarada — F : C → V, enviando o dobramento de rank 3 de W_c para a representação de vácuo c = 26 da álgebra de Virasoro, com a estrutura preservada conforme abaixo. Se for falso, os dois 26 permanecem coincidência — e diremos isso, neste mesmo livro, trocando o esqueleto Lean por sua negação e acrescentando a frase que explica por quê. Qualquer dos desfechos é honesto. Qualquer dos desfechos é publicável. Nenhum dos desfechos está vetado pela escrita deste Nível.</p>
+
+      <h3>As quatro correspondências estruturais que F deve preservar.</h3>
+      <p>Para estreitar a busca, eis os quatro mapas que o functor candidato F : C → V deve carregar. Cada um é uma hipótese. Cada um, sozinho, pode dar um capítulo de tese.</p>
+      <table class="corr-table">
+        <thead><tr><th>Lado-fonte (C — catástrofe / Tribonacci)</th><th>Lado-alvo (V — Virasoro / CFT 2d)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="lhs">Condição de raiz dupla  W_c'(1) = 0</span></td><td><span class="rhs">Teoria deformada marginalmente (operador nem relevante nem irrelevante)</span></td></tr>
+          <tr><td><span class="lhs">Ramo distinto em q = −2</span></td><td><span class="rhs">Existência de um segundo vácuo / setor não-perturbativo</span></td></tr>
+          <tr><td><span class="lhs">Recorrência de Tribonacci  η³ = η² + η + 1</span></td><td><span class="rhs">Álgebra OPE de rank 3 fechando sobre si (OPE do tensor de tensão)</span></td></tr>
+          <tr class="sharp"><td><span class="lhs">det(T₃) = 1, com T₃ ∈ SL(3,ℤ)</span></td><td><span class="rhs">Invariância modular, com grupo da folha-mundo Sp(2g,ℤ)</span></td></tr>
+        </tbody>
+      </table>
+      <p>Das quatro, a última — em destaque — é a mais nítida. SL(3,ℤ) e Sp(2g,ℤ) são ambos grupos de transformações inteiras que preservam volume. <em>det = 1 é a mesma afirmação dos dois lados.</em> Comece por aí. (3) é a próxima mais nítida, mas a identificação dobramento-como-tensor-de-tensão é delicada; (4) permite exibir um mapa estruturalmente honesto primeiro, antes que essa delicadeza seja enfrentada.</p>
+
+      <h3>O status da fórmula 2(N−1) + 2 ela mesma, sem rodeios.</h3>
+      <p>A fórmula <code>Dcrit(N) = 2(N − 1) + 2</code> é, hoje, um <em>ansatz</em>. Para que se torne teorema em vez de rótulo, a contagem "N − 1 = 12" precisa <em>significar</em> algo — talvez "12 osciladores transversos, fixados depois de se escolher as duas direções do cone de luz", talvez outra coisa — e o +2 precisa ser o mesmo +2 da contagem de cone de luz da corda bosônica. Se essa decomposição se sustentar, a fórmula reproduz a contagem de cordas a partir da álgebra de rank 3. Se não se sustentar, a fórmula é uma coincidência de aparência memorável. Qualquer dos desfechos é honesto. Qualquer dos desfechos move o projeto. A escrita atual não veta nenhum dos dois.</p>
+
+      <div class="callout-open">Referências cruzadas para o camará: §8.6 de GTCT-2026-001 nomeia o gênero "convergência a partir de pontos de partida independentes" em que este Nível habita (η⁻ᵏ de Navrátil como precedente); o esqueleto Lean acima será arquivado como <code>AXLE Issue # tba</code> (ao lado da Issue #12, a obrigação κ-Lipschitz do mini-curso da Sessão S3 do Vol. IV); os pré-requisitos do Mathlib4 ainda ausentes são CFT 2d, formalismo do tensor de tensão e o sistema de fantasmas b,c. O camará é bem-vindo em qualquer dessas entradas.</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
