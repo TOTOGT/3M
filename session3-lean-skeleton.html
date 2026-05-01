@@ -138,7 +138,7 @@ MathJax = {
     <li><strong style="color:var(--t);">Reuse.</strong> The operator chain $G = U\circ F\circ K\circ C$ is a structural claim about every chapter in GTCT. A Lean 4 formalisation of $G$ in <em>one</em> setting (here: the dm³ ODE) becomes a <em>template</em> for the other chapters.</li>
     <li><strong style="color:var(--t);">Discovery.</strong> Writing the proof down in Lean 4 is what <em>exposed</em> AXLE Issue #12: the Lipschitz estimate that our paper hand-waves. Lean would not accept the hand-wave. That is how the gap became a named issue.</li>
   </ul>
-  <div class="insight">Formalisation is not about certainty. It is about <em>locating</em> uncertainty. The gap between $\varepsilon_0 = 1/3$ (Gronwall) and $r_\star = 0.80$ (numerics) is a mathematical gap. Issue #12 is a <em>formal</em> gap — a place where the Lean proof currently says <code style="color:var(--k);font-family:inherit;">sorry</code>. Both deserve attention.</div>
+  <div class="insight">Formalisation locates uncertainty — and sometimes it finds that a claim is not just imprecise but <em>wrong</em>. The symmetric Gronwall ball $|\varepsilon_0| = 1/3$ has been <strong style="color:var(--k);">removed</strong> from the canonical Lean file (<code>GCTC/Chain_updated.lean</code>, 2026-04-18): numerics (DOP853; <code>FINDINGS.md</code>) show the claim is false on the inner side — $r(0) = 0.667$ collapses in finite time. The basin is asymmetric: outer side is wide (all $r_0 > 1$ tested), inner boundary is $r_\star \approx 0.80$. On the positive side, <code style="color:var(--f);font-family:inherit;">gronwall_outer</code> is now <em>proved</em>. Two obligations remain as <code style="color:var(--k);font-family:inherit;">sorry</code> and two as <code style="color:var(--gd);font-family:inherit;">axiom</code> (pending the dm³ ODE formalisation).</div>
 </div>
 <!-- ═══ §2 CHAIN.LEAN ═══ -->
 <div class="section">
@@ -179,41 +179,45 @@ MathJax = {
 <!-- ═══ §3 SPIRAL RETURN ═══ -->
 <div class="section">
   <div class="slabel">§3 · The Theorem</div>
-  <h2><code>SpiralReturn</code> — Formalising Theorem 2.1</h2>
-  <p>The ODE itself is a Picard–Lindelöf application. Mathlib's <code>ODE.Gronwall</code> and <code>ODE.PicardLindelof</code> give us existence, uniqueness, and the Gronwall lemma. The skeleton below shows the statement in its current form.</p>
-  <pre class="lean"><span class="com">/- AXLE/SpiralReturn.lean — Theorem 2.1 (symmetric) -/</span>
-<span class="kw">import</span> AXLE.Chain
-<span class="kw">import</span> Mathlib.Analysis.ODE.PicardLindelof
-<span class="kw">import</span> Mathlib.Analysis.SpecialFunctions.Log.Basic
+  <h2><code>GCTC/Chain_updated.lean</code> — Current Proof State</h2>
+  <p>The canonical Lean file is now <code>GCTC/Chain_updated.lean</code> (updated 2026-04-18 in the GTCT repo). The symmetric $\varepsilon_0 = 1/3$ formulation has been replaced by an asymmetric-basin model. The snippet below shows the two key theorems: one <em>proved</em>, one still <code style="color:var(--k);">sorry</code>.</p>
+  <pre class="lean"><span class="com">/- GCTC/Chain_updated.lean — updated 2026-04-18 -/</span>
+<span class="com">-- ε₀ = 1/3 removed: false on the inner side (see FINDINGS.md).</span>
+<span class="com">-- Replaced with asymmetric basin: r_star ≈ 0.80 inner, unbounded outer.</span>
 
-<span class="kw">namespace</span> AXLE
+<span class="com">/-- Inner-basin boundary (empirical; replaces ε₀ = 1/3). -/</span>
+<span class="kw">noncomputable def</span> <span class="name">r_star</span> : <span class="type">ℝ</span> := <span class="num">0.8</span>
 
-<span class="com">/-- The dm³ radial equation at ε = 2. -/</span>
-<span class="kw">noncomputable def</span> <span class="name">dm3Radial</span> (z : <span class="type">ℝ</span>) (r : <span class="type">ℝ</span>) : <span class="type">ℝ</span> :=
-  r * (<span class="num">1</span> - r^<span class="num">2</span>) + <span class="num">2</span> * (r - <span class="num">1</span>) * Real.exp (-z)
+<span class="com">/-- Outer-basin Gronwall bound — PROVED. -/</span>
+<span class="kw">theorem</span> <span class="name">gronwall_outer</span>
+    (μ_max ε μ_bound : <span class="type">ℝ</span>) (hμ_bound : <span class="num">0</span> &lt; μ_bound)
+    (hμ : μ_max + <span class="num">3</span> * ε ≤ -μ_bound) :
+    ∃ C : <span class="type">ℝ</span>, <span class="num">0</span> &lt; C ∧ ∀ t : <span class="type">ℝ</span>, <span class="num">0</span> ≤ t →
+      Real.exp ((μ_max + <span class="num">3</span> * ε) * t) ≤ C * Real.exp (-μ_bound * t) := <span class="kw">by</span>
+  refine ⟨<span class="num">1</span>, one_pos, ?_⟩
+  intro t ht; rw [one_mul]
+  apply Real.exp_le_exp.mpr
+  exact mul_le_mul_of_nonneg_right hμ ht   <span class="com">-- ← proved</span>
 
-<span class="com">/-- Theorem 2.1 (symmetric): if |r₀ - 1| &lt; 1/3 and z₀ ≥ log 2,
-    the solution converges exponentially to r = 1 at rate -2. -/</span>
-<span class="kw">theorem</span> <span class="name">spiralReturn</span>
-    {r₀ z₀ : <span class="type">ℝ</span>}
-    (hr : |r₀ - <span class="num">1</span>| &lt; <span class="num">1</span>/<span class="num">3</span>)
-    (hz : z₀ ≥ Real.log <span class="num">2</span>) :
-    ∃ (r : <span class="type">ℝ → ℝ</span>), ∃ (μ : <span class="type">ℝ</span>), μ &lt; <span class="num">0</span> ∧
-      r <span class="num">0</span> = r₀ ∧
-      (∀ t ≥ <span class="num">0</span>, |r t - <span class="num">1</span>| ≤ |r₀ - <span class="num">1</span>| * Real.exp (μ * t)) := <span class="kw">by</span>
-  <span class="com">-- Step 1: apply Picard–Lindelöf for local existence</span>
-  <span class="com">-- Step 2: derive the scalar inequality ½ d/dt u² ≤ (-2 + 3ε₀ + εe^{-z₀}) u²</span>
-  <span class="com">-- Step 3: apply Mathlib.Analysis.ODE.Gronwall</span>
-  <span class="com">-- Step 4: the Lipschitz bound needed at Step 2 — see Issue #12</span>
-  <span class="sorry">sorry</span>
+<span class="com">/-- Spiral Return (T1) — corrected hypothesis; still sorry. -/</span>
+<span class="kw">theorem</span> <span class="name">spiral_return_exists</span>
+    {X : <span class="type">Type*</span>} [MetricSpace X] [SeminormedAddCommGroup X]
+    (G : GChain X) (x₀ : X)
+    (h_nontrivial : GChain.iter G <span class="num">64</span> x₀ ≠ x₀) :
+    ∃ sr : SpiralReturn X G, sr.x₀' ≠ sr.x₀ := <span class="kw">by</span>
+  <span class="sorry">sorry</span>   <span class="com">-- pending AXLE integration of dm³ flow dynamics</span>
 
-<span class="kw">end</span> AXLE</pre>
-  <h3>What is proved, what is <code style="color:var(--k);">sorry</code></h3>
-  <p>Steps 1 and 3 of the proof sketch are <em>library calls</em>. Mathlib's <code>ODE.PicardLindelof</code> and <code>ODE.Gronwall</code> are complete, maintained, and well-documented. Step 2 — producing the scalar inequality from the radial equation — needs a bound on the coupling term. That bound is the content of Issue #12.</p>
+<span class="com">-- Two axioms mark the ODE dependency boundary:</span>
+<span class="com">--   axiom inner_basin_is_asymmetric  (inner side; TODO(AXLE) replace with ODE statement)</span>
+<span class="com">--   axiom outer_basin_unbounded      (outer side; TODO(AXLE) tie to dm³ flow)</span>
+
+<span class="kw">end</span> GCTC</pre>
+  <h3>What is proved, what is <code style="color:var(--k);">sorry</code>, what is <code style="color:var(--gd);">axiom</code></h3>
+  <p><code style="color:var(--f);">gronwall_outer</code> is now <em>proved</em> — the corrected hypothesis ($\mu_{\max} + 3\varepsilon \leq -\mu_{\text{bound}}$, stronger than the old $< 0$) was what made the proof go through. Two theorems remain as <code style="color:var(--k);">sorry</code>: <code>spiral_return_exists</code> and <code>poincare_collatz</code>. Two further claims are declared as <code style="color:var(--gd);">axiom</code> — a permanent dependency on the dm³ ODE once it is formalised in Mathlib: <code>inner_basin_is_asymmetric</code> and <code>outer_basin_unbounded</code>. An <code>axiom</code> is not a <code>sorry</code>: it extends the logical foundation, which means the "0 extra axioms" headline is only recoverable once those two are replaced with real ODE proofs.</p>
   <div class="theorem">
-    <div class="thm-label">Lemma 2.1.A · The scalar inequality</div>
-    <div class="thm-title">Given $|u(0)| &lt; 1/3$ and $z(0) \geq \log 2$, there exists $\eta &gt; 0$ such that along solutions of dm³, $\tfrac12 \frac{d}{dt} u^2 \leq -\eta\, u^2$ for all $t \geq 0$.</div>
-    <div class="thm-body">This is what Step 2 must deliver. Given it, Step 3 is a one-line application of <code>Mathlib.Analysis.ODE.Gronwall</code>. The explicit $\eta$ is $2 - 3\varepsilon_0 - 1 &gt; 0$ when $\varepsilon_0 &lt; 1/3$. The missing input is a <em>Lipschitz bound on the coupling</em> that is uniform for all $t$ at which $|u| &lt; \varepsilon_0$. Stated as an obligation: $\kappa(r,z) := \varepsilon(r-1)e^{-z}$ is $L$-Lipschitz in $r$ on $\{|r-1| &lt; 1/3\} \times \{z \geq \log 2 - \delta\}$ for some explicit $L$. That is Issue #12.</div>
+    <div class="thm-label">Lemma 2.1.A · The outer-basin decay bound (proved)</div>
+    <div class="thm-title">For all $r_0 > 1$ (outer side), the dm³ radial flow converges exponentially to $r = 1$ at rate $\mu_{\max} = -2$. The inner boundary is asymmetric: $r_\star \approx 0.80$ (not $1 - 1/3 = 0.667$).</div>
+    <div class="thm-body">The decay-exponent sign — $(\mu_{\max} + 3\varepsilon) &lt; 0$ — is proved by <code>gronwall_outer</code>. The full Gronwall ODE integration (that the contraction bound follows from the exponent) is in the book proofs (GTCT-2026-001 §5) and is not yet formalised in Lean. The symmetric $\varepsilon_0 = 1/3$ claim has been removed because numerics show $r(0) = 0.667$ collapses — the inner boundary of the basin is $r_\star \approx 0.80$, not $1 - 1/3$. What remains open: <code>spiral_return_exists</code>, <code>poincare_collatz</code>, and two <code>axiom</code> placeholders for the ODE boundary conditions.</div>
   </div>
 </div>
 <!-- ═══ §4 ISSUE #12 ═══ -->
@@ -259,7 +263,7 @@ MathJax = {
     </div>
     <div class="issue-body">Formalise S1's board exercise: $\{r(t) &gt; 1\}$ is positively invariant. Done via <code>Mathlib.Analysis.ODE.Invariant</code>.</div>
   </div>
-  <div class="warn"><strong style="color:#f87171;">Beyond #12.</strong> The sharp basin $r_\star \approx 0.80$ is a separate research project, not a formalisation gap. No amount of Lean will sharpen $1/3$ to $0.80$ — that requires a new mathematical argument, probably a Lyapunov function with sign-aware structure. If you want to work on that, the numeric lab (<code>labs/dm3_numeric.py</code>) is the place to start: it reproduces Table 1 in one file.</div>
+  <div class="warn"><strong style="color:#f87171;">The ε₀ = 1/3 claim is false on the inner side.</strong> This is no longer a sharpening gap — it is a correction. DOP853 numerics confirm $r(0) = 0.667$ (the symmetric Gronwall boundary) collapses in finite time. The canonical Lean file (<code>GCTC/Chain_updated.lean</code>) replaces the symmetric ball with the asymmetric pair $(r_\star \approx 0.80,\ \infty)$. The outer Gronwall bound is proved; the inner boundary is currently an <code>axiom</code> pending ODE formalisation. If you want to close it, start at <code>FINDINGS.md</code> in the GTCT repo and the numeric sweep in <code>dm3_inner_basin.png</code>.</div>
 </div>
 <!-- ═══ §5 CONTRIBUTION ═══ -->
 <div class="section">
@@ -289,16 +293,16 @@ MathJax = {
   <div class="slabel">§6 · Closing</div>
   <h2>What the Course Did</h2>
   <p>In three hours we walked from <em>contact 3-manifolds</em> (S1) through <em>Theorem 2.1 with its Gronwall basin</em> (S2) to a <em>Lean 4 formalisation with one open obligation</em> (S3). The formalisation is live, public, and welcomes contributions. The sharp basin $r_\star$ is open research. The dm³ simulator runs in any browser.</p>
-  <div class="insight">If you contribute a proof of <code>kappa_lipschitz</code>, you close the last <code>sorry</code> in the symmetric proof of Theorem 2.1. The operator chain $G = U\circ F\circ K\circ C$ then has one fully verified instance. That is a milestone: a GTCT theorem with a machine-checked proof. Even if the sharp basin remains open.</div>
+  <div class="insight">The outer-basin Gronwall bound (<code>gronwall_outer</code>) is proved. The remaining open obligations are: <code>spiral_return_exists</code> (sorry — needs dm³ flow dynamics), <code>poincare_collatz</code> (sorry — needs g³³ convergence), and two <code>axiom</code> declarations for the inner/outer ODE boundary conditions. Closing those axioms into real theorems — once Mathlib formalises a suitable ODE module for the dm³ system — would give GTCT its first fully machine-checked instance.</div>
   <div class="theorem">
     <div class="thm-label">Final take-away</div>
     <div class="thm-title">The map of the territory.</div>
     <div class="thm-body">
       <ul style="margin:.4rem 0 0 1.4rem;">
         <li>The <em>geometry</em> (S1) forces a helix. The contact form is not decoration; it is what $\Gamma$ lives on.</li>
-        <li>The <em>analysis</em> (S2) proves exponential contraction at rate $-2$, on a Gronwall ball $|r - 1| &lt; 1/3$.</li>
-        <li>The <em>numerics</em> (S2) correct the inner boundary to $r_\star \approx 0.80$ — stricter than Gronwall, not weaker.</li>
-        <li>The <em>formalisation</em> (S3) reduces the whole symmetric theorem to one Mathlib-style lemma: <code>kappa_lipschitz</code>.</li>
+        <li>The <em>analysis</em> (S2) proves exponential contraction at rate $-2$ on the outer basin ($r_0 > 1$). The symmetric $\varepsilon_0 = 1/3$ claim is false on the inner side.</li>
+        <li>The <em>numerics</em> (S2) establish the asymmetric basin: outer side unbounded, inner boundary $r_\star \approx 0.80$.</li>
+        <li>The <em>formalisation</em> (S3) has proved <code>gronwall_outer</code>; two <code>sorry</code>s and two <code>axiom</code>s mark the boundary of what Lean can currently check without a dm³ ODE module in Mathlib.</li>
       </ul>
       <p style="margin-top:.7rem;">Four layers, four contributions, one helix. Obrigado, Natal.</p>
     </div>
