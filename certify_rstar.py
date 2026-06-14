@@ -8,7 +8,7 @@ contact-geometric ODE system.
 
 Author  : Pablo Nogueira Grossi  |  G6 LLC  |  Newark, NJ  |  2026
 ORCID   : 0009-0000-6496-2186
-Zenodo  : 10.5281/zenodo.19117400
+Zenodo  : 10.5281/zenodo.19117399
 License : MIT
 
 System (cylindrical contact coordinates; contact form alpha = dz - r^2 dtheta)
@@ -154,7 +154,7 @@ def main():
     print("=" * 62)
     print("  dm3 Inner Basin Boundary Certification")
     print("  Pablo Nogueira Grossi  |  G6 LLC  |  2026")
-    print("  DOI: 10.5281/zenodo.19117400")
+    print("  DOI: 10.5281/zenodo.19117399")
     print("=" * 62)
     print()
     print("  System:")
