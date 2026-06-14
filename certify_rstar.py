@@ -3,7 +3,7 @@
 """
 certify_rstar.py
 ================
-Numerical certification of the inner basin boundary r* for the dm3
+Numerical certification of the inner basin boundary r* for the dm³
 contact-geometric ODE system.
 
 Author  : Pablo Nogueira Grossi  |  G6 LLC  |  Newark, NJ  |  2026
@@ -74,7 +74,7 @@ BISECT_TOL = 1e-7    # stop when interval < this
 
 # ---------------------------------------------------------------------------
 def dm3_rhs(t: float, y: list) -> list:
-    """Right-hand side of the dm3 system (theta decoupled; evolve r and z)."""
+    """Right-hand side of the dm³ system (theta decoupled; evolve r and z)."""
     r, z = y
     # Clamp exponent to avoid overflow; exp(-z) is large when z is very negative
     ez = np.exp(min(-z, 200.0))
@@ -152,7 +152,7 @@ def bisect_rstar(lo: float = BISECT_LO,
 def main():
     print()
     print("=" * 62)
-    print("  dm3 Inner Basin Boundary Certification")
+    print("  dm³ Inner Basin Boundary Certification")
     print("  Pablo Nogueira Grossi  |  G6 LLC  |  2026")
     print("  DOI: 10.5281/zenodo.19117399")
     print("=" * 62)
