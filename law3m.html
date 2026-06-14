@@ -137,7 +137,7 @@ footer a{color:var(--gd);text-decoration:none;}
   <div class="axiom">
     <span class="axiom-num">Equation I · Radial Contraction</span>
     <div class="axiom-title">ṙ = r(1 − r²) + ε(r − 1)e<sup>−z</sup></div>
-    <p>The first term $r(1-r^2)$ is a logistic contraction: for $r > 1$ it is negative (pulls inward), for $r < 1$ it is positive (pushes outward). The unit cylinder $r = 1$ is the unique zero — it is the <em>target</em> of the radial dynamics. The second term is the coupling: the exponential factor $e^{-z}$ makes the basin asymmetric. At height $z \gg 1$ the coupling vanishes and the contraction is clean; near $z = 0$ the correction shifts the real basin boundary from the symmetric $r = 2/3$ to $r^* \approx 0.80$.</p>
+    <p>The first term $r(1-r^2)$ is a logistic contraction: for $r > 1$ it is negative (pulls inward), for $r < 1$ it is positive (pushes outward). The unit cylinder $r = 1$ is the unique zero — it is the <em>target</em> of the radial dynamics. The second term is the coupling: the exponential factor $e^{-z}$ makes the basin asymmetric. At height $z \gg 1$ the coupling vanishes and the contraction is clean; near $z = 0$ the correction shifts the real basin boundary from the symmetric $r = 2/3$ to $r^* \approx 0.77594$ (certified numerically; see <code>certify_rstar.py</code>).</p>
     <p><strong>Physical reading:</strong> a rotating body contracts toward its optimal radius. Too far out, centripetal force pulls it in. Too close, angular momentum pushes it out. The stable orbit is at $r = 1$.</p>
   </div>
 
@@ -178,7 +178,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="inv"><span class="inv-val">2π</span><span class="inv-name">T* · contact period</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">τ · embodiment threshold</span></div>
     <div class="inv"><span class="inv-val">1/3</span><span class="inv-name">ε₀ · Gronwall radius</span></div>
-    <div class="inv"><span class="inv-val">0.80</span><span class="inv-name">r* · real basin edge</span></div>
+    <div class="inv"><span class="inv-val">0.77594</span><span class="inv-name">r* · real basin edge</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">ε · coupling strength</span></div>
   </div>
 
@@ -203,9 +203,9 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
       <p>Angular momentum generates vertical lift via the contact condition $dz = r^2 d\theta$. At the stable orbit $r = 1$: lift rate = 1. This is not a thrust force — it is a consequence of the contact geometry. The disk does not push against anything. It follows the Reeb field $\partial_z$.</p>
     </div>
     <div class="phys-card">
-      <span class="op">Fold F at κ* = r* ≈ 0.80 · Whitney A₁</span>
+      <span class="op">Fold F at r* ≈ 0.77594 · Whitney A₁</span>
       <h4>Plasma Corona — The Fold</h4>
-      <p>At the basin boundary $r^* \approx 0.80$ the coupling term $\varepsilon(r-1)^2 e^{-z}$ reaches its critical value. The electromagnetic field folds past the ionisation threshold. Surrounding air molecules are stripped of electrons. Plasma corona discharge. The lights are the fold F made visible.</p>
+      <p>At the certified basin boundary $r^* \approx 0.77594$ the coupling term $\varepsilon(r-1)^2 e^{-z}$ reaches its critical value. The electromagnetic field folds past the ionisation threshold. Surrounding air molecules are stripped of electrons. Plasma corona discharge. The lights are the fold F made visible.</p>
     </div>
   </div>
 
@@ -222,7 +222,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="math-block">|r(t) − 1| ≤ |r(0) − 1| · e^{−2t}     (Lyapunov rate μ = −2)
 
 z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
-    <p>Outside this basin ($r < r^* \approx 0.80$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ that naive Gronwall estimates predict. The correction is governed by the coupling term in Equation III.</p>
+    <p>Outside this basin ($r < r^* \approx 0.77594$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ that naive Gronwall estimates predict. The correction is governed by the coupling term in Equation III.</p>
     <p style="font-size:.83rem; color:var(--dim);">AXLE Issue #12: the Lipschitz estimate closing the inductive step is still <code>sorry</code>. This is the open problem the 3M mini-course leaves in your hands.</p>
   </div>
 
