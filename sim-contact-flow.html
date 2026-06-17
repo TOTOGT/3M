@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dm³ Contact Flow — 3D</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#030a09;}
+canvas{display:block;}
+#ui{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;
+  padding:.55rem .8rem;
+  background:rgba(3,10,9,.82);
+  font-family:'Courier New',monospace;font-size:.7rem;color:rgba(45,212,191,.7);
+  border-bottom:1px solid rgba(45,212,191,.12);
+  pointer-events:none;
+}
+#ui label{pointer-events:all;display:flex;align-items:center;gap:.4rem;}
+#ui input[type=range]{width:80px;accent-color:#2dd4bf;}
+#ui .val{color:#c9a84c;min-width:2.8rem;}
+.legend{display:flex;gap:.7rem;margin-left:auto;}
+.leg{display:flex;align-items:center;gap:.3rem;}
+.dot{width:8px;height:8px;border-radius:50%;}
+.blue{background:#3b9eff;}
+.red{background:#ff4d4d;}
+.gold{background:#c9a84c;}
+.white{background:rgba(255,255,255,.35);}
+#tip{position:absolute;bottom:.5rem;left:50%;transform:translateX(-50%);
+  font-family:'Courier New',monospace;font-size:.65rem;
+  color:rgba(45,212,191,.35);pointer-events:none;white-space:nowrap;}
+</style>
+</head>
+<body>
+<div id="ui">
+  <label>r₀ <input type="range" id="r0" min="0.20" max="2.50" step="0.01" value="1.50">
+    <span class="val" id="r0v">1.50</span></label>
+  <label>ε <input type="range" id="eps" min="0.50" max="4.00" step="0.05" value="2.00">
+    <span class="val" id="epsv">2.00</span></label>
+  <div class="legend">
+    <div class="leg"><div class="dot blue"></div>outer (r₀&gt;r*)</div>
+    <div class="leg"><div class="dot red"></div>inner (r₀&lt;r*)</div>
+    <div class="leg"><div class="dot gold"></div>attractor Γ</div>
+    <div class="leg"><div class="dot white"></div>basin r*</div>
+  </div>
+</div>
+<div id="tip">drag to rotate · scroll to zoom</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── ODE ──────────────────────────────────────────────────────────────────────
+function odeRHS(r, th, z, eps){
+  const e = Math.exp(-z);
+  const dr  = r*(1-r*r) + eps*(r-1)*e;
+  const dth = 1;
+  const dz  = r*r - eps*(r-1)*(r-1)*e;
+  return [dr,dth,dz];
+}
+function rk4step(r,th,z,eps,dt){
+  const [a1,b1,c1]=odeRHS(r,th,z,eps);
+  const [a2,b2,c2]=odeRHS(r+.5*dt*a1,th+.5*dt*b1,z+.5*dt*c1,eps);
+  const [a3,b3,c3]=odeRHS(r+.5*dt*a2,th+.5*dt*b2,z+.5*dt*c2,eps);
+  const [a4,b4,c4]=odeRHS(r+dt*a3,th+dt*b3,z+dt*c3,eps);
+  return [r+dt/6*(a1+2*a2+2*a3+a4),
+          th+dt/6*(b1+2*b2+2*b3+b4),
+          z +dt/6*(c1+2*c2+2*c3+c4)];
+}
+function integrate(r0,th0,z0,eps,steps,dt){
+  const pts=[];
+  let r=r0,th=th0,z=z0;
+  for(let i=0;i<steps;i++){
+    if(!isFinite(r)||!isFinite(z)||Math.abs(z)>40||r<0.001) break;
+    pts.push(new THREE.Vector3(r*Math.cos(th),r*Math.sin(th),z*0.3));
+    [r,th,z]=rk4step(r,th,z,eps,dt);
+  }
+  return pts;
+}
+
+// ── Scene ─────────────────────────────────────────────────────────────────────
+const W=window.innerWidth, H=window.innerHeight;
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(W,H);
+document.body.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x030a09);
+const camera=new THREE.PerspectiveCamera(50,W/H,.01,200);
+camera.position.set(3.5,2.5,3.0);
+camera.lookAt(0,0,0);
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function makeLine(pts,color,opacity=1){
+  const geo=new THREE.BufferGeometry().setFromPoints(pts);
+  const mat=new THREE.LineBasicMaterial({color,transparent:opacity<1,opacity});
+  return new THREE.Line(geo,mat);
+}
+function makeTube(pts,color,r=0.012,opacity=1){
+  if(pts.length<2) return new THREE.Object3D();
+  const curve=new THREE.CatmullRomCurve3(pts);
+  const geo=new THREE.TubeGeometry(curve,pts.length*2,r,6,false);
+  const mat=new THREE.MeshBasicMaterial({color,transparent:opacity<1,opacity});
+  return new THREE.Mesh(geo,mat);
+}
+function cylinder(radius,height,color,opacity=0.18){
+  const geo=new THREE.CylinderGeometry(radius,radius,height,48,1,true);
+  const mat=new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide,
+    transparent:true,opacity,wireframe:false});
+  const mesh=new THREE.Mesh(geo,mat);
+  mesh.rotation.x=Math.PI/2;
+  mesh.position.z=height/2-2;
+  return mesh;
+}
+// ── Axes / grid ───────────────────────────────────────────────────────────────
+{
+  const axMat=new THREE.LineBasicMaterial({color:0x1a3a38,transparent:true,opacity:.5});
+  for(let t=0;t<Math.PI*2;t+=Math.PI/6){
+    const pts2=[new THREE.Vector3(0,0,-0.3),new THREE.Vector3(2.6*Math.cos(t),2.6*Math.sin(t),-0.3)];
+    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts2),axMat));
+  }
+  for(let r=0.5;r<=2.5;r+=0.5){
+    const circle=[];
+    for(let t=0;t<=Math.PI*2+.01;t+=.05)
+      circle.push(new THREE.Vector3(r*Math.cos(t),r*Math.sin(t),-0.3));
+    scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(circle),axMat));
+  }
+  // z-axis
+  scene.add(makeLine([new THREE.Vector3(0,0,-0.5),new THREE.Vector3(0,0,3.5)],0x1a3a38,.5));
+}
+
+// ── Attractor helix Γ at r=1 ─────────────────────────────────────────────────
+const attractorPts=[];
+for(let t=0;t<=16*Math.PI;t+=.04)
+  attractorPts.push(new THREE.Vector3(Math.cos(t),Math.sin(t),t*0.3*0.16));
+scene.add(makeTube(attractorPts,0xc9a84c,0.016));
+
+// ── Basin boundary cylinder r* ────────────────────────────────────────────────
+const RSTAR=0.77594059;
+const bndPts=[];
+for(let t=0;t<=16*Math.PI;t+=.04)
+  bndPts.push(new THREE.Vector3(RSTAR*Math.cos(t),RSTAR*Math.sin(t),t*0.3*0.16));
+scene.add(makeLine(bndPts,0xffffff));
+scene.add(cylinder(RSTAR,6,0xffffff,0.06));
+
+// ── Background trajectories ───────────────────────────────────────────────────
+const DT=0.04, STEPS=280;
+// Outer blue
+[1.3,1.8,2.4].forEach(r0=>{
+  const pts=integrate(r0,0,0.5,2,STEPS,DT);
+  scene.add(makeTube(pts,0x3b9eff,0.012,.85));
+});
+// Inner red (escape)
+[0.45,0.65].forEach(r0=>{
+  const pts=integrate(r0,0,1.0,2,STEPS*.5,DT);
+  scene.add(makeTube(pts,0xff4d4d,0.012,.85));
+});
+
+// ── Live trajectory (controlled by sliders) ───────────────────────────────────
+let liveObj=null;
+function rebuildLive(){
+  if(liveObj){ scene.remove(liveObj); liveObj=null; }
+  const r0=parseFloat(document.getElementById('r0').value);
+  const eps=parseFloat(document.getElementById('eps').value);
+  const isInner=r0<RSTAR;
+  const color=isInner?0xff9900:0x00e5ff;
+  const pts=integrate(r0,Math.PI*.3,0.5,eps,STEPS,DT);
+  if(pts.length>1){
+    liveObj=makeTube(pts,color,0.02,1);
+    scene.add(liveObj);
+  }
+  // mark r* on slider area
+  const circle=[];
+  for(let t=0;t<=Math.PI*2+.01;t+=.05)
+    circle.push(new THREE.Vector3(r0*Math.cos(t),r0*Math.sin(t),-0.3));
+  // (ring at base — subtle)
+  const ringMat=new THREE.LineBasicMaterial({color,transparent:true,opacity:.4});
+  const ring=new THREE.Line(new THREE.BufferGeometry().setFromPoints(circle),ringMat);
+  if(liveObj) liveObj.add(ring);
+}
+['r0','eps'].forEach(id=>{
+  const el=document.getElementById(id);
+  const val=document.getElementById(id+'v');
+  el.addEventListener('input',()=>{
+    val.textContent=parseFloat(el.value).toFixed(id==='eps'?2:2);
+    rebuildLive();
+  });
+});
+rebuildLive();
+
+// ── Orbit controls (mouse) ────────────────────────────────────────────────────
+let isDragging=false,lastX=0,lastY=0;
+let spherical={theta:0.6,phi:0.9,radius:camera.position.length()};
+function updateCamera(){
+  const s=spherical;
+  camera.position.set(
+    s.radius*Math.sin(s.phi)*Math.cos(s.theta),
+    s.radius*Math.sin(s.phi)*Math.sin(s.theta),
+    s.radius*Math.cos(s.phi)
+  );
+  camera.lookAt(0,0,0.5);
+}
+updateCamera();
+const cv=renderer.domElement;
+cv.addEventListener('mousedown',e=>{if(e.button===0){isDragging=true;lastX=e.clientX;lastY=e.clientY;}});
+window.addEventListener('mouseup',()=>isDragging=false);
+window.addEventListener('mousemove',e=>{
+  if(!isDragging)return;
+  const dx=(e.clientX-lastX)*0.006, dy=(e.clientY-lastY)*0.006;
+  spherical.theta-=dx;
+  spherical.phi=Math.max(.15,Math.min(Math.PI-.15,spherical.phi+dy));
+  lastX=e.clientX;lastY=e.clientY;
+  updateCamera();
+});
+cv.addEventListener('wheel',e=>{
+  spherical.radius=Math.max(1.5,Math.min(10,spherical.radius+e.deltaY*.008));
+  updateCamera();
+},{passive:true});
+// Touch
+let t0=null;
+cv.addEventListener('touchstart',e=>{if(e.touches.length===1){t0={x:e.touches[0].clientX,y:e.touches[0].clientY};}},{passive:true});
+cv.addEventListener('touchmove',e=>{
+  if(!t0||e.touches.length!==1)return;
+  const dx=(e.touches[0].clientX-t0.x)*0.006, dy=(e.touches[0].clientY-t0.y)*0.006;
+  spherical.theta-=dx; spherical.phi=Math.max(.15,Math.min(Math.PI-.15,spherical.phi+dy));
+  t0={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  updateCamera();
+},{passive:true});
+
+// ── Render loop ───────────────────────────────────────────────────────────────
+function animate(){ requestAnimationFrame(animate); renderer.render(scene,camera); }
+animate();
+
+window.addEventListener('resize',()=>{
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+});
+</script>
+</body>
+</html>
