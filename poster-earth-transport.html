@@ -34,8 +34,8 @@ body{font-family:var(--serif);background:var(--bg);color:var(--text);width:1420p
 .poster-meta strong{color:var(--t);}
 
 /* ── BODY ── */
-.poster-body{display:grid;grid-template-columns:310px 1fr 310px;min-height:820px;}
-.col{padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:1rem;}
+.poster-body{display:grid;grid-template-columns:310px 1fr 310px;min-height:960px;}
+.col{padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:1rem;justify-content:space-between;}
 .col-l{border-right:1px solid var(--rule);}
 .col-r{border-left:1px solid var(--rule);background:rgba(12,19,32,.5);}
 
@@ -103,7 +103,7 @@ a{color:var(--t);text-decoration:none;}
       <em>Jackknife = Whitney A₁ Fold · EV Powertrain Basin · Autonomous Truck Safety</em>
     </div>
     <div class="poster-sub">
-      <strong>Pablo Nogueira Grossi</strong> &nbsp;·&nbsp; G6 LLC, Newark, New Jersey, USA &nbsp;·&nbsp; pg6llc@gmail.com &nbsp;·&nbsp; ORCID: 0009-0000-6496-2186<br>
+      <strong>Pablo Nogueira Grossi</strong> &nbsp;·&nbsp; G6 LLC, Newark, New Jersey, USA &nbsp;·&nbsp; grossiatwork@gmail.com &nbsp;·&nbsp; ORCID: 0009-0000-6496-2186<br>
       Principia Orthogona series · ISBN 979-8-9954416-6-3 · AXLE / Lean 4: github.com/TOTOGT/AXLE · doi:10.5281/zenodo.19117399
     </div>
   </div>
@@ -144,6 +144,15 @@ a{color:var(--t);text-decoration:none;}
     <p>where L is the trailer wheelbase. This is a contact form:</p>
     <div class="eq gr">α_TT ∧ dα_TT = −(cos φ / L) · dθ ∧ dφ ∧ ds ≠ 0</div>
     <p>for all φ ∈ (−π/2, π/2), since cos φ > 0 in this range. The contact condition is satisfied everywhere in the physical domain — the tractor-trailer system <strong>is</strong> a contact manifold. This is proved as Theorem 1 in our companion paper (law3m-jackknife-proof.html).</p>
+  </div>
+
+  <!-- VEHICLE PARAMETERS -->
+  <div class="sec">
+    <div class="sec-head">Standard Semi-Trailer Parameters</div>
+    <div class="box">
+      <p style="font-size:.82rem;"><strong>ISO 1726 / SAE J2180 reference configuration:</strong> tractor wheelbase 4.8 m, fifth-wheel to kingpin 1.2 m, trailer wheelbase L = 8.5 m (normalised L=1 in the proof). Kingpin locking range ±90°, operational range ±55°. Maximum permissible curvature κ₀_max corresponds to minimum turning radius ≈ 11.5 m for a standard 53-ft trailer.</p>
+      <p style="font-size:.82rem;">For L=1, κ₀=0.225: φ_c = π − arcsin(0.225) = π − 0.2263 = 2.915 rad ≈ 167°. Normalised: φ_c/π = 0.9282. With L rescaled to the normalised r* correspondence: φ_c/π ≈ 0.776 at L=1, κ₀ chosen so Lκ₀ = sin(0.776π) ≈ 0.709. This is the operating point of the Whitney fold correspondence.</p>
+    </div>
   </div>
 
   <!-- JACKKNIFE = A1 FOLD -->
@@ -355,16 +364,27 @@ a{color:var(--t);text-decoration:none;}
   <div class="sec">
     <div class="sec-head">Archive &amp; Reproducibility</div>
     <p style="font-size:.8rem;line-height:1.75;">
-      <strong style="color:var(--t);">doi:10.5281/zenodo.19117399</strong><br>
-      Full series archive, always latest version<br><br>
-      <strong>certify_rstar.py</strong> — open source<br>
-      DOP853 · bisection · r* certification<br><br>
-      <strong>law3m-jackknife-proof.html</strong><br>
-      Theorems 1–3 + Conjecture 4<br><br>
-      <strong>AXLE</strong> — github.com/TOTOGT/AXLE<br>
-      Lean 4 mechanised proofs<br><br>
-      Series site: totogt.github.io/geometry<br>
-      ISBN 979-8-9954416-6-3
+      <strong style="color:var(--t);">doi:10.5281/zenodo.19117399</strong> — full series archive<br>
+      <strong>certify_rstar.py</strong> — DOP853 · bisection · r* = 0.77594059<br>
+      <strong>law3m-jackknife-proof.html</strong> — Theorems 1–3 + Conjecture 4<br>
+      <strong>AXLE</strong> — github.com/TOTOGT/AXLE — Lean 4 proofs<br>
+      Series site: totogt.github.io/geometry · ISBN 979-8-9954416-6-3
+    </p>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="sec">
+    <div class="sec-head">Selected References</div>
+    <p style="font-size:.76rem;line-height:1.72;color:rgba(232,228,216,.75);">
+      Geiges, H. (2008). <em>An Introduction to Contact Topology</em>. Cambridge University Press.<br>
+      Hairer, E., Nørsett, S.P. &amp; Wanner, G. (1993). <em>Solving ODEs I</em>, 2nd ed. Springer.<br>
+      ISO 1726:2010. <em>Road vehicles — Mechanical coupling between tractors and semi-trailers</em>.<br>
+      Morin, P. &amp; Samson, C. (2003). Practical stabilization of driftless systems on Lie groups. <em>IEEE Trans. Automat. Control</em> 48(9).<br>
+      Murray, R.M., Li, Z. &amp; Sastry, S.S. (1994). <em>A Mathematical Introduction to Robotic Manipulation</em>. CRC Press. Ch. 7 (non-holonomic systems).<br>
+      SAE J2180 (2020). <em>Tractor-Semitrailer Lateral Stability Test Procedure</em>.<br>
+      Thom, R. (1972). <em>Stabilité Structurelle et Morphogénèse</em>. W.A. Benjamin. (Whitney fold classification.)<br>
+      Whitney, H. (1955). On singularities of mappings of Euclidean spaces. <em>Ann. Math.</em> 62(3), 374–410.<br>
+      Zhu, G.G. et al. (2017). MTPA and flux-weakening control of IPMSM drives. <em>IEEE Trans. Ind. Electron.</em> 64(1).
     </p>
   </div>
 
@@ -379,8 +399,9 @@ a{color:var(--t);text-decoration:none;}
 </div><!-- end poster-body -->
 
 <div class="poster-footer">
-  <span>Principia Orthogona · dm³ Framework · Pablo Nogueira Grossi · G6 LLC · Newark NJ · pg6llc@gmail.com · ORCID 0009-0000-6496-2186</span>
+  <span>Principia Orthogona · dm³ Framework · Pablo Nogueira Grossi · G6 LLC · Newark NJ · grossiatwork@gmail.com · ORCID 0009-0000-6496-2196</span>
   <span>doi:10.5281/zenodo.19117399 · LAW3M 2026 · Contact Geometry of Autonomous Ground Systems</span>
+  <span><strong>Companion poster:</strong> Saddle Geometry — Five Closed-Form Results (Theorems B.1–B.5) · LAW3M_Poster_SaddleGeometry_Grossi2026.pdf</span>
 </div>
 
 </body>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Theorem B.3 — Trace Identity — tr(J) = 2 cos(2π/7) · LAW3M 2026 · Grossi</title>
+
+<style>
+:root{--bg:#060b12;--bg2:#0b1420;--bg3:#101a28;--t:#38bdf8;--gd:#c9a84c;--gr:#34d399;--or:#f97316;--re:#f87171;--pu:#a78bfa;--text:#e8e4d8;--dim:#6b7f8e;--rule:rgba(56,189,248,.1);--serif:Georgia,"Times New Roman",serif;--sans:"Helvetica Neue",Arial,sans-serif;--mono:"Courier New",Courier,monospace;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--serif);background:var(--bg);color:var(--text);max-width:820px;margin:0 auto;padding:2.5rem 2rem 5rem;}
+.nav{font-family:var(--mono);font-size:.65rem;color:var(--dim);margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+.nav a{color:var(--t);text-decoration:none;}
+.eyebrow{font-family:var(--mono);font-size:.68rem;color:var(--t);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;}
+h1{font-size:1.85rem;font-weight:400;color:var(--text);line-height:1.25;margin-bottom:.6rem;}
+h1 strong{color:var(--gd);}
+.meta{font-family:var(--mono);font-size:.68rem;color:var(--dim);line-height:2;margin-bottom:2rem;}
+.meta a{color:var(--t);text-decoration:none;}
+h2{font-family:var(--sans);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);border-bottom:1px solid rgba(201,168,76,.18);padding-bottom:.35rem;margin:2rem 0 1rem;}
+h2.t{color:var(--t);border-color:rgba(56,189,248,.15);}
+h2.gr{color:var(--gr);border-color:rgba(52,211,153,.15);}
+h2.or{color:var(--or);border-color:rgba(249,115,22,.15);}
+h2.re{color:var(--re);border-color:rgba(248,113,113,.15);}
+h2.pu{color:var(--pu);border-color:rgba(167,139,250,.15);}
+p{font-size:.9rem;line-height:1.85;color:rgba(232,228,216,.85);margin-bottom:.9rem;}
+p:last-child{margin-bottom:0;}
+.thm-box{background:var(--bg3);border:1px solid rgba(201,168,76,.22);border-left:4px solid var(--gd);border-radius:0 5px 5px 0;padding:1.2rem 1.5rem;margin:1rem 0 1.5rem;}
+.thm-box .label{font-family:var(--mono);font-size:.65rem;color:var(--gd);margin-bottom:.5rem;font-weight:700;letter-spacing:.1em;}
+.thm-box .stmt{font-size:.95rem;color:var(--text);line-height:1.75;}
+.thm-box .stmt .key{color:var(--gd);font-weight:600;}
+.eq{font-family:var(--mono);font-size:.88rem;color:var(--t);background:rgba(56,189,248,.06);border-left:2.5px solid var(--t);padding:.5rem 1rem;margin:.6rem 0;border-radius:0 3px 3px 0;line-height:1.5;}
+.eq.gd{color:var(--gd);background:rgba(201,168,76,.06);border-color:var(--gd);}
+.eq.gr{color:var(--gr);background:rgba(52,211,153,.06);border-color:var(--gr);}
+.eq.or{color:var(--or);background:rgba(249,115,22,.06);border-color:var(--or);}
+.pf{border-left:2px solid rgba(107,103,87,.3);padding:.5rem 1rem .5rem 1.2rem;margin:.5rem 0 1rem;font-size:.87rem;color:rgba(232,228,216,.72);line-height:1.85;}
+.pf .pf-label{font-family:var(--mono);font-size:.63rem;color:var(--dim);margin-bottom:.3rem;font-style:italic;}
+.qed{float:right;color:var(--gd);}
+.box{background:var(--bg2);border:1px solid var(--rule);border-radius:5px;padding:1rem 1.2rem;margin:1rem 0;}
+.box.or{border-color:rgba(249,115,22,.18);background:rgba(249,115,22,.03);}
+.box.gr{border-color:rgba(52,211,153,.15);background:rgba(52,211,153,.03);}
+.box.re{border-color:rgba(248,113,113,.18);background:rgba(248,113,113,.04);}
+.box.pu{border-color:rgba(167,139,250,.18);background:rgba(167,139,250,.03);}
+.lean-block{background:#0a1017;border:1px solid rgba(56,189,248,.15);border-radius:5px;padding:1rem 1.2rem;font-family:var(--mono);font-size:.8rem;color:#a5c8e1;line-height:1.7;overflow-x:auto;margin:.8rem 0;}
+.lean-block .kw{color:var(--pu);}
+.lean-block .cm{color:#4a6070;font-style:italic;}
+.lean-block .id{color:var(--gr);}
+.lean-block .num{color:var(--or);}
+.badge{display:inline-block;font-family:var(--mono);font-size:.62rem;padding:.15rem .5rem;border-radius:3px;border:1px solid;margin-right:.4rem;}
+.badge.ok{color:var(--gr);border-color:rgba(52,211,153,.3);}
+.badge.pend{color:var(--or);border-color:rgba(249,115,22,.3);}
+.prev-next{display:flex;justify-content:space-between;margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:.68rem;}
+.prev-next a{color:var(--t);text-decoration:none;}
+</style>
+
+</head>
+<body>
+<div class="nav">
+  <a href="../law3m-index.html">← LAW3M Package</a>
+  <a href="../law3m.html">Full Paper</a>
+  <a href="../poster-law3m-saddle-theorems.html">Saddle Poster</a>
+  <a href="https://totogt.github.io/GTCT/book4/ch10.html#s65">GTCT Vol IV §6.5</a>
+  <a href="https://doi.org/10.5281/zenodo.20682934">Zenodo</a>
+</div>
+
+<div class="eyebrow">LAW3M · Saddle Geometry · Theorem B.3</div>
+<h1><strong>Theorem B.3:</strong> Trace Identity — tr(J) = 2 cos(2π/7)</h1>
+<div class="meta">
+  Pablo Nogueira Grossi · G6 LLC, Newark NJ · grossiatwork@gmail.com · ORCID 0009-0000-6496-2186<br>
+  Principia Orthogona Vol IV (GTCT) · doi:<a href="https://doi.org/10.5281/zenodo.20682934">10.5281/zenodo.20682934</a> ·
+  Lean 4 status: <span class="badge pend">pending</span>
+</div>
+
+<h2>Statement</h2>
+
+<div class="thm-box">
+  <div class="label">Theorem B.3 — Trace Identity (Main Result)</div>
+  <div class="stmt">
+    The Jacobian trace at the LAW3M saddle equals:
+    <div class="eq gd">tr(J)|<sub>saddle</sub> = 1 + r<sub>s</sub> − r<sub>s</sub>² = √(2 − r<sub>s</sub>) = 2 cos(2π/7) ≈ 1.2470</div>
+    The divergence of the vector field at the saddle is an exact 7th-root-of-unity cosine.
+  </div>
+</div>
+<p>This is the main result of the saddle geometry package. The Jacobian at the saddle is the linearisation of the LAW3M vector field evaluated at (r<sub>s</sub>, z<sub>s</sub>). Its trace measures the local divergence — the net expansion/contraction rate of phase volume at the saddle.</p>
+
+
+<h2 class="t">Proof</h2>
+
+<p>The Jacobian J of the LAW3M ODE in (r, z) coordinates has entries:</p>
+<div class="eq">J<sub>11</sub> = ∂ṙ/∂r = (1 − 3r²) + 2e<sup>−z</sup></div>
+<div class="eq">J<sub>12</sub> = ∂ṙ/∂z = −2(r−1)e<sup>−z</sup></div>
+<div class="eq">J<sub>21</sub> = ∂ż/∂r = 2r − 4(r−1)e<sup>−z</sup></div>
+<div class="eq">J<sub>22</sub> = ∂ż/∂z = 2(r−1)²e<sup>−z</sup></div>
+
+<p><strong>Step 1.</strong> At the saddle, ż = 0 gives the saddle condition:</p>
+<div class="eq">2(r<sub>s</sub>−1)²e<sup>−z<sub>s</sub></sup> = r<sub>s</sub>²</div>
+<p>So J<sub>22</sub>|<sub>s</sub> = r<sub>s</sub>² (this is Theorem B.4, independently).</p>
+
+<p><strong>Step 2.</strong> Substitute e<sup>−z<sub>s</sub></sup> = r<sub>s</sub>² / [2(r<sub>s</sub>−1)²] into J<sub>11</sub>:</p>
+<div class="eq">J<sub>11</sub>|<sub>s</sub> = (1−3r<sub>s</sub>²) + 2 · r<sub>s</sub>²/[2(r<sub>s</sub>−1)²] = (1−3r<sub>s</sub>²) + r<sub>s</sub>²/(r<sub>s</sub>−1)²</div>
+
+<p><strong>Step 3.</strong> Compute tr(J) = J<sub>11</sub> + J<sub>22</sub>:</p>
+<div class="eq">tr(J) = (1−3r<sub>s</sub>²) + r<sub>s</sub>²/(r<sub>s</sub>−1)² + r<sub>s</sub>²</div>
+<div class="eq">      = 1 − 2r<sub>s</sub>² + r<sub>s</sub>²/(r<sub>s</sub>−1)²</div>
+
+<p><strong>Step 4.</strong> Claim: tr(J) = 1 + r<sub>s</sub> − r<sub>s</sub>². This is equivalent to:</p>
+<div class="eq">r<sub>s</sub>²/(r<sub>s</sub>−1)² = r<sub>s</sub> + r<sub>s</sub>² &nbsp;⟺&nbsp; r<sub>s</sub>² = (r<sub>s</sub>+r<sub>s</sub>²)(r<sub>s</sub>−1)²</div>
+<div class="eq">RHS = r<sub>s</sub>(1+r<sub>s</sub>)(r<sub>s</sub>−1)² = r<sub>s</sub>(r<sub>s</sub>³−r<sub>s</sub>²−r<sub>s</sub>+1) = r<sub>s</sub>⁴−r<sub>s</sub>³−r<sub>s</sub>²+r<sub>s</sub></div>
+<p>We need this to equal r<sub>s</sub>², i.e., r<sub>s</sub>⁴ − r<sub>s</sub>³ − 2r<sub>s</sub>² + r<sub>s</sub> = 0, i.e., r<sub>s</sub>(r<sub>s</sub>³−r<sub>s</sub>²−2r<sub>s</sub>+1) = 0. Since r<sub>s</sub> ≠ 0, this requires r<sub>s</sub>³−r<sub>s</sub>²−2r<sub>s</sub>+1 = 0, which is exactly the cubic of Theorem B.1. ✓</p>
+
+<p><strong>Step 5.</strong> By Theorem B.2, (1+r<sub>s</sub>−r<sub>s</sub>²)² = 2−r<sub>s</sub>. Since the trace is positive (r<sub>s</sub> &lt; 2), tr(J) = √(2−r<sub>s</sub>). Finally:</p>
+<div class="eq">2 − r<sub>s</sub> = 2 − 2cos(3π/7) = 2(1−cos(3π/7)) = 4sin²(3π/14)</div>
+<div class="eq">√(2−r<sub>s</sub>) = 2sin(3π/14) = 2cos(π/2−3π/14) = 2cos(4π/14) = 2cos(2π/7)</div>
+<div class="eq gd">tr(J)|<sub>saddle</sub> = 2cos(2π/7) &nbsp;&nbsp;★ <span class="qed">□</span></div>
+
+
+<h2 class="gr">Lean 4 Verification</h2>
+
+<p>Status: <span class="badge pend">pending</span> — depends on B.1 (Mathlib gap: <code>Real.cos_pi_div_seven</code>) and B.2 (nlinarith). Once those are in, the trace computation closes by simp + ring.</p>
+<div class="lean-block">
+<span class="cm">-- Assuming B1 and B2 are available:</span>
+<span class="kw">theorem</span> <span class="id">trace_identity</span> (h_cubic : saddle_cubic rs) (h_fund : fundamental_identity rs h_cubic) :
+    jacobian_trace rs = <span class="num">2</span> * Real.cos (<span class="num">2</span> * π / <span class="num">7</span>) := <span class="kw">by</span>
+  simp [jacobian_trace, h_fund]
+  ring_nf
+  norm_num [Real.cos_pi_div_seven]
+</div>
+
+
+<h2 class="or">Literature Gap Closed</h2>
+
+<div class="box or">
+  <p><strong>Gap closed:</strong> The identification tr(J)|<sub>saddle</sub> = 2cos(2π/7) is entirely new. No prior work in contact-ODE theory or Hamiltonian mechanics has connected the Jacobian trace of a saddle equilibrium to a 7th cyclotomic value via a coupling-constant constraint.</p>
+  <p style="margin-top:.6rem;">This is not a numerical coincidence. The cosine value emerges necessarily from: (1) the contact-manifold constraint fixing ε = 2, (2) the saddle cubic having 7th-cyclotomic roots (Theorem B.1), and (3) the algebraic bridge of Theorem B.2. Remove any one of these and the result does not hold.</p>
+</div>
+
+
+<h2 class="pu">Physical Consequence</h2>
+
+<div class="box gr">
+  <p><strong>Stability rate:</strong> tr(J) = 2cos(2π/7) ≈ 1.247 > 0 confirms the saddle is dynamically unstable (tr > 0 ⟹ at least one eigenvalue has positive real part — confirmed by Theorem B.5). The exact value gives: perturbations near the saddle expand at a rate governed by a 7th-root-of-unity cosine, not an irrational algebraic number with no further structure.</p>
+  <p style="margin-top:.6rem;"><strong>Design implication:</strong> In a rotating EM energy system, the recovery corridor above r<sub>s</sub> and below r* has divergence exactly 2cos(2π/7). This constrains the feedback gain required to push the system back toward r = 1.</p>
+</div>
+
+
+<div class="prev-next">
+  <a href="thm-B2.html">&larr; Theorem B.2</a>
+  <a href="thm-B4.html">Theorem B.4 &rarr;</a>
+</div>
+</body>
+</html>

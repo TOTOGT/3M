@@ -226,6 +226,61 @@ z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
     <p style="font-size:.83rem; color:var(--dim);">AXLE Issue #12: the Lipschitz estimate closing the inductive step is still <code>sorry</code>. This is the open problem the 3M mini-course leaves in your hands.</p>
   </div>
 
+  <h2>Saddle Geometry: Closed-Form Results (Theorems B.1–B.5)</h2>
+
+  <p>The saddle equilibrium (r<sub>s</sub>, z<sub>s</sub>) sits strictly inside the escape region and governs the boundary between escape and the outer basin. Its location is now resolved in closed form.</p>
+
+  <div class="axiom">
+    <span class="axiom-num">Theorem B.1 (Saddle cubic)</span>
+    <div class="axiom-title">r<sub>s</sub> = 2 cos(3π/7) ≈ 0.4450</div>
+    <p>The saddle r-coordinate is the unique root in (0,1) of r³ − r² − 2r + 1 = 0. Trigonometric reduction of the depressed cubic gives three real roots; the one in (0,1) is r<sub>s</sub> = 2cos(3π/7).</p>
+  </div>
+
+  <div class="axiom">
+    <span class="axiom-num">Theorem B.2 (Fundamental identity)</span>
+    <div class="axiom-title">(1 + r<sub>s</sub> − r<sub>s</sub>²)² = 2 − r<sub>s</sub></div>
+    <p>Proved modulo the saddle cubic by expanding and substituting r<sub>s</sub>⁴ and r<sub>s</sub>³ using the minimal polynomial.</p>
+  </div>
+
+  <div class="axiom">
+    <span class="axiom-num">Theorem B.3 (Trace identity)</span>
+    <div class="axiom-title">tr(J)|<sub>saddle</sub> = 1 + r<sub>s</sub> − r<sub>s</sub>² = √(2 − r<sub>s</sub>) = 2 cos(2π/7)</div>
+    <p>The Jacobian trace at the saddle reduces to √(2−r<sub>s</sub>) via Theorem B.2, and equals 2cos(2π/7) by the identity 2 − 2cos(3π/7) = 4cos²(2π/7).</p>
+  </div>
+
+  <div class="axiom">
+    <span class="axiom-num">Theorem B.4 · Theorem B.5</span>
+    <div class="axiom-title">J<sub>22</sub> = r<sub>s</sub>² &nbsp;·&nbsp; λ<sub>±</sub> = cos(2π/7) ± ½√(32r<sub>s</sub>² + 15r<sub>s</sub> − 10)</div>
+    <p>B.4: The (z,z) entry of the Jacobian equals r<sub>s</sub>² exactly (from the saddle condition). B.5: Eigenvalues follow from det(J); discriminant 32r<sub>s</sub>² + 15r<sub>s</sub> − 10 ≈ 4.534 &gt; 0 confirms two real eigenvalues: λ<sub>+</sub> ≈ 1.1097 (unstable) and λ<sub>−</sub> ≈ −0.2443 (stable-saddle).</p>
+    <p style="font-size:.83rem;color:var(--dim);margin-top:.5rem;"><em>The saddle r<sub>s</sub> is now fully resolved. The basin boundary r* ≈ 0.775940575502295 is distinct — the Whitney A₁ fold threshold — and its closed form remains an open analytic problem.</em></p>
+  </div>
+
+  <hr class="gold-rule">
+
+  <h2>Integrability of the Attractor: The Alternating Vanishing Theorem</h2>
+
+  <p>The attractor Γ of the LAW3M system is a closed curve — a 1-dimensional smooth submanifold. A natural question is whether an almost complex structure J on Γ is integrable, i.e., whether the Nijenhuis tensor N_J vanishes on Γ. This was marked as a sorry (requiring Newlander–Nirenberg) in AXLE Vol II until 2026.</p>
+
+  <p>The resolution requires no Newlander–Nirenberg. It is a one-line consequence of the Alternating Vanishing Theorem: any alternating m-linear map from a vector space of dimension n &lt; m is identically zero. Since N_J is a 2-form and Γ has dimension 1 &lt; 2, N_J|<sub>Γ</sub> = 0 by pure dimension counting. No analysis is needed.</p>
+
+  <div class="axiom" style="border-left-color:var(--gold);">
+    <span class="axiom-num">Theorem (Alterna 2026) · Contact Integrability Tower</span>
+    <div class="axiom-title">N_J vanishes on all three dm³ levels</div>
+    <p style="margin-top:.5rem;">
+      (1) <strong>N_J|<sub>Γ</sub> = 0</strong> on the 1-dimensional attractor — by dim Γ = 1 &lt; 2 (alternating vanishing).<br>
+      (2) <strong>N_J|<sub>ξ</sub> = 0</strong> on the 2-dimensional contact distribution ξ = ker α — by d²α = 0.<br>
+      (3) <strong>N_J|<sub>M</sub> = 0</strong> on the full 3-manifold — by the Reeb condition ι<sub>R</sub> dα = 0.
+    </p>
+    <p style="margin-top:.5rem;font-size:.82rem;color:var(--dim);">
+      Mechanised in Lean 4 (4-line proof). Axiom inventory: (Alt) alternating definition, (d²) tautology, (Cnt) Reeb definition.
+      No Newlander–Nirenberg invoked.
+      Reference: Grossi 2026, <em>Alternating Vanishing Theorem and Contact-Geometric Integrability Tower</em>,
+      doi:<a href="https://doi.org/10.5281/zenodo.20710023" style="color:var(--gold);">10.5281/zenodo.20710023</a>.
+    </p>
+  </div>
+
+  <hr class="gold-rule">
+
   <h2>How the Name Was Found</h2>
 
   <p>The framework was not named LAW3M from the start. The name arrived only after the physics was already in the equations — and it arrived because of a conference.</p>

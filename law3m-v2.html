@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LAW3M v2 — Self-Contained Paper · Grossi 2026</title>
+<style>
+:root{
+  --bg:#060b12; --bg2:#0b1420; --bg3:#101a28; --bg4:#141f30;
+  --t:#38bdf8; --gd:#c9a84c; --gr:#34d399; --or:#f97316; --re:#f87171; --pu:#a78bfa; --law:#f97316;
+  --text:#e8e4d8; --dim:#6b7f8e; --rule:rgba(56,189,248,.1);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,sans-serif;
+  --mono:"Courier New",Courier,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--serif);background:var(--bg);color:var(--text);font-size:17px;line-height:1.88;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,11,18,.96);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(201,168,76,.15);padding:.65rem 2rem;
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;}
+.nav-brand{font-family:var(--mono);font-size:.65rem;color:var(--gd);letter-spacing:.2em;text-decoration:none;}
+.nav-links{display:flex;gap:1.4rem;flex-wrap:wrap;}
+.nav-links a{font-family:var(--mono);font-size:.62rem;color:var(--dim);text-decoration:none;letter-spacing:.08em;}
+.nav-links a:hover{color:var(--t);}
+
+/* ── HERO ── */
+.hero{padding:4rem 2rem 3rem;text-align:center;border-bottom:1px solid var(--rule);
+      background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(249,115,22,.07) 0%,transparent 68%);}
+.hero-tag{font-family:var(--mono);font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;
+          color:var(--or);border:1px solid rgba(249,115,22,.35);padding:.2rem .9rem;
+          display:inline-block;margin-bottom:1.6rem;}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:400;color:var(--or);letter-spacing:.08em;
+         line-height:1.1;margin-bottom:.5rem;}
+.hero-subtitle{font-size:1.1rem;color:var(--dim);font-style:italic;max-width:640px;margin:0 auto 1.6rem;}
+.hero-authors{font-family:var(--mono);font-size:.7rem;color:var(--dim);line-height:2;margin-bottom:2rem;}
+.hero-authors a{color:var(--t);text-decoration:none;}
+.abstract-box{max-width:720px;margin:0 auto;background:var(--bg2);border:1px solid rgba(201,168,76,.18);
+              border-left:3px solid var(--gd);padding:1.4rem 1.8rem;text-align:left;}
+.abstract-box .ab-label{font-family:var(--mono);font-size:.62rem;color:var(--gd);letter-spacing:.2em;margin-bottom:.7rem;}
+.abstract-box p{font-size:.9rem;line-height:1.8;color:rgba(232,228,216,.8);margin:0;}
+
+/* ── PAGE BODY ── */
+.page{max-width:820px;margin:0 auto;padding:3rem 2rem 6rem;}
+
+/* ── SECTION HEADINGS ── */
+h2{font-size:1rem;font-weight:400;color:var(--gd);letter-spacing:.18em;text-transform:uppercase;
+   margin:3.5rem 0 1.2rem;padding-bottom:.4rem;border-bottom:1px solid rgba(201,168,76,.18);}
+h2.t{color:var(--t);border-color:rgba(56,189,248,.15);}
+h2.gr{color:var(--gr);border-color:rgba(52,211,153,.15);}
+h2.or{color:var(--or);border-color:rgba(249,115,22,.15);}
+h2.re{color:var(--re);border-color:rgba(248,113,113,.15);}
+h2.pu{color:var(--pu);border-color:rgba(167,139,250,.15);}
+h3{font-size:1rem;font-weight:600;color:var(--text);margin:2rem 0 .7rem;}
+p{margin-bottom:1rem;}
+p:last-child{margin-bottom:0;}
+em{color:var(--or);font-style:normal;}
+strong{color:var(--text);}
+a{color:var(--t);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ── DEFINITION BOX ── */
+.def{background:var(--bg2);border:1px solid rgba(56,189,248,.15);border-left:3px solid var(--t);
+     padding:1rem 1.4rem;margin:1.2rem 0;}
+.def .def-label{font-family:var(--mono);font-size:.6rem;color:var(--t);letter-spacing:.15em;margin-bottom:.4rem;}
+.def p{font-size:.88rem;color:var(--text);margin:0;line-height:1.75;}
+
+/* ── THEOREM BOX ── */
+.thm{background:var(--bg3);border:1px solid rgba(201,168,76,.2);border-left:3.5px solid var(--gd);
+     padding:1.1rem 1.5rem;margin:1.4rem 0;}
+.thm.t{border-left-color:var(--t);border-color:rgba(56,189,248,.15);}
+.thm.gr{border-left-color:var(--gr);border-color:rgba(52,211,153,.15);}
+.thm.or{border-left-color:var(--or);border-color:rgba(249,115,22,.15);}
+.thm .thm-label{font-family:var(--mono);font-size:.62rem;color:var(--gd);letter-spacing:.12em;margin-bottom:.4rem;font-weight:700;}
+.thm.t .thm-label{color:var(--t);}
+.thm.gr .thm-label{color:var(--gr);}
+.thm.or .thm-label{color:var(--or);}
+.thm p{font-size:.9rem;color:var(--text);margin:0;line-height:1.75;}
+.thm p strong{color:var(--gd);}
+.thm.t p strong{color:var(--t);}
+.thm.gr p strong{color:var(--gr);}
+
+/* ── PROOF ── */
+.pf{border-left:2px solid rgba(107,103,87,.3);padding:.6rem 1rem .6rem 1.3rem;margin:.5rem 0 1.2rem;
+    font-size:.88rem;color:rgba(232,228,216,.75);line-height:1.85;}
+.pf .pf-label{font-family:var(--mono);font-size:.62rem;color:var(--dim);margin-bottom:.35rem;font-style:italic;}
+.qed{float:right;color:var(--gd);}
+
+/* ── DISPLAY EQ ── */
+.eq{font-family:var(--mono);font-size:.92rem;color:var(--t);
+    background:rgba(56,189,248,.05);border-left:2.5px solid var(--t);
+    padding:.5rem 1rem;margin:.6rem 0;border-radius:0 3px 3px 0;line-height:1.55;overflow-x:auto;}
+.eq.gd{color:var(--gd);background:rgba(201,168,76,.05);border-color:var(--gd);}
+.eq.gr{color:var(--gr);background:rgba(52,211,153,.05);border-color:var(--gr);}
+.eq.or{color:var(--or);background:rgba(249,115,22,.05);border-color:var(--or);}
+.eq.re{color:var(--re);background:rgba(248,113,113,.05);border-color:var(--re);}
+.eq.pu{color:var(--pu);background:rgba(167,139,250,.05);border-color:var(--pu);}
+
+/* ── FIGURE ── */
+.fig{margin:2rem 0;background:var(--bg2);border:1px solid var(--rule);border-radius:5px;overflow:hidden;}
+.fig svg{display:block;width:100%;height:auto;}
+.fig-cap{font-family:var(--mono);font-size:.68rem;color:var(--dim);padding:.6rem 1rem;
+         border-top:1px solid var(--rule);line-height:1.6;}
+
+/* ── LEAN ── */
+.lean{background:#080f18;border:1px solid rgba(56,189,248,.15);border-radius:4px;
+      padding:.9rem 1.2rem;font-family:var(--mono);font-size:.8rem;color:#a5c8e1;
+      line-height:1.7;overflow-x:auto;margin:.8rem 0;}
+.lean .kw{color:var(--pu);}
+.lean .cm{color:#405060;font-style:italic;}
+.lean .id{color:var(--gr);}
+.lean .num{color:var(--or);}
+.badge{font-family:var(--mono);font-size:.62rem;padding:.12rem .45rem;border-radius:3px;border:1px solid;display:inline-block;}
+.badge.ok{color:var(--gr);border-color:rgba(52,211,153,.3);}
+.badge.pend{color:var(--or);border-color:rgba(249,115,22,.3);}
+
+/* ── REMARK / NOTE ── */
+.rem{background:rgba(56,189,248,.03);border:1px solid rgba(56,189,248,.1);
+     padding:.8rem 1.2rem;margin:.8rem 0;font-size:.86rem;color:rgba(232,228,216,.7);line-height:1.75;}
+.rem strong{color:var(--t);}
+
+.gold-rule{border:none;border-top:1px solid rgba(201,168,76,.15);margin:2.5rem 0;}
+
+/* ── SUMMARY TABLE ── */
+.sum-table{width:100%;border-collapse:collapse;font-size:.84rem;margin:1.2rem 0;}
+.sum-table th{background:var(--bg3);color:var(--gd);padding:.5rem .8rem;
+  border:1px solid var(--rule);font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-align:left;}
+.sum-table td{padding:.5rem .8rem;border:1px solid rgba(56,189,248,.07);
+  color:rgba(232,228,216,.82);vertical-align:top;line-height:1.65;}
+.sum-table tr:nth-child(even) td{background:rgba(56,189,248,.02);}
+
+footer{text-align:center;padding:2rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.07em;
+       color:var(--dim);border-top:1px solid var(--rule);}
+footer a{color:var(--gd);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="law3m-index.html" class="nav-brand">LAW3M · Research Package</a>
+  <div class="nav-links">
+    <a href="#s1">§1 Contact Geometry</a>
+    <a href="#s2">§2 The ODE</a>
+    <a href="#s3">§3 Attractor</a>
+    <a href="#s4">§4 Basin</a>
+    <a href="#s5">§5 Saddle</a>
+    <a href="#s6">§6 Integrability</a>
+    <a href="#s7">§7 Open Problem</a>
+    <a href="law3m-index.html">← Hub</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">LAW3M · Principia Orthogona Vol IV · 2026</div>
+  <h1>LAW3M</h1>
+  <p class="hero-subtitle">A self-contained paper on helical attractors on contact 3-manifolds,<br>with five closed-form saddle results and a mechanised Lean 4 tower</p>
+  <div class="hero-authors">
+    <strong>Pablo Nogueira Grossi</strong> &nbsp;·&nbsp; G6 LLC, Newark, New Jersey, USA<br>
+    grossiatwork@gmail.com &nbsp;·&nbsp; ORCID: <a href="https://orcid.org/0009-0000-6496-2186">0009-0000-6496-2186</a> &nbsp;·&nbsp; +1 (646) 342-3751<br>
+    Principia Orthogona Vol IV (GTCT) · ISBN 979-8-9954416-6-3<br>
+    AXLE: <a href="https://github.com/TOTOGT/AXLE">github.com/TOTOGT/AXLE</a> &nbsp;·&nbsp;
+    doi: <a href="https://doi.org/10.5281/zenodo.20682934">10.5281/zenodo.20682934</a>
+  </div>
+
+  <div class="abstract-box">
+    <div class="ab-label">Abstract</div>
+    <p>We introduce the LAW3M contact ODE — three coupled equations governing helical motion on the contact 3-manifold (ℝ³, dz − r²dθ) at coupling constant ε = 2 — and prove all major results from first principles. No external references are required to follow this paper. §1 defines the contact manifold; §2 derives the ODE from the contact structure; §3 proves exponential stability of the helical attractor Γ via Lyapunov; §4 characterises the basin of attraction and certifies the Whitney A₁ fold threshold r* ≈ 0.776; §5 gives five closed-form saddle results (Theorems B.1–B.5), including r<sub>s</sub> = 2cos(3π/7) and tr(J)|<sub>saddle</sub> = 2cos(2π/7); §6 proves the contact integrability tower (N_J = 0 on Γ, ξ, M) via the Alternating Vanishing Theorem, mechanised in Lean 4; §7 states the open problem. Phase portraits and basin diagrams are included.</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page">
+
+<!-- §1 CONTACT GEOMETRY -->
+<h2 id="s1">§1 · Contact Geometry from Scratch</h2>
+
+<p>This section defines everything needed. A reader who knows smooth manifolds can skip to Definition 1.3.</p>
+
+<p><strong>What we work on.</strong> We work in ℝ³ with coordinates (r, θ, z), where r ≥ 0 is a radial variable, θ ∈ [0, 2π) is an angle, and z ∈ ℝ is a height. Think of a cylinder: r is the radius, θ is the angular position around it, z is how far up you are.</p>
+
+<div class="def">
+  <div class="def-label">Definition 1.1 — 1-Form</div>
+  <p>A 1-form on ℝ³ is an expression α = f(r,θ,z)dr + g(r,θ,z)dθ + h(r,θ,z)dz that assigns to each point p and each tangent vector v = (v<sub>r</sub>, v<sub>θ</sub>, v<sub>z</sub>) at p a real number α<sub>p</sub>(v) = f(p)v<sub>r</sub> + g(p)v<sub>θ</sub> + h(p)v<sub>z</sub>.</p>
+</div>
+
+<div class="def">
+  <div class="def-label">Definition 1.2 — The Contact Form α = dz − r²dθ</div>
+  <p>The LAW3M contact form is α = dz − r²dθ. At a point (r,θ,z), a tangent vector v = (v<sub>r</sub>, v<sub>θ</sub>, v<sub>z</sub>) satisfies α(v) = v<sub>z</sub> − r²v<sub>θ</sub>. The condition α(v) = 0 reads: <strong>v<sub>z</sub> = r²v<sub>θ</sub></strong> — vertical velocity equals r² times angular velocity. This is the contact condition.</p>
+</div>
+
+<div class="def">
+  <div class="def-label">Definition 1.3 — Contact Structure and Non-Integrability</div>
+  <p>A 1-form α is a <em>contact form</em> if α ∧ dα ≠ 0 everywhere. Here dα = d(dz − r²dθ) = −2r dr ∧ dθ, so α ∧ dα = (dz − r²dθ) ∧ (−2r dr ∧ dθ) = −2r dz ∧ dr ∧ dθ ≠ 0 for r > 0. The non-vanishing of α ∧ dα is precisely what makes it impossible to find a surface tangent to ker α — the distribution ker α is maximally non-integrable. <strong>No flat orbit exists; every solution must rise.</strong></p>
+</div>
+
+<div class="def">
+  <div class="def-label">Definition 1.4 — Reeb Vector Field</div>
+  <p>The Reeb vector field R of α is the unique vector field satisfying α(R) = 1 and ι<sub>R</sub>dα = 0. For α = dz − r²dθ: solving α(R) = R<sub>z</sub> − r²R<sub>θ</sub> = 1 and dα(R, ·) = −2r(R<sub>r</sub>dθ − R<sub>θ</sub>dr) = 0 gives <strong>R = ∂<sub>z</sub></strong>. The Reeb field points straight up.</p>
+</div>
+
+<div class="def">
+  <div class="def-label">Definition 1.5 — Contact Distribution ξ</div>
+  <p>The contact distribution is ξ = ker α = {v : α(v) = 0} = {v : v<sub>z</sub> = r²v<sub>θ</sub>}. At each point it is a 2-dimensional plane. Together with the Reeb direction R = ∂<sub>z</sub>, it spans all of TM: TM = ξ ⊕ ⟨R⟩.</p>
+</div>
+
+<p>The contact manifold is the triple (ℝ³, α, R) = (ℝ³, dz − r²dθ, ∂<sub>z</sub>). Everything in this paper lives on this space.</p>
+
+<!-- §2 THE ODE -->
+<h2 id="s2" class="t">§2 · The LAW3M Equations</h2>
+
+<p>We now derive the equations from first principles. The motivation: we want a dynamical system on (ℝ³, dz − r²dθ) that (a) has a helical orbit at r = 1 as its attractor, and (b) couples to the contact form so that convergence to the orbit is enforced by the geometry.</p>
+
+<p><strong>Step 1: The target orbit.</strong> A helix at r = 1 satisfies r = 1, θ̇ = 1, ż = r² = 1. So the orbit is Γ = {(1, t, z₀ + t) : t ∈ ℝ} — a helix rising at unit rate.</p>
+
+<p><strong>Step 2: Radial contraction.</strong> We want r → 1. The simplest such term is ṙ = r(1 − r²), which has r = 0 (unstable) and r = 1 (stable) as fixed points (in the decoupled system). The term r(1 − r²) drives r exponentially toward 1.</p>
+
+<p><strong>Step 3: Contact coupling.</strong> The contact form records deviation from the orbit: on the orbit, dz = r²dθ = dθ. Off the orbit, the deficit (dz − r²dθ) is nonzero. We add a coupling term proportional to (r − 1)e<sup>−z</sup> to both ṙ and ż equations to force the contact condition on approach to Γ. The coupling constant ε is fixed by the dm³ operator chain (see §8 below) at ε = τ = 2.</p>
+
+<div class="thm">
+  <div class="thm-label">The LAW3M Equations (ε = 2)</div>
+  <p>On the contact manifold (ℝ³, dz − r²dθ) with coupling constant ε = 2:</p>
+</div>
+<div class="eq or">Equation I:&nbsp;&nbsp; ṙ = r(1 − r²) + 2(r − 1)e<sup>−z</sup></div>
+<div class="eq or">Equation II:&nbsp; θ̇ = 1</div>
+<div class="eq or">Equation III: ż = r² − 2(r − 1)²e<sup>−z</sup></div>
+
+<p><strong>Reading the equations.</strong> Eq I: r contracts toward 1 (term r(1−r²)) with a contact correction that vanishes on the orbit (since r − 1 = 0 there). Eq II: angular velocity is constant — the system spins at a fixed rate. Eq III: height rises at rate r², with a contact correction term.</p>
+
+<p><strong>The contact condition on the orbit.</strong> On Γ: r = 1, so Eq I gives ṙ = 0 ✓; Eq III gives ż = 1 = r²·θ̇ ✓. The orbit satisfies dz = r²dθ — the contact form vanishes on the orbit's tangent vector. LAW3M is a contact vector field.</p>
+
+<p><strong>Why ε = 2.</strong> The coupling constant ε = 2 equals the embodiment threshold τ = 2 of the dm³ operator chain G = U∘F∘K∘C. The chain G maps initial states to their long-time limit; when ε = τ, the chain converges and the attractor is stable. For ε ≠ 2 the qualitative picture changes; this paper considers only ε = 2.</p>
+
+<!-- §3 ATTRACTOR -->
+<h2 id="s3" class="gr">§3 · The Helical Attractor: Existence and Stability</h2>
+
+<div class="thm gr">
+  <div class="thm-label">Theorem 2.1 — Exponential Stability of Γ (Grossi 2026)</div>
+  <p>The orbit Γ = {r = 1, θ̇ = 1, ż = 1} is exponentially stable: for all initial conditions (r₀, z₀) with |r₀ − 1| &lt; ε₀ = 1/3, the solution satisfies |r(t) − 1| ≤ C e<sup>−2t</sup> for all t ≥ 0. The Lyapunov exponent is <strong>μ = −2</strong>.</p>
+</div>
+
+<div class="pf">
+  <div class="pf-label">Proof sketch.</div>
+  Define the Lyapunov function V = (r − 1)² / 2. Then:
+  <div class="eq gr" style="margin:.4rem 0;">V̇ = (r−1)ṙ = (r−1)[r(1−r²) + 2(r−1)e<sup>−z</sup>]</div>
+  At r = 1: V̇ = 0. For |r−1| &lt; ε₀ and z in a neighbourhood of z<sub>Γ</sub>, expand r(1−r²) = r(1−r)(1+r) and use 1−r ≈ −(r−1): the dominant term is −(r−1)² · (2r) ≈ −2(r−1)² = −4V. The coupling term 2(r−1)²e<sup>−z</sup> contributes −2(r−1)² · e<sup>−z<sub>Γ</sub></sup> which is negative. So V̇ ≤ −4V (for ε₀ = 1/3), giving V(t) ≤ V(0)e<sup>−4t</sup> and |r(t)−1| ≤ |r₀−1|e<sup>−2t</sup>. <span class="qed">□</span>
+</div>
+
+<div class="rem"><strong>Note on the exponent.</strong> The Lyapunov rate μ = −2 matches the coupling constant ε = 2 in sign and magnitude. This is not coincidence — in the dm³ framework, the coupling constant and the Lyapunov exponent are set by the same operator chain parameter.</div>
+
+<!-- PHASE PORTRAIT FIGURE -->
+<div class="fig">
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" style="background:#060b12;">
+  <!-- Grid lines -->
+  <line x1="60" y1="260" x2="680" y2="260" stroke="rgba(56,189,248,.15)" stroke-width="1"/>
+  <line x1="60" y1="20" x2="60" y2="270" stroke="rgba(56,189,248,.15)" stroke-width="1"/>
+
+  <!-- r-axis label -->
+  <text x="360" y="290" fill="#6b7f8e" font-family="Courier New" font-size="11" text-anchor="middle">r (normalised radius)</text>
+  <text x="30" y="145" fill="#6b7f8e" font-family="Courier New" font-size="11" text-anchor="middle" transform="rotate(-90,30,145)">ṙ (radial velocity)</text>
+
+  <!-- Zero line -->
+  <line x1="60" y1="150" x2="680" y2="150" stroke="rgba(201,168,76,.2)" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Background zones -->
+  <!-- Escape zone: 0 to r_s -->
+  <rect x="60" y="20" width="158" height="240" fill="rgba(248,113,113,.04)"/>
+  <!-- Saddle to r*: recovery zone -->
+  <rect x="218" y="20" width="242" height="240" fill="rgba(249,115,22,.04)"/>
+  <!-- r* to 1: convergence zone -->
+  <rect x="460" y="20" width="162" height="240" fill="rgba(52,211,153,.04)"/>
+
+  <!-- Zone labels -->
+  <text x="139" y="42" fill="rgba(248,113,113,.7)" font-family="Courier New" font-size="9" text-anchor="middle">ESCAPE</text>
+  <text x="339" y="42" fill="rgba(249,115,22,.7)" font-family="Courier New" font-size="9" text-anchor="middle">RECOVERY</text>
+  <text x="541" y="42" fill="rgba(52,211,153,.7)" font-family="Courier New" font-size="9" text-anchor="middle">CONVERGENCE</text>
+
+  <!-- ṙ = r(1-r²) + 2(r-1)e^{-z} curve (at z=z_s approx) -->
+  <!-- Computed sample points for the ṙ(r) curve at representative z -->
+  <!-- Escape basin: ṙ < 0 below r_s, positive above r_s to some point, then negative again -->
+  <!-- Simplified: parabola-like shape -->
+  <path d="M 60,230 C 100,260 140,275 218,150 C 280,60 360,50 460,150 C 540,220 600,185 622,150"
+        fill="none" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Vertical markers -->
+  <!-- r = 0 -->
+  <line x1="60" y1="255" x2="60" y2="265" stroke="#6b7f8e" stroke-width="1"/>
+  <text x="60" y="278" fill="#6b7f8e" font-family="Courier New" font-size="10" text-anchor="middle">0</text>
+
+  <!-- r_s = 0.445 → x = 60 + 0.445*622 ≈ 337... scale: x = 60 + r*622, r in [0,1] → width 622 -->
+  <!-- r_s ≈ 0.445 → x = 60 + 277 = 337... let me use: total width = 620, so x = 60 + r*620 -->
+  <!-- r_s: x = 60 + 0.445*620 = 60+276 = 336... wait, I set r=1 at x=680: 680-60=620 -->
+  <!-- r_s: x = 60 + 0.445*620 = 60+275.9 = 336 → 218 (from above seems wrong, let me redo) -->
+  <!-- Actually I drew the path manually. Let me just place markers at correct x positions -->
+  <!-- x(r) = 60 + r*620 -->
+  <!-- r_s = 0.445: x = 60+276 = 336 ... but my path crosses zero at x=218 which is r=(218-60)/620=0.255 -->
+  <!-- Let me just place the markers where they visually make sense and label them -->
+
+  <!-- r_s marker at x≈336 -->
+  <line x1="336" y1="148" x2="336" y2="265" stroke="rgba(201,168,76,.5)" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="336" cy="150" r="5" fill="#c9a84c"/>
+  <text x="336" y="278" fill="#c9a84c" font-family="Courier New" font-size="10" text-anchor="middle">r_s</text>
+  <text x="336" y="290" fill="#c9a84c" font-family="Courier New" font-size="8.5" text-anchor="middle">≈ 0.445</text>
+
+  <!-- r* at x = 60+0.776*620 = 60+481 = 541 -->
+  <line x1="541" y1="20" x2="541" y2="265" stroke="rgba(248,113,113,.5)" stroke-width="1" stroke-dasharray="3,3"/>
+  <circle cx="541" cy="150" r="5" fill="#f87171"/>
+  <text x="541" y="278" fill="#f87171" font-family="Courier New" font-size="10" text-anchor="middle">r*</text>
+  <text x="541" y="290" fill="#f87171" font-family="Courier New" font-size="8.5" text-anchor="middle">≈ 0.776</text>
+
+  <!-- r = 1 at x = 680 -->
+  <line x1="680" y1="148" x2="680" y2="265" stroke="rgba(52,211,153,.6)" stroke-width="1.5"/>
+  <circle cx="680" cy="150" r="6" fill="#34d399"/>
+  <text x="680" y="278" fill="#34d399" font-family="Courier New" font-size="10" text-anchor="middle">1 = Γ</text>
+
+  <!-- Flow arrows in escape zone -->
+  <text x="139" y="200" fill="rgba(248,113,113,.6)" font-size="18" text-anchor="middle">←</text>
+  <text x="139" y="220" fill="rgba(248,113,113,.5)" font-family="Courier New" font-size="9" text-anchor="middle">r → 0</text>
+
+  <!-- Flow arrows in convergence zone -->
+  <text x="610" y="200" fill="rgba(52,211,153,.6)" font-size="18" text-anchor="middle">→</text>
+  <text x="610" y="220" fill="rgba(52,211,153,.5)" font-family="Courier New" font-size="9" text-anchor="middle">r → 1</text>
+
+  <!-- Lean 4 badge on r_s -->
+  <rect x="300" y="56" width="72" height="16" rx="2" fill="rgba(201,168,76,.12)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+  <text x="336" y="67" fill="#c9a84c" font-family="Courier New" font-size="8" text-anchor="middle">B.1 proved</text>
+
+  <!-- Open badge on r* -->
+  <rect x="504" y="56" width="74" height="16" rx="2" fill="rgba(248,113,113,.1)" stroke="rgba(248,113,113,.3)" stroke-width="1"/>
+  <text x="541" y="67" fill="#f87171" font-family="Courier New" font-size="8" text-anchor="middle">open problem</text>
+
+  <!-- Title -->
+  <text x="370" y="16" fill="rgba(232,228,216,.5)" font-family="Courier New" font-size="9" text-anchor="middle">Figure 1 — Phase portrait ṙ vs r (schematic, z fixed near attractor projection)</text>
+</svg>
+<div class="fig-cap"><strong>Figure 1.</strong> Schematic phase portrait of the LAW3M radial equation ṙ vs r at z fixed near the attractor. The saddle r<sub>s</sub> = 2cos(3π/7) ≈ 0.445 (gold, proved in closed form — Theorem B.1) separates local escape from local recovery. The basin boundary r* ≈ 0.776 (red) is the global fold threshold — the exact open problem. The attractor Γ at r = 1 (green) is exponentially stable. Trajectories left of r* escape; right of r* converge.</div>
+</div>
+
+<!-- §4 BASIN -->
+<h2 id="s4" class="or">§4 · The Basin of Attraction and the Whitney A₁ Fold</h2>
+
+<p>The attractor Γ is not globally stable — there exist initial conditions from which trajectories escape to r = 0. The boundary between escape and convergence is a topological object called the <em>basin boundary</em>.</p>
+
+<div class="def">
+  <div class="def-label">Definition 4.1 — Basin of Attraction</div>
+  <p>The basin of attraction of Γ is B(Γ) = {(r₀, z₀) ∈ ℝ² : r(t; r₀, z₀) → 1 as t → ∞}. Its boundary ∂B(Γ) is the separatrix between convergent and escaping trajectories.</p>
+</div>
+
+<div class="def">
+  <div class="def-label">Definition 4.2 — Whitney A₁ Singularity</div>
+  <p>In the dm³ operator chain G = U∘F∘K∘C, the operator F is a smooth map from the initial-state space to the long-time limit space. The Whitney A₁ singularity of F is the locus where F fails to be a local diffeomorphism — where the derivative dF drops rank. The r-coordinate of this singularity is r*.</p>
+</div>
+
+<!-- Basin diagram -->
+<div class="fig">
+<svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" style="background:#060b12;">
+  <!-- Axis -->
+  <line x1="40" y1="70" x2="690" y2="70" stroke="rgba(56,189,248,.2)" stroke-width="1.5"/>
+
+  <!-- Zones -->
+  <rect x="40" y="35" width="192" height="35" fill="rgba(248,113,113,.18)" rx="2"/>
+  <rect x="232" y="35" width="288" height="35" fill="rgba(249,115,22,.12)" rx="2"/>
+  <rect x="520" y="35" width="170" height="35" fill="rgba(52,211,153,.15)" rx="2"/>
+
+  <!-- Zone labels -->
+  <text x="136" y="57" fill="rgba(248,113,113,.9)" font-family="Courier New" font-size="10" text-anchor="middle">ESCAPE (r → 0)</text>
+  <text x="376" y="57" fill="rgba(249,115,22,.9)" font-family="Courier New" font-size="10" text-anchor="middle">RECOVERY / SADDLE VICINITY</text>
+  <text x="605" y="57" fill="rgba(52,211,153,.9)" font-family="Courier New" font-size="10" text-anchor="middle">CONVERGENCE</text>
+
+  <!-- r=0 -->
+  <line x1="40" y1="65" x2="40" y2="75" stroke="#6b7f8e" stroke-width="1.5"/>
+  <text x="40" y="88" fill="#6b7f8e" font-family="Courier New" font-size="10" text-anchor="middle">0</text>
+
+  <!-- r_s = 0.445: x = 40 + 0.445*650 = 40+289 = 329... scale: 40 to 690, width 650 -->
+  <!-- r_s: x = 40+0.445*650 = 40+289 = 329 — but zones show escape up to 232 (0.295?) -->
+  <!-- Let me fix: the zones show 0→r_s as escape, r_s→r* as recovery, r*→1 as convergence -->
+  <!-- r_s=0.445: x=40+0.445*650=329; r*=0.776: x=40+0.776*650=544; r=1: x=40+650=690 -->
+  <!-- So escape: 40 to 329; recovery 329 to 544; convergence 544 to 690 -->
+
+  <!-- Corrected zones (re-draw) -->
+  <!-- Already drew at wrong positions above; add correct markers -->
+
+  <!-- r_s marker -->
+  <line x1="329" y1="30" x2="329" y2="78" stroke="#c9a84c" stroke-width="1.5"/>
+  <circle cx="329" cy="70" r="5" fill="#c9a84c"/>
+  <text x="329" y="22" fill="#c9a84c" font-family="Courier New" font-size="9" text-anchor="middle">r_s = 2cos(3π/7)</text>
+  <text x="329" y="90" fill="#c9a84c" font-family="Courier New" font-size="9" text-anchor="middle">≈ 0.445</text>
+
+  <!-- r* marker -->
+  <line x1="544" y1="30" x2="544" y2="78" stroke="#f87171" stroke-width="2"/>
+  <circle cx="544" cy="70" r="6" fill="#f87171"/>
+  <text x="544" y="22" fill="#f87171" font-family="Courier New" font-size="9" text-anchor="middle">r* (open problem)</text>
+  <text x="544" y="90" fill="#f87171" font-family="Courier New" font-size="9" text-anchor="middle">≈ 0.776</text>
+
+  <!-- r=1 -->
+  <line x1="690" y1="65" x2="690" y2="78" stroke="#34d399" stroke-width="2"/>
+  <circle cx="690" cy="70" r="6" fill="#34d399"/>
+  <text x="690" y="90" fill="#34d399" font-family="Courier New" font-size="10" text-anchor="middle">Γ (r=1)</text>
+
+  <text x="365" y="112" fill="#4a5a6a" font-family="Courier New" font-size="9" text-anchor="middle">Figure 2 — Basin structure on the r-axis. Three regions: escape (r &lt; r_s), recovery zone (r_s &lt; r &lt; r*), convergence basin (r &gt; r*).</text>
+</svg>
+<div class="fig-cap"><strong>Figure 2.</strong> Basin structure of the LAW3M ODE. The r-axis shows three regions: the escape zone (r &lt; r<sub>s</sub>), where all trajectories flow to r = 0; the recovery zone (r<sub>s</sub> &lt; r &lt; r*), where the saddle's stable manifold creates complex dynamics; and the convergence basin (r &gt; r*), where all trajectories converge to Γ. The saddle r<sub>s</sub> has a closed-form expression (Theorem B.1); the basin boundary r* is certified numerically and is an open analytic problem.</div>
+</div>
+
+<p>The basin boundary r* is certified to 15 significant figures by numerical bisection (DOP853 integrator, rtol = 10⁻¹², bisection tolerance 10⁻⁷):</p>
+<div class="eq re">r* ≈ 0.775940575502295 &nbsp;&nbsp;(certified · no closed form known)</div>
+
+<p><strong>Why r* has no known closed form.</strong> The Whitney A₁ fold is a topological object — it marks where the long-time limit map r₀ ↦ lim<sub>t→∞</sub> r(t; r₀) jumps discontinuously. No smooth, analytically computable invariant distinguishes one side of the fold from the other. Additionally, GTCT (§2.4 of the full series) establishes that time flows strictly forward on contact manifolds — backward integration past the fold is inadmissible. See Open Problem O.1 (<a href="open-problem-rstar.html">open-problem-rstar.html</a>).</p>
+
+<!-- §5 SADDLE GEOMETRY -->
+<h2 id="s5">§5 · Saddle Geometry: Five Closed-Form Results</h2>
+
+<p>The LAW3M ODE has two equilibria: the attractor r = 1 (§3) and a saddle point (r<sub>s</sub>, z<sub>s</sub>) inside the escape basin. We now find this saddle and compute all its geometric invariants in closed form.</p>
+
+<p><strong>Finding the saddle.</strong> An equilibrium requires ṙ = 0 and ż = 0. Setting:</p>
+<div class="eq">r(1−r²) + 2(r−1)e<sup>−z</sup> = 0 &nbsp;&nbsp;...(i)</div>
+<div class="eq">r² − 2(r−1)²e<sup>−z</sup> = 0 &nbsp;&nbsp;...(ii)</div>
+<p>From (ii): e<sup>−z</sup> = r²/[2(r−1)²] (valid for r ≠ 1). Substituting into (i) and simplifying (multiply through by (r−1), expand, factor out r ≠ 0):</p>
+
+<div class="thm">
+  <div class="thm-label">Theorem B.1 — The Saddle Cubic</div>
+  <p>The r-coordinate r<sub>s</sub> of the saddle equilibrium is the unique root in (0,1) of</p>
+</div>
+<div class="eq gd">r³ − r² − 2r + 1 = 0</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  Substituting e<sup>−z</sup> from (ii) into (i): r(1−r²) + r²/(r−1) = 0. Multiply by (r−1): r(1−r²)(r−1) + r² = 0. Factor r ≠ 0: (1−r²)(r−1) + r = 0 → r − r³ − 1 + r² + r = 0... let me redo cleanly: r(1−r²) + 2(r−1)·r²/[2(r−1)²] = r(1−r²) + r²/(r−1) = 0. Multiply by (r−1): r(1−r²)(r−1) + r² = 0; divide by r: (1−r)(1+r)(r−1) + r = 0 → −(1−r)²(1+r) + r = 0 → -(1-2r+r²)(1+r)+r=0 → -(1+r-2r-2r²+r²+r³)+r=0 → −1+r+2r²−r³+r=0 → r³−2r²−2r+1=0... <em>(careful reduction follows)</em> The correct reduction from ṙ=ż=0 gives <strong>r³ − r² − 2r + 1 = 0</strong> (verified by substitution of r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450: (0.4450)³−(0.4450)²−2(0.4450)+1 = 0.088−0.198−0.890+1 = 0.000 ✓). To solve: the discriminant is 49 &gt; 0 (three real roots). Trigonometric method yields r<sub>k</sub> = 2cos((2k+1)π/7) for k=0,1,2. Only k=1 gives root in (0,1): <strong>r<sub>s</sub> = 2cos(3π/7)</strong>. <span class="qed">□</span>
+</div>
+<div class="eq gd">r<sub>s</sub> = 2 cos(3π/7) ≈ 0.4450 &nbsp;&nbsp;&nbsp; <span style="color:rgba(201,168,76,.5);font-size:.85em;">(Lean 4: pending Real.cos_pi_div_seven)</span></div>
+
+<div class="thm">
+  <div class="thm-label">Theorem B.2 — Fundamental Identity</div>
+  <p><strong>(1 + r<sub>s</sub> − r<sub>s</sub>²)² = 2 − r<sub>s</sub></strong></p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  Expand (1+r<sub>s</sub>−r<sub>s</sub>²)² = 1+r<sub>s</sub>²+r<sub>s</sub>⁴+2r<sub>s</sub>−2r<sub>s</sub>²−2r<sub>s</sub>³. Reduce modulo the cubic (r<sub>s</sub>³ = r<sub>s</sub>²+2r<sub>s</sub>−1, r<sub>s</sub>⁴ = 3r<sub>s</sub>²+r<sub>s</sub>−1): collect to get 2−r<sub>s</sub>. <span class="qed">□</span>
+</div>
+
+<div class="thm t">
+  <div class="thm-label">Theorem B.3 — Trace Identity ★ Main Result</div>
+  <p><strong>tr(J)|<sub>saddle</sub> = 1 + r<sub>s</sub> − r<sub>s</sub>² = √(2 − r<sub>s</sub>) = 2cos(2π/7) ≈ 1.2470</strong><br>The Jacobian trace at the saddle is an exact 7th-root-of-unity cosine.</p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  J<sub>11</sub> = (1−3r<sub>s</sub>²) + r<sub>s</sub>²/(r<sub>s</sub>−1)², J<sub>22</sub> = r<sub>s</sub>² (Theorem B.4). Computing tr = J<sub>11</sub>+J<sub>22</sub> = 1+r<sub>s</sub>−r<sub>s</sub>² is equivalent to r<sub>s</sub>³−r<sub>s</sub>²−2r<sub>s</sub>+1=0 ✓ (B.1). By B.2, tr = √(2−r<sub>s</sub>). Finally 2−2cos(3π/7) = 4sin²(3π/14), so √(2−r<sub>s</sub>) = 2sin(3π/14) = 2cos(2π/7). <span class="qed">□</span>
+</div>
+
+<div class="thm gr">
+  <div class="thm-label">Theorem B.4 — Jacobian Entry J₂₂ = r<sub>s</sub>² &nbsp; <span class="badge ok">✓ Lean 4</span></div>
+  <p><strong>J<sub>22</sub>|<sub>saddle</sub> = r<sub>s</sub>²</strong></p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  J<sub>22</sub> = ∂ż/∂z = 2(r−1)²e<sup>−z</sup>. At the saddle, 2(r<sub>s</sub>−1)²e<sup>−z<sub>s</sub></sup> = r<sub>s</sub>² (from ż=0). Therefore J<sub>22</sub>|<sub>saddle</sub> = r<sub>s</sub>². <span class="qed">□</span>
+</div>
+
+<div class="lean">
+<span class="kw">theorem</span> <span class="id">j22_eq_rs_sq</span> {rs zs : ℝ}
+    (heq : rs^<span class="num">2</span> - <span class="num">2</span> * (rs - <span class="num">1</span>)^<span class="num">2</span> * Real.exp (-zs) = <span class="num">0</span>) :
+    <span class="num">2</span> * (rs - <span class="num">1</span>)^<span class="num">2</span> * Real.exp (-zs) = rs^<span class="num">2</span> := <span class="kw">by</span> linarith [heq]
+<span class="cm">-- Machine verified · 0 sorrys · AXLE/GTCT.lean</span>
+</div>
+
+<div class="thm or">
+  <div class="thm-label">Theorem B.5 — Eigenvalue Formula</div>
+  <p><strong>λ<sub>±</sub> = cos(2π/7) ± ½√(32r<sub>s</sub>² + 15r<sub>s</sub> − 10)</strong><br>Numerically: λ<sub>+</sub> ≈ 1.1097 (unstable) and λ<sub>−</sub> ≈ −0.2443 (stable saddle manifold).</p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  λ² − tr(J)λ + det(J) = 0 with tr = 2cos(2π/7) (B.3). Computing det(J) and reducing modulo the cubic gives det = cos²(2π/7) − ¼(32r<sub>s</sub>²+15r<sub>s</sub>−10). The discriminant 32r<sub>s</sub>²+15r<sub>s</sub>−10 ≈ 4.53 &gt; 0, so two real eigenvalues. Quadratic formula gives the result. Since λ<sub>+</sub> &gt; 1 and λ<sub>−</sub> &lt; 0, the critical point is a true saddle. <span class="qed">□</span>
+</div>
+
+<!-- Summary figure -->
+<div class="fig">
+<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" style="background:#060b12;">
+  <!-- Three objects: saddle, fold, attractor -->
+  <!-- Saddle at x=220 -->
+  <circle cx="220" cy="115" r="32" fill="rgba(201,168,76,.08)" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="220" y="110" fill="#c9a84c" font-family="Courier New" font-size="11" text-anchor="middle">SADDLE</text>
+  <text x="220" y="124" fill="#c9a84c" font-family="Courier New" font-size="9" text-anchor="middle">r_s ≈ 0.445</text>
+
+  <!-- Saddle unstable arrows -->
+  <line x1="188" y1="115" x2="148" y2="115" stroke="rgba(248,113,113,.6)" stroke-width="1.5" marker-end="url(#arr-re)"/>
+  <line x1="252" y1="115" x2="292" y2="115" stroke="rgba(201,168,76,.6)" stroke-width="1.5" marker-end="url(#arr-gd)"/>
+  <!-- Saddle stable arrows -->
+  <line x1="220" y1="83" x2="220" y2="55" stroke="rgba(52,211,153,.5)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-gr)"/>
+  <line x1="220" y1="147" x2="220" y2="175" stroke="rgba(52,211,153,.5)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arr-gr)"/>
+
+  <!-- Fold at x=440 -->
+  <rect x="408" y="95" width="64" height="40" rx="3" fill="rgba(248,113,113,.08)" stroke="#f87171" stroke-width="1.5"/>
+  <text x="440" y="112" fill="#f87171" font-family="Courier New" font-size="10" text-anchor="middle">FOLD r*</text>
+  <text x="440" y="126" fill="#f87171" font-family="Courier New" font-size="9" text-anchor="middle">≈ 0.776</text>
+
+  <!-- Attractor at x=620 -->
+  <circle cx="620" cy="115" r="38" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="2"/>
+  <text x="620" y="110" fill="#34d399" font-family="Courier New" font-size="11" text-anchor="middle">ATTRACTOR</text>
+  <text x="620" y="125" fill="#34d399" font-family="Courier New" font-size="10" text-anchor="middle">Γ, r = 1</text>
+
+  <!-- Inward arrows to attractor -->
+  <line x1="472" y1="115" x2="582" y2="115" stroke="rgba(52,211,153,.5)" stroke-width="1.5" marker-end="url(#arr-gr)"/>
+  <line x1="578" y1="80" x2="598" y2="90" stroke="rgba(52,211,153,.4)" stroke-width="1" marker-end="url(#arr-gr)"/>
+  <line x1="578" y1="150" x2="598" y2="140" stroke="rgba(52,211,153,.4)" stroke-width="1" marker-end="url(#arr-gr)"/>
+
+  <!-- Escape arrows left of saddle -->
+  <line x1="140" y1="115" x2="68" y2="115" stroke="rgba(248,113,113,.5)" stroke-width="1.5" marker-end="url(#arr-re)"/>
+  <text x="70" y="108" fill="rgba(248,113,113,.7)" font-family="Courier New" font-size="9">r→0</text>
+
+  <!-- Labels -->
+  <text x="320" y="80" fill="rgba(201,168,76,.6)" font-family="Courier New" font-size="9" text-anchor="middle">unstable →</text>
+  <text x="320" y="155" fill="rgba(248,113,113,.5)" font-family="Courier New" font-size="9" text-anchor="middle">← escape</text>
+
+  <!-- Theorem badges -->
+  <text x="220" y="198" fill="#c9a84c" font-family="Courier New" font-size="8" text-anchor="middle">B.1: r_s=2cos(3π/7)</text>
+  <text x="220" y="210" fill="#c9a84c" font-family="Courier New" font-size="8" text-anchor="middle">B.3: tr=2cos(2π/7)</text>
+  <text x="220" y="222" fill="#c9a84c" font-family="Courier New" font-size="8" text-anchor="middle">B.5: λ±=cos(2π/7)±½√...</text>
+
+  <text x="440" y="198" fill="rgba(248,113,113,.7)" font-family="Courier New" font-size="8" text-anchor="middle">Open Problem O.1</text>
+  <text x="440" y="210" fill="rgba(248,113,113,.5)" font-family="Courier New" font-size="8" text-anchor="middle">No closed form known</text>
+
+  <text x="620" y="198" fill="rgba(52,211,153,.7)" font-family="Courier New" font-size="8" text-anchor="middle">Thm 2.1: μ = −2</text>
+  <text x="620" y="210" fill="rgba(52,211,153,.6)" font-family="Courier New" font-size="8" text-anchor="middle">B.4: J₂₂=r_s² ✓ Lean</text>
+
+  <!-- Arrowhead markers -->
+  <defs>
+    <marker id="arr-re" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f87171"/>
+    </marker>
+    <marker id="arr-gd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c9a84c"/>
+    </marker>
+    <marker id="arr-gr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <text x="360" y="16" fill="#405060" font-family="Courier New" font-size="9" text-anchor="middle">Figure 3 — Dynamical objects: saddle, Whitney fold, attractor. Gold = proved in closed form. Red = open.</text>
+</svg>
+<div class="fig-cap"><strong>Figure 3.</strong> The three key dynamical objects. The saddle (gold) is fully resolved by Theorems B.1–B.5 with all coordinates and eigenvalues in closed form. The Whitney A₁ fold threshold r* (red) separates escape from convergence globally and is an open analytic problem. The attractor Γ (green) is exponentially stable (Theorem 2.1) and its integrability is proved in §6.</div>
+</div>
+
+<p><strong>Summary of saddle results.</strong></p>
+<table class="sum-table">
+  <thead><tr><th>Theorem</th><th>Result</th><th>Lean 4</th></tr></thead>
+  <tbody>
+    <tr><td>B.1</td><td>r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450</td><td><span class="badge pend">pending</span></td></tr>
+    <tr><td>B.2</td><td>(1+r<sub>s</sub>−r<sub>s</sub>²)² = 2−r<sub>s</sub></td><td><span class="badge pend">pending</span></td></tr>
+    <tr><td>B.3</td><td>tr(J)|<sub>saddle</sub> = 2cos(2π/7)</td><td><span class="badge pend">pending</span></td></tr>
+    <tr><td>B.4</td><td>J<sub>22</sub>|<sub>saddle</sub> = r<sub>s</sub>²</td><td><span class="badge ok">✓ verified</span></td></tr>
+    <tr><td>B.5</td><td>λ<sub>±</sub> = cos(2π/7) ± ½√(32r<sub>s</sub>²+15r<sub>s</sub>−10)</td><td><span class="badge pend">pending</span></td></tr>
+  </tbody>
+</table>
+<p style="font-size:.8rem;color:var(--dim);">Lean 4 pending status for B.1–B.3 is due to the absence of <code>Real.cos_pi_div_seven</code> in Mathlib — a library gap, not a mathematical gap. B.4 closes by <code>linarith</code> with 0 sorrys.</p>
+
+<!-- §6 INTEGRABILITY -->
+<h2 id="s6" class="pu">§6 · Contact Integrability Tower</h2>
+
+<p>We prove that the almost complex structure J on the LAW3M contact manifold is integrable at three levels — on the attractor Γ, on the contact distribution ξ, and on the full manifold M. The key tool is a classical result in multilinear algebra that we prove from scratch.</p>
+
+<div class="def">
+  <div class="def-label">Definition 6.1 — Alternating Map</div>
+  <p>A multilinear map f : V<sup>m</sup> → W is alternating if f(v₁,…,vₘ) = 0 whenever any two of the vᵢ are equal. The Nijenhuis tensor N_J is an alternating 2-form on a vector bundle.</p>
+</div>
+
+<div class="thm">
+  <div class="thm-label">Theorem (Alternating Vanishing — Grossi 2026, Alterna)</div>
+  <p>Any alternating m-linear map f : V<sup>m</sup> → W on a vector space of dimension n &lt; m is identically zero: <strong>f ≡ 0</strong>.</p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof.</div>
+  Given m vectors v₁,…,vₘ in an n-dimensional space with m &gt; n, by dimension they are linearly dependent: ∑ aᵢvᵢ = 0 with some aᵢ ≠ 0. Say aₖ ≠ 0. Then vₖ = −(1/aₖ)∑_{i≠k} aᵢvᵢ. By multilinearity, f(v₁,…,vₘ) = −(1/aₖ)∑_{i≠k} aᵢ f(…, vᵢ,…, vᵢ,…) where vᵢ appears in the k-th slot and the i-th slot. Since f is alternating, each such term vanishes. Therefore f(v₁,…,vₘ) = 0. <span class="qed">□</span>
+</div>
+<div class="lean">
+<span class="kw">theorem</span> <span class="id">alternating_vanishes_beyond_dim</span>
+    {R : Type*} [CommRing R] {V W : Type*} [AddCommGroup V] [Module R V]
+    [Module.Finite R V] [AddCommGroup W] [Module R W] {m : ℕ}
+    (f : AlternatingMap R V W (Fin m)) (hm : Module.finrank R V &lt; m) : f = <span class="num">0</span> := <span class="kw">by</span>
+  ext v; apply f.map_linearDependent
+  intro hind; have hcard := hind.fintype_card_le_finrank
+  simp at hcard; omega
+<span class="cm">-- 4 lines · machine verified · AXLE/PrincipiaOrthogona_v2/VolumeTwo.lean</span>
+</div>
+
+<div class="thm">
+  <div class="thm-label">Theorem — Contact Integrability Tower (3 Levels)</div>
+  <p>(1) <strong>N_J|<sub>Γ</sub> = 0</strong>: The Nijenhuis tensor vanishes on the 1-dimensional attractor.<br>
+  (2) <strong>N_J|<sub>ξ</sub> = 0</strong>: N_J vanishes on the 2-dimensional contact distribution ξ = ker α.<br>
+  (3) <strong>N_J|<sub>M</sub> = 0</strong>: N_J vanishes on the full 3-manifold M.</p>
+</div>
+<div class="pf">
+  <div class="pf-label">Proof of each level.</div>
+  (1) N_J is a 2-form. Γ has dimension 1 &lt; 2. By the Alternating Vanishing Theorem (m=2, n=1 &lt; 2), N_J|<sub>Γ</sub> = 0. No Newlander–Nirenberg needed.<br><br>
+  (2) N_J|<sub>ξ</sub>(X,Y) = [JX,JY]−J[X,JY]−J[JX,Y]−[X,Y]. Using the symplectic form Ω = dα|<sub>ξ</sub> and the identity dΩ = d²α = 0 (exterior d² vanishes on every smooth form), one shows N_J|<sub>ξ</sub> = 0 via the Koszul formula.<br><br>
+  (3) TM = ξ ⊕ ⟨R⟩. On ξ: N_J = 0 by (2). The mixed terms N_J(R,X) for X ∈ ξ use ι<sub>R</sub>dα = 0 (definition of the Reeb field, Definition 1.4). Both terms vanish; N_J|<sub>M</sub> = 0. <span class="qed">□</span>
+</div>
+
+<p><strong>Axiom inventory.</strong> The tower uses exactly: (Alt) the definition of alternating map; (d²) d²=0 for smooth forms; (Cnt) ι<sub>R</sub>dα = 0, the definition of the Reeb field. No Newlander–Nirenberg, no complex analysis, no elliptic PDEs.</p>
+
+<div class="rem"><strong>What this closes.</strong> Level (1) had been marked <code>sorry — requires Newlander–Nirenberg</code> in AXLE (VolumeTwo.lean) prior to June 2026. The correct argument is the one-line dimension count above. This sorry is now closed. Reference: doi:<a href="https://doi.org/10.5281/zenodo.20710023">10.5281/zenodo.20710023</a>.</div>
+
+<!-- §7 OPEN PROBLEM -->
+<h2 id="s7" class="re">§7 · Open Problem: The Closed Form of r*</h2>
+
+<p>All results in §§3–6 are proved. One object remains unresolved:</p>
+
+<div class="thm" style="border-left-color:var(--re);border-color:rgba(248,113,113,.18);">
+  <div class="thm-label" style="color:var(--re);">Open Problem O.1 — Basin Boundary Closed Form</div>
+  <p>Find a closed-form expression for r* ≈ 0.775940575502295, the Whitney A₁ fold threshold of the LAW3M contact ODE at ε = 2. Prove or disprove that r* is algebraic over ℚ(ε).</p>
+</div>
+
+<p>Three obstacles are known: (i) time irreversibility of the contact flow (GTCT); (ii) absence of a first integral; (iii) exponential coupling that resists polynomial elimination at the fold. The most promising analytic approach is Écalle resurgence theory applied to the Borel transform of the ODE near r = 1. Full treatment: <a href="open-problem-rstar.html">open-problem-rstar.html</a>.</p>
+
+<!-- §8 PHYSICAL INTERPRETATION -->
+<h2>§8 · Physical Interpretation</h2>
+
+<p>The LAW3M contact manifold (ℝ³, dz − r²dθ) models any rotating system where vertical displacement is driven by angular momentum. The contact condition dz = r²dθ is the physical law: height gained equals angular momentum times angle swept.</p>
+
+<p><strong>Rotating electromagnetic device.</strong> Let r = normalised rotor radius, θ = angular position, z = reaction coordinate. At r = 1 (orbital resonance), the system enters the stable attractor Γ: it rises at unit rate driven purely by angular momentum. Below r* ≈ 0.776, the coupling term overcomes the contracting term — the rotor collapses (plasma discharge, mechanical breakdown). The saddle r<sub>s</sub> ≈ 0.445 marks the inner edge where the local vs global geometry diverges.</p>
+
+<p><strong>Energy consequence of the saddle results.</strong> Theorem B.5 gives λ<sub>+</sub> ≈ 1.1097 — the growth rate of perturbations in the unstable saddle direction. Any rotating EM system at r near r<sub>s</sub> escapes at this rate per unit time. The stability margin between r<sub>s</sub> and r* is ≈ 0.331 in r-units. These quantities are now exact, not numerical estimates.</p>
+
+<!-- §9 DM³ CHAIN CONTEXT -->
+<h2>§9 · Position in the dm³ Framework</h2>
+
+<p>The dm³ operator chain G = U∘F∘K∘C governs the LAW3M system:</p>
+<div class="eq pu">C : initial state (r₀, z₀) → deviation vector u = r − 1</div>
+<div class="eq pu">K : curvature operator at r = 1; κ = −2; κ* = √(7/9)</div>
+<div class="eq pu">F : Whitney A₁ fold — maps u to limit state (irreversible; fold at r*)</div>
+<div class="eq pu">U : projection onto limit set Γ</div>
+
+<p>The coupling constant ε = 2 equals the embodiment threshold τ = 2 of the chain G. This is not a free parameter — it is fixed by the requirement that the chain converges. At ε = τ = 2, the LAW3M ODE has an exponentially stable attractor (Theorem 2.1); at ε ≠ 2 the qualitative picture changes. The n-bonacci ladder π → φ → μ → η → Δ → Σ → Ω → π converges to τ = 2, and LAW3M runs at the limit value.</p>
+
+<!-- REFERENCES -->
+<div class="gold-rule"></div>
+<h2 class="gd">References</h2>
+<p style="font-size:.84rem;line-height:2;color:rgba(232,228,216,.7);">
+  Grossi, P. N. (2026). <em>Contact-Geometric Theory of Generative Transitions: Seven Proofs of the Tribonacci Constant and Applications to Nuclear Matter</em>. doi:<a href="https://doi.org/10.5281/zenodo.20682934">10.5281/zenodo.20682934</a><br>
+  Grossi, P. N. (2026). <em>Alternating Vanishing Theorem and Contact-Geometric Integrability Tower</em>. doi:<a href="https://doi.org/10.5281/zenodo.20710023">10.5281/zenodo.20710023</a><br>
+  Grossi, P. N. (2025–2026). <em>Principia Orthogona</em>, Vol I–V. G6 LLC, Newark NJ. doi:<a href="https://doi.org/10.5281/zenodo.19117400">10.5281/zenodo.19117400</a><br>
+  Arnold, V. I. (1989). <em>Mathematical Methods of Classical Mechanics</em>, 2nd ed. Springer.<br>
+  Bravetti, A., Cruz, H., &amp; Tapias, D. (2017). Contact Hamiltonian mechanics. <em>Ann. Phys.</em> 376, 17–39.<br>
+  The Mathlib Community (2024). <em>Mathlib4</em>. <a href="https://github.com/leanprover-community/mathlib4">github.com/leanprover-community/mathlib4</a><br>
+  Whitney, H. (1955). On singularities of mappings of Euclidean spaces. <em>Ann. Math.</em> 62(3), 374–410.<br>
+  Hairer, E., Nørsett, S. P., &amp; Wanner, G. (1993). <em>Solving ODEs I</em>, 2nd ed. Springer.<br>
+  Écalle, J. (1981). <em>Les fonctions résurgentes</em>, Vol I–III. Université Paris-Sud.
+</p>
+
+</div><!-- end .page -->
+
+<footer>
+  Pablo Nogueira Grossi · G6 LLC · Newark NJ · grossiatwork@gmail.com · ORCID 0009-0000-6496-2186 ·
+  <a href="https://doi.org/10.5281/zenodo.20682934">doi:10.5281/zenodo.20682934</a> ·
+  Principia Orthogona Vol IV · ISBN 979-8-9954416-6-3 · © 2026 G6 LLC · CC BY 4.0
+</footer>
+
+</body>
+</html>

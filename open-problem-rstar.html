@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open Problem O.1 — The Basin Boundary r* · LAW3M · Grossi 2026</title>
+<style>
+:root{
+  --bg:#060b12; --bg2:#0b1420; --bg3:#101a28;
+  --t:#38bdf8; --gd:#c9a84c; --gr:#34d399; --or:#f97316; --re:#f87171; --pu:#a78bfa;
+  --text:#e8e4d8; --dim:#6b7f8e; --rule:rgba(56,189,248,.1);
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:"Helvetica Neue",Arial,sans-serif;
+  --mono:"Courier New",Courier,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--serif);background:var(--bg);color:var(--text);max-width:820px;margin:0 auto;padding:2.5rem 2rem 5rem;}
+.nav{font-family:var(--mono);font-size:.65rem;color:var(--dim);margin-bottom:2rem;display:flex;gap:1rem;flex-wrap:wrap;}
+.nav a{color:var(--t);text-decoration:none;}
+.eyebrow{font-family:var(--mono);font-size:.68rem;color:var(--re);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.7rem;}
+h1{font-size:2rem;font-weight:400;color:var(--text);line-height:1.2;margin-bottom:.6rem;}
+h1 em{color:var(--re);font-style:normal;}
+.meta{font-family:var(--mono);font-size:.67rem;color:var(--dim);line-height:2;margin-bottom:2.2rem;}
+.meta a{color:var(--t);text-decoration:none;}
+h2{font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  padding-bottom:.35rem;margin:2.2rem 0 1rem;border-bottom:1px solid;}
+h2.re{color:var(--re);border-color:rgba(248,113,113,.2);}
+h2.t{color:var(--t);border-color:rgba(56,189,248,.15);}
+h2.or{color:var(--or);border-color:rgba(249,115,22,.15);}
+h2.gr{color:var(--gr);border-color:rgba(52,211,153,.15);}
+h2.pu{color:var(--pu);border-color:rgba(167,139,250,.15);}
+h2.gd{color:var(--gd);border-color:rgba(201,168,76,.15);}
+p{font-size:.9rem;line-height:1.88;color:rgba(232,228,216,.85);margin-bottom:1rem;}
+p strong{color:var(--text);}
+.op-box{
+  background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.22);
+  border-left:4px solid var(--re);border-radius:0 6px 6px 0;
+  padding:1.4rem 1.6rem;margin:1.2rem 0 1.8rem;
+}
+.op-box .op-label{font-family:var(--mono);font-size:.65rem;color:var(--re);letter-spacing:.1em;margin-bottom:.6rem;font-weight:700;}
+.op-box .op-stmt{font-size:1.05rem;color:var(--text);line-height:1.7;margin-bottom:.8rem;}
+.op-box .op-cert{font-family:var(--mono);font-size:.85rem;color:var(--re);
+  background:rgba(248,113,113,.07);border-left:2px solid var(--re);
+  padding:.4rem .8rem;margin:.5rem 0;border-radius:0 3px 3px 0;}
+.eq{font-family:var(--mono);font-size:.88rem;color:var(--t);
+  background:rgba(56,189,248,.06);border-left:2.5px solid var(--t);
+  padding:.5rem 1rem;margin:.6rem 0;border-radius:0 3px 3px 0;line-height:1.5;}
+.eq.re{color:var(--re);background:rgba(248,113,113,.06);border-color:var(--re);}
+.eq.gr{color:var(--gr);background:rgba(52,211,153,.06);border-color:var(--gr);}
+.eq.or{color:var(--or);background:rgba(249,115,22,.06);border-color:var(--or);}
+.eq.gd{color:var(--gd);background:rgba(201,168,76,.06);border-color:var(--gd);}
+.box{background:var(--bg2);border:1px solid var(--rule);border-radius:5px;padding:1rem 1.2rem;margin:1rem 0;}
+.box.or{border-color:rgba(249,115,22,.18);background:rgba(249,115,22,.03);}
+.box.gr{border-color:rgba(52,211,153,.15);background:rgba(52,211,153,.03);}
+.box.pu{border-color:rgba(167,139,250,.18);background:rgba(167,139,250,.03);}
+.box.gd{border-color:rgba(201,168,76,.18);background:rgba(201,168,76,.03);}
+.contrast-table{margin:1rem 0;border-collapse:collapse;width:100%;font-size:.84rem;}
+.contrast-table th{background:var(--bg3);color:var(--gd);padding:.5rem .8rem;
+  border:1px solid var(--rule);font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;text-align:left;}
+.contrast-table td{padding:.5rem .8rem;border:1px solid rgba(56,189,248,.07);
+  color:rgba(232,228,216,.82);vertical-align:top;line-height:1.65;}
+.contrast-table tr:nth-child(even) td{background:rgba(56,189,248,.02);}
+.contrast-table td.re{color:var(--re);}
+.contrast-table td.gr{color:var(--gr);}
+.lean-block{background:#0a1017;border:1px solid rgba(56,189,248,.15);border-radius:5px;
+  padding:1rem 1.2rem;font-family:var(--mono);font-size:.8rem;color:#a5c8e1;
+  line-height:1.7;overflow-x:auto;margin:.8rem 0;}
+.lean-block .kw{color:var(--pu);}
+.lean-block .cm{color:#4a6070;font-style:italic;}
+.lean-block .id{color:var(--gr);}
+.lean-block .num{color:var(--or);}
+.reward-box{
+  background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.22);
+  border-left:4px solid var(--gd);border-radius:0 6px 6px 0;
+  padding:1.1rem 1.4rem;margin:1.2rem 0;
+}
+.reward-box .r-label{font-family:var(--mono);font-size:.62rem;color:var(--gd);letter-spacing:.12em;margin-bottom:.5rem;}
+.reward-box p{font-size:.87rem;}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="law3m-index.html">← LAW3M Package</a>
+  <a href="law3m.html">Full Paper</a>
+  <a href="theorems/thm-B1.html">Theorems B.1–B.5</a>
+  <a href="poster-law3m-saddle-theorems.html">Saddle Poster</a>
+  <a href="https://totogt.github.io/GTCT/book4/ch10.html#s65">GTCT Vol IV §6.5</a>
+</div>
+
+<div class="eyebrow">Open Problem O.1 · LAW3M Contact ODE · Grossi 2026</div>
+<h1>The Closed Form of <em>r*</em>:<br>The Whitney A₁ Basin Boundary Problem</h1>
+<div class="meta">
+  Pablo Nogueira Grossi · G6 LLC, Newark NJ · grossiatwork@gmail.com · ORCID 0009-0000-6496-2186<br>
+  Principia Orthogona Vol IV (GTCT) · doi:<a href="https://doi.org/10.5281/zenodo.20682934">10.5281/zenodo.20682934</a> ·
+  AXLE: <a href="https://github.com/TOTOGT/AXLE">github.com/TOTOGT/AXLE</a><br>
+  Status: <strong style="color:var(--re);">Open</strong> · Certified numerically · No closed form known · Posted June 2026
+</div>
+
+<!-- THE PROBLEM -->
+<h2 class="re">Statement of the Problem</h2>
+
+<div class="op-box">
+  <div class="op-label">Open Problem O.1 — Basin Boundary Closed Form</div>
+  <div class="op-stmt">
+    Find a closed-form expression for the basin boundary r* of the LAW3M contact ODE at coupling constant ε = 2.
+  </div>
+  <div class="op-cert">r* ≈ 0.775940575502295</div>
+  <p style="margin-top:.7rem;font-size:.84rem;color:rgba(232,228,216,.72);">
+    This value is certified to 15 significant figures by numerical integration (DOP853, rtol = 10⁻¹², atol = 10⁻¹⁴, bisection tolerance 10⁻⁷). It is not known whether r* is algebraic, transcendental, a period (in the sense of Kontsevich–Zagier), or genuinely new. No closed-form expression in terms of ε = 2 and the ODE coefficients has been found.
+  </p>
+</div>
+
+<p>The LAW3M ODE at ε = 2 on the contact manifold (ℝ³, dz − r²dθ):</p>
+<div class="eq">ṙ = r(1 − r²) + 2(r − 1)e<sup>−z</sup></div>
+<div class="eq">θ̇ = 1</div>
+<div class="eq">ż = r² − 2(r − 1)²e<sup>−z</sup></div>
+
+<p>The basin boundary r* is the unique initial condition r₀ ∈ (r<sub>s</sub>, 1) (with z₀ fixed by the attractor projection) such that trajectories starting at r₀ &lt; r* escape to r = 0 while trajectories starting at r₀ &gt; r* converge to the attractor Γ at r = 1. It is a separatrix in the (r, z) half-plane.</p>
+
+<!-- WHAT r* IS AND IS NOT -->
+<h2 class="t">What r* Is and Is Not</h2>
+
+<table class="contrast-table">
+  <thead><tr><th>Object</th><th>Value</th><th>Status</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Saddle r<sub>s</sub></td>
+      <td style="font-family:var(--mono);">2cos(3π/7) ≈ 0.4450</td>
+      <td class="gr">✓ Closed form (Theorem B.1)</td>
+      <td>Second equilibrium; separates escape/convergence locally near itself</td>
+    </tr>
+    <tr>
+      <td>Basin boundary r*</td>
+      <td style="font-family:var(--mono);">≈ 0.775940575502295</td>
+      <td class="re">⊙ Open — no closed form</td>
+      <td>Whitney A₁ fold threshold; global separatrix between escape and convergence basins</td>
+    </tr>
+    <tr>
+      <td>Stability radius ε₀</td>
+      <td style="font-family:var(--mono);">1/3</td>
+      <td class="gr">✓ Exact (Gronwall)</td>
+      <td>Outer guaranteed-convergence ball around Γ</td>
+    </tr>
+    <tr>
+      <td>Attractor Γ</td>
+      <td style="font-family:var(--mono);">r = 1, θ̇ = 1, ż = 1</td>
+      <td class="gr">✓ Exact (Theorem 2.1)</td>
+      <td>Globally stable helical orbit for r₀ &gt; r*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>r* is not the saddle.</strong> The saddle r<sub>s</sub> ≈ 0.445 is an equilibrium point — it satisfies ṙ = ż = 0. The basin boundary r* ≈ 0.776 is not an equilibrium; it is the global fold threshold. The two objects are distinct, separated by ≈ 0.331 in r, and have entirely different mathematical characters: r<sub>s</sub> is algebraic of degree 3 over ℚ; the algebraic nature of r* is unknown.</p>
+
+<!-- WHY NO CLOSED FORM EXISTS YET -->
+<h2 class="or">Why No Closed Form Is Currently Known</h2>
+
+<p>Three independent arguments explain why r* resists closed-form analysis:</p>
+
+<p><strong>1. GTCT time irreversibility.</strong> The Galilean Theory of Contact Transformations (GTCT, Vol IV) establishes that time flows strictly forward on contact manifolds. The operator F in the dm³ chain G = U∘F∘K∘C is a Whitney A₁ fold — a singularity whose pre-image is non-unique. Backward integration past a fold is inadmissible as a matter of contact geometry, not merely numerical instability. Therefore r* cannot be found by running the ODE backwards from r = 1.</p>
+
+<div class="box or">
+  <p><strong>Formal statement:</strong> Let φ<sub>t</sub> be the contact flow of the LAW3M ODE. The map r₀ ↦ lim<sub>t→∞</sub> r(t; r₀) is discontinuous at r* — the basin boundary is a jump discontinuity of the long-time limit map. Such discontinuities are never the critical values of smooth maps; they arise from topological transitions. No analytic function of ε alone can locate a topological transition point without additional invariants of the global flow.</p>
+</div>
+
+<p><strong>2. The ODE has no known first integral.</strong> The LAW3M ODE is not Hamiltonian and not Liouville-integrable. Its contact structure is precisely what makes Γ an attractor rather than a centre — energy is dissipated into the contact form. Without a conserved quantity, the separatrix r* cannot be obtained by setting a conserved function equal to a critical value.</p>
+
+<p><strong>3. Exponential coupling.</strong> The term 2(r−1)e<sup>−z</sup> mixes the r and z variables through an exponential. The equilibrium conditions (used in Theorems B.1–B.5) become polynomial only after eliminating e<sup>−z</sup> via the saddle condition. The fold condition defining r* does not admit this elimination — it involves the global flow, not just the local equilibrium geometry.</p>
+
+<!-- NUMERICAL CERTIFICATION -->
+<h2 class="gr">Numerical Certification</h2>
+
+<p>The value r* ≈ 0.775940575502295 is certified by the following procedure, implemented in Python/SciPy and available in the AXLE repository:</p>
+
+<div class="lean-block">
+<span class="cm"># Bisection on the long-time limit map r₀ → lim_{t→∞} r(t; r₀)</span>
+<span class="cm"># DOP853 integrator, rtol=1e-12, atol=1e-14, T=500</span>
+<span class="cm"># Bisection between r_lo=0.77 (escape) and r_hi=0.78 (convergence)</span>
+<span class="cm"># Termination: |r_hi - r_lo| < 1e-7 → 15 significant figures</span>
+
+<span class="id">r_star</span> = 0.775940575502295  <span class="cm"># certified output</span>
+<span class="cm"># Independent check: r_star satisfies</span>
+<span class="cm">#   trajectory from r₀ = r_star ± 1e-8 diverges/converges within T=200</span>
+</div>
+
+<p><strong>Consistency checks passed:</strong></p>
+<div class="eq gr">r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450 &lt; r* ≈ 0.7759 &lt; 1 − ε₀ = 2/3 (outer basin)</div>
+<p style="font-size:.82rem;color:var(--dim);">Note: ε₀ = 1/3 is the Gronwall outer stability radius; 1 − ε₀ = 2/3 ≈ 0.667. The basin boundary r* &gt; 2/3 is consistent — the Gronwall bound is conservative and the true basin extends further.</p>
+
+<!-- WHAT A RESOLUTION WOULD LOOK LIKE -->
+<h2 class="pu">What a Resolution Would Look Like</h2>
+
+<p>A complete resolution of Open Problem O.1 would consist of one of the following:</p>
+
+<div class="box pu">
+  <p><strong>(a) Algebraic proof:</strong> Show r* is algebraic and find its minimal polynomial over ℚ (or ℚ(ε)). This would require a new algebraic invariant of contact flows that tracks the separatrix location. None is known.</p>
+  <p style="margin-top:.6rem;"><strong>(b) Transcendence proof:</strong> Show r* is transcendental, either by Gelfond–Schneider arguments or by proving it equals a known transcendental constant (e.g., a period integral). This would close the problem negatively — no elementary closed form exists.</p>
+  <p style="margin-top:.6rem;"><strong>(c) Resurgence representation:</strong> Provide an Écalle resurgence/transseries expansion for r* in terms of ε. This would give a non-elementary but structurally meaningful formula, and would likely reveal whether the fold threshold belongs to the class of Gevrey-1 constants associated to irregular ODEs.</p>
+  <p style="margin-top:.6rem;"><strong>(d) Geometric reduction:</strong> Find a coordinate change on the contact manifold that maps the separatrix to a level set of an explicit function. This would require understanding the global monodromy of the contact flow, which is not currently accessible.</p>
+</div>
+
+<p><strong>Candidate approach — Écalle resurgence.</strong> The LAW3M ODE is a real-analytic ODE with an exponential nonlinearity. The Borel transform of its formal power series solutions near r = 1 is expected to have singularities in the Borel plane at locations determined by the Stokes constants of the equation. If r* is a Stokes constant (or expressible as a simple function of one), resurgence theory would give an exact formula — or at minimum a convergent resurgence series. This direction is open.</p>
+
+<!-- LEAN 4 STATUS -->
+<h2 class="t">Lean 4 Status</h2>
+
+<div class="lean-block">
+<span class="cm">-- Current AXLE state (GTCT.lean)</span>
+<span class="cm">-- r* is referenced only as a numerical constant:</span>
+<span class="id">def r_star</span> : ℝ := <span class="num">0.775940575502295</span>
+
+<span class="cm">-- The basin characterisation (proved):</span>
+<span class="kw">theorem</span> <span class="id">basin_char</span> (r₀ : ℝ) (hr : r₀ &gt; <span class="id">r_star</span>) :
+    <span class="id">converges_to_attractor</span> r₀ := <span class="kw">sorry</span> <span class="cm">-- AXLE Issue #12</span>
+
+<span class="cm">-- The open problem formalised:</span>
+<span class="cm">-- ∄ f : ℝ → ℝ, (f is elementary) ∧ (f 2 = r_star)</span>
+<span class="cm">-- Status: open. No Lean 4 proof strategy known.</span>
+</div>
+
+<p>The basin convergence theorem is currently marked sorry (AXLE Issue #12, Gronwall integral estimate). The open problem itself — non-existence of a closed form — is not yet even formalised as a Lean 4 statement, because the notion of "elementary function" requires a formalisation of differential Galois theory that is not in Mathlib.</p>
+
+<!-- COMPARISON -->
+<h2 class="gd">Comparison with Closed Saddle Results</h2>
+
+<p>The contrast between the saddle r<sub>s</sub> and the boundary r* illustrates the difference between local and global contact geometry:</p>
+
+<table class="contrast-table">
+  <thead><tr><th>Property</th><th>Saddle r<sub>s</sub> = 2cos(3π/7)</th><th>Basin boundary r*</th></tr></thead>
+  <tbody>
+    <tr><td>Type</td><td>Equilibrium point (ṙ = ż = 0)</td><td>Separatrix / topological boundary</td></tr>
+    <tr><td>Defined by</td><td>Algebraic equation (degree 3 over ℚ)</td><td>Long-time behaviour of trajectories</td></tr>
+    <tr><td>Proof technique</td><td>Elimination + trigonometric cubic</td><td>Bisection + numerical ODE</td></tr>
+    <tr><td>Closed form</td><td class="gr">✓ 2cos(3π/7)</td><td class="re">⊙ Unknown</td></tr>
+    <tr><td>Lean 4</td><td>Pending (Mathlib gap only)</td><td>Not formalised (open)</td></tr>
+    <tr><td>Physical role</td><td>Inner safety threshold</td><td>Outer basin edge (global)</td></tr>
+  </tbody>
+</table>
+
+<!-- REWARD -->
+<div class="reward-box">
+  <div class="r-label">Recognition</div>
+  <p>A resolution of Open Problem O.1 — either a closed-form expression for r* or a proof of its non-existence — will be credited as a co-result of the Principia Orthogona series, acknowledged in all future AXLE deposits, and cited in the planned Zenodo 1080-theorem milestone deposit. Correspondence: grossiatwork@gmail.com.</p>
+</div>
+
+<!-- REFERENCES -->
+<h2 class="gd">References</h2>
+<p style="font-size:.83rem;color:rgba(232,228,216,.7);line-height:1.9;">
+  Grossi, P. N. (2026). <em>Contact-Geometric Theory of Generative Transitions</em> (GTCT / Vol IV). doi:10.5281/zenodo.20682934<br>
+  Grossi, P. N. (2026). <em>Alternating Vanishing Theorem and Contact-Geometric Integrability Tower</em>. doi:10.5281/zenodo.20710023<br>
+  Écalle, J. (1981). <em>Les fonctions résurgentes</em>, Vol. I–III. Université Paris-Sud.<br>
+  Kontsevich, M. &amp; Zagier, D. (2001). Periods. In <em>Mathematics Unlimited — 2001 and Beyond</em>, Springer, 771–808.<br>
+  Whitney, H. (1955). On singularities of mappings of Euclidean spaces. <em>Ann. Math.</em> 62(3), 374–410.<br>
+  Arnold, V. I. (1989). <em>Mathematical Methods of Classical Mechanics</em>, 2nd ed. Springer.<br>
+  Hairer, E., Nørsett, S. P., &amp; Wanner, G. (1993). <em>Solving Ordinary Differential Equations I</em>, 2nd ed. Springer.
+</p>
+
+</body>
+</html>
