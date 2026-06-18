@@ -136,11 +136,11 @@ p strong{color:var(--text);}
 
 /* ── SCALE LADDER ── */
 .ladder{display:flex;flex-direction:column;gap:.22rem;margin:.3rem 0;}
-.rung{display:grid;grid-template-columns:56px 1fr 80px;gap:.5rem;align-items:center;}
+.rung{display:grid;grid-template-columns:44px 148px 1fr;gap:.5rem;align-items:center;}
 .rung-g{font-family:var(--mono);font-size:.64rem;color:var(--gd);}
+.rung-label{font-family:var(--mono);font-size:.62rem;color:var(--dim);white-space:nowrap;text-align:right;}
 .rung-bar-bg{height:4px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;}
 .rung-bar{height:100%;border-radius:3px;}
-.rung-label{font-family:var(--mono);font-size:.62rem;color:var(--dim);text-align:right;white-space:nowrap;}
 
 /* ── CAJUEIRO TABLE ── */
 .caj-table{width:100%;border-collapse:collapse;font-size:.72rem;margin:.3rem 0;}
@@ -171,10 +171,6 @@ p strong{color:var(--text);}
 }
 a{color:var(--t);text-decoration:none;}
 </style>
-<script>
-window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 
@@ -223,9 +219,9 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
       Δ²u = λ⁴ u on Ω ⊂ ℝ², u|∂Ω = ∂ₙu|∂Ω = 0
     </div>
     <p>
-      Each eigenvalue $\lambda_{nm}$ corresponds to a distinct nodal geometry.
+      Each eigenvalue λ<sub>nm</sub> corresponds to a distinct nodal geometry.
       The plate <em>selects</em> the mode whose frequency matches the driving —
-      all other modes destructively cancel. The zero-set $\{u_{nm} = 0\}$ is the
+      all other modes destructively cancel. The zero-set {u<sub>nm</sub> = 0} is the
       visible Chladni figure.
     </p>
 
@@ -294,7 +290,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <p>
       The physical content of every Chladni experiment is a
       <strong>selection principle</strong>: of all possible oscillatory states,
-      only those satisfying $\Delta^2 u = \lambda^4 u$ are
+      only those satisfying Δ²u = λ⁴u are
       sustained. Non-eigenmodes are dissipated. The system <em>locks</em> to
       the zero-set of its resonant eigenfunction.
     </p>
@@ -319,8 +315,8 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
   <div class="sec">
     <div class="sec-head t">§3 · The g-Scale Resonance Ladder</div>
     <p>
-      The dm³ g-series exponentiates the operator chain: $g^n$ indexes the
-      $n$-th application of $G = U\circ F\circ K\circ C$. Each rung is a
+      The dm³ g-series exponentiates the operator chain: g<sup>n</sup> indexes the
+      <em>n</em>-th application of G = U∘F∘K∘C. Each rung is a
       physical scale. <strong>Resonant locking occurs at every rung</strong> —
       the mechanism is identical, only the medium changes.
     </p>
@@ -328,43 +324,43 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="ladder">
       <div class="rung">
         <div class="rung-g">g⁰</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:8%;background:#2dd4bf;"></div></div>
         <div class="rung-label" style="color:#2dd4bf;">quantum / atomic</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:6%;background:#2dd4bf;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g⁶</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:18%;background:#5af0d0;"></div></div>
         <div class="rung-label" style="color:#5af0d0;">Chladni · acoustic</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:13%;background:#5af0d0;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g¹⁶</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:28%;background:#a78bfa;"></div></div>
         <div class="rung-label" style="color:#a78bfa;">neural / EEG</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:21%;background:#a78bfa;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g³²</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:40%;background:#c9a84c;"></div></div>
         <div class="rung-label" style="color:#c9a84c;">morphogenesis</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:30%;background:#c9a84c;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g⁴⁸</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:55%;background:#f97316;"></div></div>
         <div class="rung-label" style="color:#f97316;">climate / ocean</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:41%;background:#f97316;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g" style="color:#c9a84c;font-weight:700;">g⁶⁴</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:70%;background:#c9a84c;"></div></div>
         <div class="rung-label" style="color:#c9a84c;font-weight:700;">Saturn hexagon ★</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:53%;background:#c9a84c;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g⁸⁰</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:84%;background:#f87171;"></div></div>
         <div class="rung-label" style="color:#f87171;">stellar / stellar wind</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:63%;background:#f87171;"></div></div>
       </div>
       <div class="rung">
         <div class="rung-g">g⁹⁶</div>
-        <div class="rung-bar-bg"><div class="rung-bar" style="width:100%;background:#f87171;"></div></div>
         <div class="rung-label" style="color:#f87171;">Milkomeda · galactic</div>
+        <div class="rung-bar-bg"><div class="rung-bar" style="width:75%;background:#f87171;"></div></div>
       </div>
     </div>
 
@@ -379,7 +375,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="sec-head gd">§4 · Saturn's Hexagon (g⁶⁴)</div>
     <p>
       Saturn's north polar hexagon is a <strong>stationary Rossby wave</strong>
-      of azimuthal wavenumber $m = 6$, frequency-locked to the planet's internal
+      of azimuthal wavenumber m = 6, frequency-locked to the planet's internal
       rotation. It has persisted for at least 40 years of continuous observation
       (Voyager 1980, Cassini 2004–2017, JWST 2023). Its geometry is:
     </p>
@@ -434,9 +430,9 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="svg-label">SATURN'S NORTH POLAR HEXAGON · schematic (not to scale)</div>
 
     <p>
-      The hexagon is a <strong>Rossby wave locked at mode $m=6$</strong>.
+      The hexagon is a <strong>Rossby wave locked at mode m = 6</strong>.
       The linearised shallow-water equations on a rotating sphere admit
-      wave solutions $\psi \propto e^{i(m\theta - \omega t)}$; the $m=6$ mode
+      wave solutions ψ ∝ e<sup>i(mθ − ωt)</sup>; the m = 6 mode
       phase-locks to zero in Saturn's co-rotating frame, producing a stationary
       geometric pattern — a planetary Chladni figure.
     </p>
@@ -450,7 +446,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
   <div class="sec">
     <div class="sec-head pu">§5 · The dm³ Counterpart</div>
     <p>
-      The dm³ ODE on the contact manifold $(\mathbb{R}^3, \alpha = dz - r^2\,d\theta)$:
+      The dm³ ODE on the contact manifold (ℝ³, α = dz − r²dθ):
     </p>
     <div class="eq pu">
       ṙ = r(1 − r²) + 2(r−1)e^{−z}
@@ -458,16 +454,16 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
       ż = r² − 2(r−1)²e^{−z}
     </div>
     <p>
-      admits a unique helical attractor $\Gamma = \{r = 1\}$.
+      admits a unique helical attractor Γ = {r = 1}.
       <strong>Theorem 2.1</strong> (proved; see gravity scales preprint §3):
-      every orbit with $r_0 > r_\star \approx 0.80$ converges exponentially
-      to $\Gamma$ at rate $\mu = -2$.
+      every orbit with r₀ > r★ ≈ 0.776 converges exponentially
+      to Γ at rate μ = −2.
     </p>
     <div class="thm">
       <div class="thm-label">Structural Parallel · Three Attractors</div>
-      <p><strong>Chladni:</strong> $\{u_{nm} = 0\}$ — nodal curve on plate.</p>
-      <p><strong>Saturn:</strong> $\{\psi_6 = \text{const}\}$ — hexagonal isoline in the jet stream.</p>
-      <p><strong>dm³:</strong> $\Gamma = \{r = 1\}$ — Reeb orbit of the contact structure.</p>
+      <p><strong>Chladni:</strong> {u<sub>nm</sub> = 0} — nodal curve on plate.</p>
+      <p><strong>Saturn:</strong> {ψ₆ = const} — hexagonal isoline in the jet stream.</p>
+      <p><strong>dm³:</strong> Γ = {r = 1} — Reeb orbit of the contact structure.</p>
       <p style="margin-top:.4rem;color:rgba(167,139,250,.9);font-size:.8rem;">
         All three are <em>zeros of a differential operator acting on a resonant eigenfunction</em>,
         stabilised by a dissipative / Lyapunov trapping mechanism.
@@ -554,7 +550,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
       The <strong>triskelion</strong> — three interlocked spirals meeting at a
       common centre — appears as a Chladni mode on triangular plates and as
       an intermediate orbit in dm³ simulations near the saddle point
-      $(r_s, z_s)$. Its three-fold symmetry corresponds to:
+      (r<sub>s</sub>, z<sub>s</sub>). Its three-fold symmetry corresponds to:
     </p>
     <div class="chips">
       <span class="chip or">Chladni (3,2) mode</span>
@@ -567,31 +563,48 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="svg-panel">
       <svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="200" fill="rgba(249,115,22,.03)" rx="4"/>
-        <!-- Three arms of the triskelion, each a cubic Bézier -->
-        <path d="M100,100 C130,70 165,80 155,115 C145,150 110,155 95,130 C80,105 90,75 100,100 Z"
-          fill="none" stroke="#f97316" stroke-width="1.6" opacity=".8"/>
-        <path d="M100,100 C70,70 45,90 55,125 C65,160 100,165 115,140 C130,115 115,85 100,100 Z"
-          fill="none" stroke="#f97316" stroke-width="1.6" opacity=".8"/>
-        <path d="M100,100 C100,60 75,40 55,60 C35,80 45,115 75,120 C105,125 115,95 100,100 Z"
-          fill="none" stroke="#f97316" stroke-width="1.6" opacity=".5"/>
-        <!-- centre dot -->
-        <circle cx="100" cy="100" r="3.5" fill="#f97316" opacity=".7"/>
         <!-- outer reference circle -->
         <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(249,115,22,.15)" stroke-width="1" stroke-dasharray="2,3"/>
-        <!-- label -->
-        <text x="100" y="190" text-anchor="middle" fill="#7a8f8d" font-size="8" font-family="monospace">triskelion · 3-fold mode</text>
-        <!-- angle labels -->
-        <text x="158" y="95" fill="rgba(249,115,22,.6)" font-size="8" font-family="monospace">0°</text>
-        <text x="62" y="170" fill="rgba(249,115,22,.6)" font-size="8" font-family="monospace">120°</text>
-        <text x="62" y="42" fill="rgba(249,115,22,.6)" font-size="8" font-family="monospace">240°</text>
+        <!-- Three spiral arms radiating from centre, each rotated 120° -->
+        <!-- Arm 1: sweeps to the right and down -->
+        <g transform="translate(100,100)">
+          <path d="M0,0 C 22,-8 52,-6 62,18 C 72,42 50,70 22,64 C -6,58 -14,30 0,0"
+            fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0,0 C 22,-8 52,-6 62,18 C 72,42 50,70 22,64 C -6,58 -14,30 0,0"
+            fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"
+            transform="rotate(120)"/>
+          <path d="M0,0 C 22,-8 52,-6 62,18 C 72,42 50,70 22,64 C -6,58 -14,30 0,0"
+            fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round"
+            transform="rotate(240)"/>
+          <!-- arm-end dots -->
+          <circle cx="22" cy="64" r="2.5" fill="#f97316" opacity=".6"/>
+          <circle cx="-54" cy="-14" r="2.5" fill="#f97316" opacity=".6"
+            transform="rotate(120) translate(22,64) rotate(-120)"/>
+          <!-- rotation direction arc -->
+          <path d="M 45,0 A 45,45 0 0 1 22.5,39" fill="none"
+            stroke="rgba(249,115,22,.3)" stroke-width="1"
+            marker-end="url(#tri-arr)"/>
+          <defs>
+            <marker id="tri-arr" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+              <path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(249,115,22,.5)"/>
+            </marker>
+          </defs>
+        </g>
+        <!-- centre dot -->
+        <circle cx="100" cy="100" r="3.5" fill="#f97316"/>
+        <!-- labels -->
+        <text x="100" y="192" text-anchor="middle" fill="#7a8f8d" font-size="8" font-family="monospace">triskelion · 3-fold mode</text>
+        <text x="172" y="100" fill="rgba(249,115,22,.55)" font-size="8" font-family="monospace">0°</text>
+        <text x="54" y="176" fill="rgba(249,115,22,.55)" font-size="8" font-family="monospace">120°</text>
+        <text x="54" y="36" fill="rgba(249,115,22,.55)" font-size="8" font-family="monospace">240°</text>
       </svg>
     </div>
     <div class="svg-label">TRISKELION · three-fold resonant orbit · dm³ near-saddle</div>
 
     <p>
-      The tribonacci constant $\eta \approx 1.839$ (operator η in the dm³ ladder)
+      The tribonacci constant η ≈ 1.839 (operator η in the dm³ ladder)
       governs the three-fold recurrence and appears as the growth rate of
-      the saddle manifold near $(r_s, z_s)$. See <code>chEta-tribonacci.html</code>.
+      the saddle manifold near (r<sub>s</sub>, z<sub>s</sub>). See <code>chEta-tribonacci.html</code>.
     </p>
   </div>
 
@@ -621,7 +634,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="thm t">
       <div class="thm-label">Open Problem · Cross-Scale Universality</div>
       <p>Is there a contact-geometric proof that the Rossby wave locking
-      condition $\partial_t q = 0$ at $m = 6$ can be derived as a
+      condition ∂<sub>t</sub>q = 0 at m = 6 can be derived as a
       dm³ resonance condition on a suitable contact 3-manifold modelling
       the rotating shallow-water equations?</p>
     </div>
@@ -629,11 +642,10 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <div class="thm t">
       <div class="thm-label">Open Problem · Chladni ↔ dm³ Dictionary</div>
       <p>
-        Construct an explicit map from Chladni eigendata $(\lambda_{nm},
-        u_{nm})$ on a disk $D^2$ to dm³ initial data $(r_0, z_0)$ such that
-        the limit cycle $\Gamma$ corresponds to the nodal circle of the $(0,1)$
+        Construct an explicit map from Chladni eigendata (λ<sub>nm</sub>, u<sub>nm</sub>) on a disk D² to dm³ initial data (r₀, z₀) such that
+        the limit cycle Γ corresponds to the nodal circle of the (0,1)
         mode. The map should intertwine the Kirchhoff–Love bilaplacian with the
-        dm³ contact Laplacian $\Delta_\alpha$.
+        dm³ contact Laplacian Δ<sub>α</sub>.
       </p>
     </div>
 
@@ -641,10 +653,10 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
       <p style="font-size:.76rem;">
         <strong style="color:var(--re);">Note on det(J).</strong>
         The saddle Jacobian eigenvalue satisfies
-        $\det(J)|_{r_s} = r_s^2(-1-r_s-2r_s^2) \approx -0.364$
-        where $r_s = 2\cos(3\pi/7) \approx 0.445$ is the saddle coordinate.
-        This is <em>distinct</em> from $\varepsilon_0 = 1/3$, which is the
-        Lyapunov stability radius from $V = (r-1)^2/2$.
+        det(J)|<sub>rₛ</sub> = r<sub>s</sub>²(−1−r<sub>s</sub>−2r<sub>s</sub>²) ≈ −0.364
+        where r<sub>s</sub> = 2cos(3π/7) ≈ 0.445 is the saddle coordinate.
+        This is <em>distinct</em> from ε₀ = 1/3, which is the
+        Lyapunov stability radius from V = (r−1)²/2.
         See TOGT Theorem B.3 and gravity scales preprint §4.
       </p>
     </div>
@@ -656,7 +668,7 @@ window.MathJax={tex:{inlineMath:[['$','$']]},svg:{fontCache:'global'}};
     <p style="font-size:.72rem;color:var(--dim);line-height:1.65;">
       Chladni (1787) <em>Entdeckungen über die Theorie des Klanges</em> ·
       Baines &amp; Szmytkowski (2007) Saturn hexagon dynamics ·
-      Sayanagi et al. (2010) Rossby wave $m=6$ locking ·
+      Sayanagi et al. (2010) Rossby wave m = 6 locking ·
       Grossi (2026) <em>Contact-Geometric Theory of Generative Transitions</em>
       doi:<a href="https://doi.org/10.5281/zenodo.20682934">10.5281/zenodo.20682934</a> ·
       Grossi (2026) <em>Gravity Across Scales</em>
