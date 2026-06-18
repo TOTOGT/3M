@@ -134,11 +134,11 @@ MathJax = {
   <h2>Why Lean 4, Why Now</h2>
   <p>Theorem 2.1 in its symmetric form is an ODE result. Calculus says it is true. So why formalise it?</p>
   <ul>
-    <li><strong style="color:var(--t);">Transparency.</strong> The Gronwall chain in S2 had a half-dozen little assumptions ("assume $z(0) \geq \log 2$", "use the induction hypothesis", "absorb this constant"). In a paper this is normal. In Lean 4 each is a separate, type-checked obligation.</li>
+    <li><strong style="color:var(--t);">Transparency.</strong> The Lyapunov chain in S2 had a half-dozen little assumptions ("assume $z(0) \geq \log 2$", "use the induction hypothesis", "absorb this constant"). In a paper this is normal. In Lean 4 each is a separate, type-checked obligation.</li>
     <li><strong style="color:var(--t);">Reuse.</strong> The operator chain $G = U\circ F\circ K\circ C$ is a structural claim about every chapter in GTCT. A Lean 4 formalisation of $G$ in <em>one</em> setting (here: the dm³ ODE) becomes a <em>template</em> for the other chapters.</li>
     <li><strong style="color:var(--t);">Discovery.</strong> Writing the proof down in Lean 4 is what <em>exposed</em> AXLE Issue #12: the Lipschitz estimate that our paper hand-waves. Lean would not accept the hand-wave. That is how the gap became a named issue.</li>
   </ul>
-  <div class="insight">Formalisation locates uncertainty — and sometimes it finds that a claim is not just imprecise but <em>wrong</em>. The symmetric Gronwall ball $|\varepsilon_0| = 1/3$ has been <strong style="color:var(--k);">removed</strong> from the canonical Lean file (<code>GCTC/Chain_updated.lean</code>, 2026-04-18): numerics (DOP853; <code>FINDINGS.md</code>) show the claim is false on the inner side — $r(0) = 0.667$ collapses in finite time. The basin is asymmetric: outer side is wide (all $r_0 > 1$ tested), inner boundary is $r_\star \approx 0.80$. On the positive side, <code style="color:var(--f);font-family:inherit;">gronwall_outer</code> is now <em>proved</em>. Two obligations remain as <code style="color:var(--k);font-family:inherit;">sorry</code> and two as <code style="color:var(--gd);font-family:inherit;">axiom</code> (pending the dm³ ODE formalisation).</div>
+  <div class="insight">Formalisation locates uncertainty — and sometimes it finds that a claim is not just imprecise but <em>wrong</em>. The symmetric Lyapunov ball $|\varepsilon_0| = 1/3$ has been <strong style="color:var(--k);">removed</strong> from the canonical Lean file (<code>GCTC/Chain_updated.lean</code>, 2026-04-18): numerics (DOP853; <code>FINDINGS.md</code>) show the claim is false on the inner side — $r(0) = 0.667$ collapses in finite time. The basin is asymmetric: outer side is wide (all $r_0 > 1$ tested), inner boundary is $r_\star \approx 0.80$. On the positive side, <code style="color:var(--f);font-family:inherit;">gronwall_outer</code> is now <em>proved</em>. Two obligations remain as <code style="color:var(--k);font-family:inherit;">sorry</code> and two as <code style="color:var(--gd);font-family:inherit;">axiom</code> (pending the dm³ ODE formalisation).</div>
 </div>
 <!-- ═══ §2 CHAIN.LEAN ═══ -->
 <div class="section">
@@ -188,7 +188,7 @@ MathJax = {
 <span class="com">/-- Inner-basin boundary (empirical; replaces ε₀ = 1/3). -/</span>
 <span class="kw">noncomputable def</span> <span class="name">r_star</span> : <span class="type">ℝ</span> := <span class="num">0.8</span>
 
-<span class="com">/-- Outer-basin Gronwall bound — PROVED. -/</span>
+<span class="com">/-- Outer-basin Lyapunov bound — PROVED. -/</span>
 <span class="kw">theorem</span> <span class="name">gronwall_outer</span>
     (μ_max ε μ_bound : <span class="type">ℝ</span>) (hμ_bound : <span class="num">0</span> &lt; μ_bound)
     (hμ : μ_max + <span class="num">3</span> * ε ≤ -μ_bound) :
@@ -217,7 +217,7 @@ MathJax = {
   <div class="theorem">
     <div class="thm-label">Lemma 2.1.A · The outer-basin decay bound (proved)</div>
     <div class="thm-title">For all $r_0 > 1$ (outer side), the dm³ radial flow converges exponentially to $r = 1$ at rate $\mu_{\max} = -2$. The inner boundary is asymmetric: $r_\star \approx 0.80$ (not $1 - 1/3 = 0.667$).</div>
-    <div class="thm-body">The decay-exponent sign — $(\mu_{\max} + 3\varepsilon) &lt; 0$ — is proved by <code>gronwall_outer</code>. The full Gronwall ODE integration (that the contraction bound follows from the exponent) is in the book proofs (GTCT-2026-001 §5) and is not yet formalised in Lean. The symmetric $\varepsilon_0 = 1/3$ claim has been removed because numerics show $r(0) = 0.667$ collapses — the inner boundary of the basin is $r_\star \approx 0.80$, not $1 - 1/3$. What remains open: <code>spiral_return_exists</code>, <code>poincare_collatz</code>, and two <code>axiom</code> placeholders for the ODE boundary conditions.</div>
+    <div class="thm-body">The decay-exponent sign — $(\mu_{\max} + 3\varepsilon) &lt; 0$ — is proved by <code>gronwall_outer</code>. The full Lyapunov ODE integration (that the contraction bound follows from the exponent) is in the book proofs (GTCT-2026-001 §5) and is not yet formalised in Lean. The symmetric $\varepsilon_0 = 1/3$ claim has been removed because numerics show $r(0) = 0.667$ collapses — the inner boundary of the basin is $r_\star \approx 0.80$, not $1 - 1/3$. What remains open: <code>spiral_return_exists</code>, <code>poincare_collatz</code>, and two <code>axiom</code> placeholders for the ODE boundary conditions.</div>
   </div>
 </div>
 <!-- ═══ §4 ISSUE #12 ═══ -->
@@ -263,7 +263,7 @@ MathJax = {
     </div>
     <div class="issue-body">Formalise S1's board exercise: $\{r(t) &gt; 1\}$ is positively invariant. Done via <code>Mathlib.Analysis.ODE.Invariant</code>.</div>
   </div>
-  <div class="warn"><strong style="color:#f87171;">The ε₀ = 1/3 claim is false on the inner side.</strong> This is no longer a sharpening gap — it is a correction. DOP853 numerics confirm $r(0) = 0.667$ (the symmetric Gronwall boundary) collapses in finite time. The canonical Lean file (<code>GCTC/Chain_updated.lean</code>) replaces the symmetric ball with the asymmetric pair $(r_\star \approx 0.80,\ \infty)$. The outer Gronwall bound is proved; the inner boundary is currently an <code>axiom</code> pending ODE formalisation. If you want to close it, start at <code>FINDINGS.md</code> in the GTCT repo and the numeric sweep in <code>dm3_inner_basin.png</code>.</div>
+  <div class="warn"><strong style="color:#f87171;">The ε₀ = 1/3 claim is false on the inner side.</strong> This is no longer a sharpening gap — it is a correction. DOP853 numerics confirm $r(0) = 0.667$ (the symmetric Lyapunov estimate boundary) collapses in finite time. The canonical Lean file (<code>GCTC/Chain_updated.lean</code>) replaces the symmetric ball with the asymmetric pair $(r_\star \approx 0.80,\ \infty)$. The outer Lyapunov bound is proved; the inner boundary is currently an <code>axiom</code> pending ODE formalisation. If you want to close it, start at <code>FINDINGS.md</code> in the GTCT repo and the numeric sweep in <code>dm3_inner_basin.png</code>.</div>
 </div>
 <!-- ═══ §5 CONTRIBUTION ═══ -->
 <div class="section">
@@ -292,8 +292,8 @@ MathJax = {
 <div class="section">
   <div class="slabel">§6 · Closing</div>
   <h2>What the Course Did</h2>
-  <p>In three hours we walked from <em>contact 3-manifolds</em> (S1) through <em>Theorem 2.1 with its Gronwall basin</em> (S2) to a <em>Lean 4 formalisation with one open obligation</em> (S3). The formalisation is live, public, and welcomes contributions. The sharp basin $r_\star$ is open research. The dm³ simulator runs in any browser.</p>
-  <div class="insight">The outer-basin Gronwall bound (<code>gronwall_outer</code>) is proved. The remaining open obligations are: <code>spiral_return_exists</code> (sorry — needs dm³ flow dynamics), <code>poincare_collatz</code> (sorry — needs g³³ convergence), and two <code>axiom</code> declarations for the inner/outer ODE boundary conditions. Closing those axioms into real theorems — once Mathlib formalises a suitable ODE module for the dm³ system — would give GTCT its first fully machine-checked instance.</div>
+  <p>In three hours we walked from <em>contact 3-manifolds</em> (S1) through <em>Theorem 2.1 with its Lyapunov basin</em> (S2) to a <em>Lean 4 formalisation with one open obligation</em> (S3). The formalisation is live, public, and welcomes contributions. The sharp basin $r_\star$ is open research. The dm³ simulator runs in any browser.</p>
+  <div class="insight">The outer-basin Lyapunov bound (<code>gronwall_outer</code>) is proved. The remaining open obligations are: <code>spiral_return_exists</code> (sorry — needs dm³ flow dynamics), <code>poincare_collatz</code> (sorry — needs g³³ convergence), and two <code>axiom</code> declarations for the inner/outer ODE boundary conditions. Closing those axioms into real theorems — once Mathlib formalises a suitable ODE module for the dm³ system — would give GTCT its first fully machine-checked instance.</div>
   <div class="theorem">
     <div class="thm-label">Final take-away</div>
     <div class="thm-title">The map of the territory.</div>
