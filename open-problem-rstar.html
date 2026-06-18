@@ -139,7 +139,7 @@ p strong{color:var(--text);}
     <tr>
       <td>Stability radius ε₀</td>
       <td style="font-family:var(--mono);">1/3</td>
-      <td class="gr">✓ Exact (Gronwall)</td>
+      <td class="gr">✓ Lyapunov basin estimate</td>
       <td>Outer guaranteed-convergence ball around Γ</td>
     </tr>
     <tr>
@@ -186,7 +186,7 @@ p strong{color:var(--text);}
 
 <p><strong>Consistency checks passed:</strong></p>
 <div class="eq gr">r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450 &lt; r* ≈ 0.7759 &lt; 1 − ε₀ = 2/3 (outer basin)</div>
-<p style="font-size:.82rem;color:var(--dim);">Note: ε₀ = 1/3 is the Gronwall outer stability radius; 1 − ε₀ = 2/3 ≈ 0.667. The basin boundary r* &gt; 2/3 is consistent — the Gronwall bound is conservative and the true basin extends further.</p>
+<p style="font-size:.82rem;color:var(--dim);">Note: ε₀ = 1/3 is the Lyapunov stability radius derived from V = (r−1)²/2; 1 − ε₀ = 2/3 ≈ 0.667. The basin boundary r* &gt; 2/3 is consistent — the Lyapunov estimate is conservative and the true basin extends further.</p>
 
 <!-- WHAT A RESOLUTION WOULD LOOK LIKE -->
 <h2 class="pu">What a Resolution Would Look Like</h2>
@@ -219,7 +219,7 @@ p strong{color:var(--text);}
 <span class="cm">-- Status: open. No Lean 4 proof strategy known.</span>
 </div>
 
-<p>The basin convergence theorem is currently marked sorry (AXLE Issue #12, Gronwall integral estimate). The open problem itself — non-existence of a closed form — is not yet even formalised as a Lean 4 statement, because the notion of "elementary function" requires a formalisation of differential Galois theory that is not in Mathlib.</p>
+<p>The basin convergence theorem is currently marked sorry (AXLE Issue #12, Lyapunov convergence rate). The open problem itself — non-existence of a closed form — is not yet even formalised as a Lean 4 statement, because the notion of "elementary function" requires a formalisation of differential Galois theory that is not in Mathlib.</p>
 
 <!-- COMPARISON -->
 <h2 class="gd">Comparison with Closed Saddle Results</h2>

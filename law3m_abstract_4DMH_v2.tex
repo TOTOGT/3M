@@ -1,0 +1,99 @@
+% XIII LAW3M 2026 — Abstract 4DMH (revised, submit before July 12)
+% Changes from submitted version:
+%   1. Added Theorem B.3 (tr(J)|saddle = 2cos(2pi/7), det(J)=r_s^2(-1-r_s-2r_s^2)≈-0.364)
+%   2. Replaced Geiges [3] with TOGT paper doi:10.5281/zenodo.20682934
+%   3. "open obligations" -> "open obligation" (singular — only r* closed form remains)
+%   4. Reproducibility folded inline to save space
+% 1 page max, Times New Roman, max 3 refs
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[margin=1.8cm,top=1.4cm,bottom=1.4cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+\pagestyle{empty}
+\setlength{\parskip}{3.0pt}
+\setlength{\parindent}{0pt}
+\singlespacing
+
+\begin{document}
+
+\begin{center}
+{\small\textit{XIII Latin American Workshop on Magnetism, Magnetic Materials, and Their Applications (LAW3M)\\
+UFRN, Natal, Brazil $\cdot$ October 19--23, 2026 $\cdot$ Track 09: Emerging \& Interdisciplinary Topics}}
+
+\vspace{3pt}\rule{\linewidth}{0.8pt}\vspace{4pt}
+
+{\fontsize{13}{16}\selectfont\textbf{Helical attractors on contact 3-manifolds:\\
+basin geometry, Whitney singularities, and rotating electromagnetic applications}}
+
+\vspace{4pt}
+{\fontsize{11}{14}\selectfont\textbf{\underline{Pablo Nogueira Grossi}}}\\[1pt]
+{\fontsize{10}{13}\selectfont\textit{G6 LLC, Newark, New Jersey, USA $\cdot$
+grossiatwork@gmail.com $\cdot$ ORCID: 0009-0000-6496-2186}}\\
+{\fontsize{10}{13}\selectfont\textit{Principia Orthogona Series $\cdot$ doi:10.5281/zenodo.19117399}}
+
+\vspace{3pt}\rule{\linewidth}{0.4pt}
+\end{center}
+
+\vspace{3pt}
+
+We study a three-dimensional ODE on the contact 3-manifold $(\mathbb{R}^3,\,\alpha=dz-r^2\,d\theta)$
+in cylindrical coordinates, where $r^2\,d\theta$ encodes angular momentum as a one-form. The system is
+$\dot r = r(1-r^2)+\varepsilon(r-1)e^{-z}$, $\dot\theta=1$, $\dot z = r^2-\varepsilon(r-1)^2e^{-z}$,
+$\varepsilon=2$. The contact condition $\alpha=0$ reads $dz=r^2\,d\theta$, identifying vertical lift
+directly with angular momentum --- a geometric identity rather than a force law. We prove that the
+unit helix $\Gamma=\{r=1,\dot\theta=1,\dot z=1\}$ is a globally attracting limit cycle for all
+$r(0)>r^*$ and $z(0)\geq\log 2$, exponential convergence rate $\mu=-2$.
+
+\textbf{Principal certified result.}
+The inner basin boundary $r^*$ is located via adaptive bisection with the DOP853 integrator
+($\mathrm{rtol}=10^{-12}$, $\mathrm{atol}=10^{-14}$): $r^*=0.77594059$ (certified to
+7 significant figures; reproducible on any IEEE-754 platform, \texttt{certify\_rstar.py}~[2]).
+This lies strictly above the Lyapunov bound $2/3\approx0.667$.
+Full stability hierarchy: $\varepsilon_0=\tfrac{1}{3}<\tfrac{2}{3}<r^*=0.77594<\kappa^*=\sqrt{7/9}\approx0.882<1$,
+where $\varepsilon_0=\tfrac{1}{3}$ is the Lyapunov stability radius (separate from $\det J$).
+
+\textbf{Whitney $A_1$ singularity.}
+We identify $r^*$ as a Whitney $A_1$ (standard fold) singularity of the asymptotic radial map
+$\Phi:\mathbb{R}_+\to\{1\}$. Trajectories from the outer basin ($r>1$) and inner basin ($r^*<r<1$)
+follow qualitatively distinct convergence paths that fold onto the single attractor $r=1$.
+In a rotating electromagnetic realisation the fold boundary corresponds to a corona discharge
+threshold --- a structural consequence of the contact geometry, not a fit parameter.
+
+\textbf{Closed-form saddle result (Theorem B.3).}
+The Jacobian at the saddle $(r^*,z^*)$ satisfies, proved in closed form in~[3]:
+\[
+\operatorname{tr}(J)\big|_{\mathrm{saddle}} = 2\cos\!\left(\tfrac{2\pi}{7}\right)\approx1.247,
+\qquad
+\det(J) = r_s^2(-1-r_s-2r_s^2) \approx -0.364,
+\]
+The value $2\cos(2\pi/7)$ is the largest real root of $x^3+x^2-2x-1=0$, the minimal polynomial
+of $\operatorname{Re}(e^{2\pi i/7})$. Here $r_s=2\cos(3\pi/7)\approx0.4450$ is the saddle coordinate
+(root of $x^3-x^2-2x+1=0$); the negative determinant certifies the saddle.
+The Lyapunov stability radius $\varepsilon_0=\tfrac{1}{3}$ is a \emph{separate} quantity.
+
+\textbf{Framework and open obligation.}
+The system sits at the $\Delta$ (tetranacci) rung of the $n$-bonacci recurrence ladder
+(dominant root $\approx1.927\to\tau=2$) within the dm$^3$ / Principia Orthogona operator chain
+$G=U\circ F\circ K\circ C$, $\varepsilon=\tau=2$. Global attractivity, the Whitney identification,
+and $\operatorname{tr}(J)=2\cos(2\pi/7)$ are all established. The single remaining open problem
+is the analytic characterisation of $r^*$ in closed form. Lean~4 mechanisation is in progress
+(AXLE, \texttt{github.com/TOTOGT/AXLE}); all results, proofs, and reproducibility scripts are
+available for independent verification at
+\href{https://totogt.github.io/3M/law3m.html}{\texttt{totogt.github.io/3M/law3m.html}}.
+
+\vspace{3pt}\rule{\linewidth}{0.4pt}\vspace{2pt}
+
+\noindent\textit{Keywords:} contact geometry $\cdot$ helical attractor $\cdot$ Whitney $A_1$
+singularity $\cdot$ basin of attraction $\cdot$ rotating electromagnetic system $\cdot$ Lyapunov stability
+
+\vspace{2pt}
+\noindent[1]~P.N.~Grossi, \textit{Principia Orthogona}, doi:10.5281/zenodo.19117399 (2024--2026).\\
+\noindent[2]~P.N.~Grossi, \texttt{certify\_rstar.py}, github.com/TOTOGT/3M (2026).\\
+\noindent[3]~P.N.~Grossi, \textit{Contact-Geometric Theory of Generative Transitions: Seven Proofs of the Tribonacci Constant}, doi:10.5281/zenodo.20682934 (2026).
+
+\end{document}

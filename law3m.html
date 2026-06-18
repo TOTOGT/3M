@@ -177,7 +177,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="inv"><span class="inv-val">−2</span><span class="inv-name">μ · Lyapunov rate</span></div>
     <div class="inv"><span class="inv-val">2π</span><span class="inv-name">T* · contact period</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">τ · embodiment threshold</span></div>
-    <div class="inv"><span class="inv-val">1/3</span><span class="inv-name">ε₀ · Gronwall radius</span></div>
+    <div class="inv"><span class="inv-val">1/3</span><span class="inv-name">ε₀ · Lyapunov stability radius</span></div>
     <div class="inv"><span class="inv-val">0.77594</span><span class="inv-name">r* · real basin edge</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">ε · coupling strength</span></div>
   </div>
@@ -222,7 +222,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="math-block">|r(t) − 1| ≤ |r(0) − 1| · e^{−2t}     (Lyapunov rate μ = −2)
 
 z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
-    <p>Outside this basin ($r < r^* \approx 0.77594$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ that naive Gronwall estimates predict. The correction is governed by the coupling term in Equation III.</p>
+    <p>Outside this basin ($r < r^* \approx 0.77594$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ predicted by the coarse Lyapunov bound. The true boundary r* is certified numerically and governed by the coupling term in Equation III.</p>
     <p style="font-size:.83rem; color:var(--dim);">AXLE Issue #12: the Lipschitz estimate closing the inductive step is still <code>sorry</code>. This is the open problem the 3M mini-course leaves in your hands.</p>
   </div>
 
