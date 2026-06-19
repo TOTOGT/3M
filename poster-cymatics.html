@@ -170,9 +170,29 @@ p strong{color:var(--text);}
   font-family:var(--mono);font-size:.6rem;color:var(--dim);
 }
 a{color:var(--t);text-decoration:none;}
+
+/* ── LANG BAR ── */
+.lang-bar{
+  background:rgba(45,212,191,.07);
+  border-bottom:1px solid var(--rule);
+  padding:.3rem 2.2rem;
+  display:flex;align-items:center;gap:1rem;
+  font-family:var(--mono);font-size:.65rem;color:var(--dim);
+}
+.lang-bar a{color:var(--t);text-decoration:none;border:1px solid rgba(45,212,191,.3);
+  padding:.1rem .5rem;border-radius:3px;}
+.lang-bar a.active{background:rgba(45,212,191,.15);color:#fff;border-color:var(--t);}
+.lang-note{font-size:.6rem;color:var(--dim);font-style:italic;}
 </style>
 </head>
 <body>
+
+<div class="lang-bar">
+  <span class="lang-note">Language / Idioma:</span>
+  <a class="active" href="poster-cymatics.html">🇺🇸 English</a>
+  <a href="poster-cimatica-pt.html">🇧🇷 Português</a>
+  <span class="lang-note" style="margin-left:auto;">For Dave's cousins in Brazil · Para as crianças curiosas do Dia 21 em diante</span>
+</div>
 
 <!-- ════════════════ HEADER ════════════════ -->
 <div class="poster-header">
@@ -692,7 +712,10 @@ a{color:var(--t);text-decoration:none;}
 <div class="poster-footer">
   <span>Pablo Nogueira Grossi · G6 LLC · ORCID 0009-0000-6496-2186 · grossiatwork@gmail.com</span>
   <span>Principia Orthogona / dm³ · ISBN 979-8-9954416-6-3 · doi:10.5281/zenodo.19117399</span>
-  <span>XII Bienal de Matemática · UFRN Natal · August 2026 &amp; LAW3M · October 2026</span>
+  <span>XII Bienal de Matemática · UFRN Natal · August 2026 &amp; LAW3M · October 2026 ·
+    <a href="https://grossi-ops.github.io/cajueiro/" target="_blank">cajueiro</a> ·
+    <a href="https://grossi-ops.github.io/Atratores/" target="_blank">Atratores</a>
+  </span>
 </div>
 
 </body>
