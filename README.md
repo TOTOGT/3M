@@ -1,4 +1,4 @@
-# 3M — The Mini-Beast · Book 3 · Principia Orthogona
+# 3M — The Mini-Beast · Book 3 · Principia Orthogona  --  THE LAW3M  __ "the law" Repo + 
 
 **Live site:** [totogt.github.io/3M](https://totogt.github.io/3M/)
 
@@ -28,7 +28,6 @@ The public web delivery layer for **Book 3: The Mini-Beast** — Principia Ortho
 | G⁴ | GTCT T1 — The IMPA Edition | Chapter 10 + Chapter E |
 | G⁵ | The Seed — Complete Completeness | 979-8-9954416-5-6 |
 
-**Buy:** [brodanova6.gumroad.com/l/soundworks](https://brodanova6.gumroad.com/l/soundworks)  
 **IMPA Portal:** [totogt.github.io/AXLE/impa-portal.html](https://totogt.github.io/AXLE/impa-portal.html)  
 **Series:** [totogt.github.io/AXLE](https://totogt.github.io/AXLE)
 
