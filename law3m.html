@@ -137,7 +137,7 @@ footer a{color:var(--gd);text-decoration:none;}
   <div class="axiom">
     <span class="axiom-num">Equation I · Radial Contraction</span>
     <div class="axiom-title">ṙ = r(1 − r²) + ε(r − 1)e<sup>−z</sup></div>
-    <p>The first term $r(1-r^2)$ is a logistic contraction: for $r > 1$ it is negative (pulls inward), for $r < 1$ it is positive (pushes outward). The unit cylinder $r = 1$ is the unique zero — it is the <em>target</em> of the radial dynamics. The second term is the coupling: the exponential factor $e^{-z}$ makes the basin asymmetric. At height $z \gg 1$ the coupling vanishes and the contraction is clean; near $z = 0$ the correction shifts the real basin boundary from the symmetric $r = 2/3$ to $r^* \approx 0.77594$ (certified numerically; see <code>certify_rstar.py</code>).</p>
+    <p>The first term $r(1-r^2)$ is a logistic contraction: for $r > 1$ it is negative (pulls inward), for $r < 1$ it is positive (pushes outward). The unit cylinder $r = 1$ is the unique zero — it is the <em>target</em> of the radial dynamics. The second term is the coupling: the exponential factor $e^{-z}$ makes the basin asymmetric. At height $z \gg 1$ the coupling vanishes and the contraction is clean; near $z = 0$ the correction shifts the real basin boundary from the symmetric $r = 2/3$ to $r^* = 0.77594059$ (certified numerically; see <code>certify_rstar.py</code>).</p>
     <p><strong>Physical reading:</strong> a rotating body contracts toward its optimal radius. Too far out, centripetal force pulls it in. Too close, angular momentum pushes it out. The stable orbit is at $r = 1$.</p>
   </div>
 
@@ -178,7 +178,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="inv"><span class="inv-val">2π</span><span class="inv-name">T* · contact period</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">τ · embodiment threshold</span></div>
     <div class="inv"><span class="inv-val">1/3</span><span class="inv-name">ε₀ · Lyapunov stability radius</span></div>
-    <div class="inv"><span class="inv-val">0.77594</span><span class="inv-name">r* · real basin edge</span></div>
+    <div class="inv"><span class="inv-val">0.77594059</span><span class="inv-name">r* · real basin edge</span></div>
     <div class="inv"><span class="inv-val">2</span><span class="inv-name">ε · coupling strength</span></div>
   </div>
 
@@ -203,9 +203,9 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
       <p>Angular momentum generates vertical lift via the contact condition $dz = r^2 d\theta$. At the stable orbit $r = 1$: lift rate = 1. This is not a thrust force — it is a consequence of the contact geometry. The disk does not push against anything. It follows the Reeb field $\partial_z$.</p>
     </div>
     <div class="phys-card">
-      <span class="op">Fold F at r* ≈ 0.77594 · Whitney A₁</span>
+      <span class="op">Fold F at r* = 0.77594059 · Whitney A₁</span>
       <h4>Plasma Corona — The Fold</h4>
-      <p>At the certified basin boundary $r^* \approx 0.77594$ the coupling term $\varepsilon(r-1)^2 e^{-z}$ reaches its critical value. The electromagnetic field folds past the ionisation threshold. Surrounding air molecules are stripped of electrons. Plasma corona discharge. The lights are the fold F made visible.</p>
+      <p>At the certified basin boundary $r^* = 0.77594059$ the coupling term $\varepsilon(r-1)^2 e^{-z}$ reaches its critical value. The electromagnetic field folds past the ionisation threshold. Surrounding air molecules are stripped of electrons. Plasma corona discharge. The lights are the fold F made visible.</p>
     </div>
   </div>
 
@@ -222,7 +222,7 @@ Non-integrability: α ∧ dα = dz∧dr∧dθ · (−2r) ≠ 0
     <div class="math-block">|r(t) − 1| ≤ |r(0) − 1| · e^{−2t}     (Lyapunov rate μ = −2)
 
 z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
-    <p>Outside this basin ($r < r^* \approx 0.77594$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ predicted by the coarse Lyapunov bound. The true boundary r* is certified numerically and governed by the coupling term in Equation III.</p>
+    <p>Outside this basin ($r < r^* = 0.77594059$) the orbit may escape. The basin is asymmetric — the inner boundary is not the symmetric $r = 2/3$ predicted by the coarse Lyapunov bound. The true boundary r* is certified numerically and governed by the coupling term in Equation III.</p>
     <p style="font-size:.83rem; color:var(--dim);">AXLE Issue #12: the Lipschitz estimate closing the inductive step is still <code>sorry</code>. This is the open problem the 3M mini-course leaves in your hands.</p>
   </div>
 
@@ -252,7 +252,7 @@ z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
     <span class="axiom-num">Theorem B.4 · Theorem B.5</span>
     <div class="axiom-title">J<sub>22</sub> = r<sub>s</sub>² &nbsp;·&nbsp; λ<sub>±</sub> = cos(2π/7) ± ½√(32r<sub>s</sub>² + 15r<sub>s</sub> − 10)</div>
     <p>B.4: The (z,z) entry of the Jacobian equals r<sub>s</sub>² exactly (from the saddle condition). B.5: Eigenvalues follow from det(J); discriminant 32r<sub>s</sub>² + 15r<sub>s</sub> − 10 ≈ 4.534 &gt; 0 confirms two real eigenvalues: λ<sub>+</sub> ≈ 1.1097 (unstable) and λ<sub>−</sub> ≈ −0.2443 (stable-saddle).</p>
-    <p style="font-size:.83rem;color:var(--dim);margin-top:.5rem;"><em>The saddle r<sub>s</sub> is now fully resolved. The basin boundary r* ≈ 0.775940575502295 is distinct — the Whitney A₁ fold threshold — and its closed form remains an open analytic problem.</em></p>
+    <p style="font-size:.83rem;color:var(--dim);margin-top:.5rem;"><em>The saddle r<sub>s</sub> is now fully resolved. The basin boundary r* = 0.77594059 is distinct — the Whitney A₁ fold threshold — and its closed form remains an open analytic problem.</em></p>
   </div>
 
   <hr class="gold-rule">
@@ -299,7 +299,7 @@ z(t) → ∞  monotonically  (the system rises forever on Γ)</div>
 
   <p>The horizontal hover — the way OVNIs appear to float parallel to the ground with no visible thrust — is Equation III: $\dot z = r^2$. When the craft reaches the stable radius $r = 1$, lift rate equals 1, driven entirely by angular momentum. Not pushed upward by any force against the air. Following the Reeb field $\partial_z$. The disk does not push. It <em>rises</em>, because the contact geometry of the space it moves through says it must.</p>
 
-  <p>The plasma corona — the light that surrounds the disk at operational speed — is the Fold operator F at the certified basin boundary $r^* \approx 0.77594$. At that radius, the coupling term $\varepsilon(r-1)^2 e^{-z}$ crosses the ionisation threshold. Air molecules are stripped of electrons. The lights are not a power source or a weapon. They are the fold singularity made visible.</p>
+  <p>The plasma corona — the light that surrounds the disk at operational speed — is the Fold operator F at the certified basin boundary $r^* = 0.77594059$. At that radius, the coupling term $\varepsilon(r-1)^2 e^{-z}$ crosses the ionisation threshold. Air molecules are stripped of electrons. The lights are not a power source or a weapon. They are the fold singularity made visible.</p>
 
   <div class="insight-box" style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.25);border-radius:6px;padding:1.3rem 1.5rem;margin:2rem 0;">
     <div style="font-family:'Courier New',monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--law);margin-bottom:.6rem;">The Three-Disk Insight</div>
