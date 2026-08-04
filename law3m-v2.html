@@ -403,8 +403,8 @@ footer a{color:var(--gd);}
 <div class="fig-cap"><strong>Figure 2.</strong> Basin structure of the LAW3M ODE. The r-axis shows three regions: the escape zone (r &lt; r<sub>s</sub>), where all trajectories flow to r = 0; the recovery zone (r<sub>s</sub> &lt; r &lt; r*), where the saddle's stable manifold creates complex dynamics; and the convergence basin (r &gt; r*), where all trajectories converge to Γ. The saddle r<sub>s</sub> has a closed-form expression (Theorem B.1); the basin boundary r* is certified numerically and is an open analytic problem.</div>
 </div>
 
-<p>The basin boundary r* is certified to 15 significant figures by numerical bisection (DOP853 integrator, rtol = 10⁻¹², bisection tolerance 10⁻⁷):</p>
-<div class="eq re">r* ≈ 0.775940575502295 &nbsp;&nbsp;(certified · no closed form known)</div>
+<p>The basin boundary r* is certified to 8 decimal places by numerical bisection (DOP853 integrator, rtol = 10⁻¹², bisection tolerance 10⁻⁷):</p>
+<div class="eq re">r* ≈ 0.77594059 &nbsp;&nbsp;(certified · no closed form known)</div>
 
 <p><strong>Why r* has no known closed form.</strong> The Whitney A₁ fold is a topological object — it marks where the long-time limit map r₀ ↦ lim<sub>t→∞</sub> r(t; r₀) jumps discontinuously. No smooth, analytically computable invariant distinguishes one side of the fold from the other. Additionally, GTCT (§2.4 of the full series) establishes that time flows strictly forward on contact manifolds — backward integration past the fold is inadmissible. See Open Problem O.1 (<a href="open-problem-rstar.html">open-problem-rstar.html</a>).</p>
 
@@ -606,7 +606,7 @@ footer a{color:var(--gd);}
 
 <div class="thm" style="border-left-color:var(--re);border-color:rgba(248,113,113,.18);">
   <div class="thm-label" style="color:var(--re);">Open Problem O.1 — Basin Boundary Closed Form</div>
-  <p>Find a closed-form expression for r* ≈ 0.775940575502295, the Whitney A₁ fold threshold of the LAW3M contact ODE at ε = 2. Prove or disprove that r* is algebraic over ℚ(ε).</p>
+  <p>Find a closed-form expression for r* ≈ 0.77594059, the Whitney A₁ fold threshold of the LAW3M contact ODE at ε = 2. Prove or disprove that r* is algebraic over ℚ(ε).</p>
 </div>
 
 <p>Three obstacles are known: (i) time irreversibility of the contact flow (GTCT); (ii) absence of a first integral; (iii) exponential coupling that resists polynomial elimination at the fold. The most promising analytic approach is Écalle resurgence theory applied to the Borel transform of the ODE near r = 1. Full treatment: <a href="open-problem-rstar.html">open-problem-rstar.html</a>.</p>

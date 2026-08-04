@@ -105,9 +105,9 @@ p strong{color:var(--text);}
   <div class="op-stmt">
     Find a closed-form expression for the basin boundary r* of the LAW3M contact ODE at coupling constant ε = 2.
   </div>
-  <div class="op-cert">r* ≈ 0.775940575502295</div>
+  <div class="op-cert">r* ≈ 0.77594059</div>
   <p style="margin-top:.7rem;font-size:.84rem;color:rgba(232,228,216,.72);">
-    This value is certified to 15 significant figures by numerical integration (DOP853, rtol = 10⁻¹², atol = 10⁻¹⁴, bisection tolerance 10⁻⁷). It is not known whether r* is algebraic, transcendental, a period (in the sense of Kontsevich–Zagier), or genuinely new. No closed-form expression in terms of ε = 2 and the ODE coefficients has been found.
+    This value is certified to 8 decimal places by numerical integration (DOP853, rtol = 10⁻¹², atol = 10⁻¹⁴, bisection tolerance 10⁻⁷). It is not known whether r* is algebraic, transcendental, a period (in the sense of Kontsevich–Zagier), or genuinely new. No closed-form expression in terms of ε = 2 and the ODE coefficients has been found.
   </p>
 </div>
 
@@ -132,7 +132,7 @@ p strong{color:var(--text);}
     </tr>
     <tr>
       <td>Basin boundary r*</td>
-      <td style="font-family:var(--mono);">≈ 0.775940575502295</td>
+      <td style="font-family:var(--mono);">≈ 0.77594059</td>
       <td class="re">⊙ Open — no closed form</td>
       <td>Whitney A₁ fold threshold; global separatrix between escape and convergence basins</td>
     </tr>
@@ -171,22 +171,22 @@ p strong{color:var(--text);}
 <!-- NUMERICAL CERTIFICATION -->
 <h2 class="gr">Numerical Certification</h2>
 
-<p>The value r* ≈ 0.775940575502295 is certified by the following procedure, implemented in Python/SciPy and available in the AXLE repository:</p>
+<p>The value r* ≈ 0.77594059 is certified by the following procedure, implemented in Python/SciPy and available in the AXLE repository:</p>
 
 <div class="lean-block">
 <span class="cm"># Bisection on the long-time limit map r₀ → lim_{t→∞} r(t; r₀)</span>
 <span class="cm"># DOP853 integrator, rtol=1e-12, atol=1e-14, T=500</span>
 <span class="cm"># Bisection between r_lo=0.77 (escape) and r_hi=0.78 (convergence)</span>
-<span class="cm"># Termination: |r_hi - r_lo| < 1e-7 → 15 significant figures</span>
+<span class="cm"># Termination: |r_hi - r_lo| < 1e-7 → ~7 significant figures</span>
 
-<span class="id">r_star</span> = 0.775940575502295  <span class="cm"># certified output</span>
+<span class="id">r_star</span> = 0.77594059  <span class="cm"># certified output</span>
 <span class="cm"># Independent check: r_star satisfies</span>
 <span class="cm">#   trajectory from r₀ = r_star ± 1e-8 diverges/converges within T=200</span>
 </div>
 
 <p><strong>Consistency checks passed:</strong></p>
-<div class="eq gr">r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450 &lt; r* ≈ 0.7759 &lt; 1 − ε₀ = 2/3 (outer basin)</div>
-<p style="font-size:.82rem;color:var(--dim);">Note: ε₀ = 1/3 is the Lyapunov stability radius derived from V = (r−1)²/2; 1 − ε₀ = 2/3 ≈ 0.667. The basin boundary r* &gt; 2/3 is consistent — the Lyapunov estimate is conservative and the true basin extends further.</p>
+<div class="eq gr">r<sub>s</sub> = 2cos(3π/7) ≈ 0.4450 &lt; 1 − ε₀ = 2/3 ≈ 0.667 &lt; r* ≈ 0.77594059 &lt; κ* = √(7/9) ≈ 0.8819 &lt; 1</div>
+<p style="font-size:.82rem;color:var(--dim);">Note: ε₀ = 1/3 is the Lyapunov stability radius derived from V = (r−1)²/2; 1 − ε₀ = 2/3 ≈ 0.667. The basin boundary satisfies r* &gt; 2/3, which means the symmetric Lyapunov ball is <em>too permissive</em> on the inner side: it certifies convergence for r(0) ∈ (0.667, 0.77594059), every point of which in fact escapes. The true inner basin is strictly smaller than the estimate claims.</p>
 
 <!-- WHAT A RESOLUTION WOULD LOOK LIKE -->
 <h2 class="pu">What a Resolution Would Look Like</h2>
@@ -208,7 +208,7 @@ p strong{color:var(--text);}
 <div class="lean-block">
 <span class="cm">-- Current AXLE state (GTCT.lean)</span>
 <span class="cm">-- r* is referenced only as a numerical constant:</span>
-<span class="id">def r_star</span> : ℝ := <span class="num">0.775940575502295</span>
+<span class="id">def r_star</span> : ℝ := <span class="num">0.77594059</span>
 
 <span class="cm">-- The basin characterisation (proved):</span>
 <span class="kw">theorem</span> <span class="id">basin_char</span> (r₀ : ℝ) (hr : r₀ &gt; <span class="id">r_star</span>) :

@@ -170,7 +170,7 @@ a{color:var(--t);text-decoration:none;}
   <!-- ABSTRACT -->
   <div class="sec">
     <div class="sec-head">Abstract</div>
-    <p>We present five closed-form results — Theorems B.1–B.5 — on the saddle equilibrium of the LAW3M contact ODE, a rotating electromagnetic energy system governed by contact geometry on (ℝ³, dz − r²dθ). The saddle r-coordinate satisfies a cubic with trigonometric solution r<sub>s</sub> = 2cos(3π/7); the Jacobian trace at the saddle equals 2cos(2π/7); and the eigenvalues are explicit cosine expressions. All five results are proved in closed form from the cubic minimal polynomial; no numerical methods are invoked. The basin boundary r* ≈ 0.775940575502295 — the Whitney A₁ fold threshold separating convergent and escaping trajectories — is identified as a transcendental object whose closed form is an open analytic problem. These results fill a gap in the contact-ODE stability literature: no prior work gave closed-form saddle analysis for systems with exponential coupling of this structure.</p>
+    <p>We present five closed-form results — Theorems B.1–B.5 — on the saddle equilibrium of the LAW3M contact ODE, a rotating electromagnetic energy system governed by contact geometry on (ℝ³, dz − r²dθ). The saddle r-coordinate satisfies a cubic with trigonometric solution r<sub>s</sub> = 2cos(3π/7); the Jacobian trace at the saddle equals 2cos(2π/7); and the eigenvalues are explicit cosine expressions. All five results are proved in closed form from the cubic minimal polynomial; no numerical methods are invoked. The basin boundary r* ≈ 0.77594059 — the Whitney A₁ fold threshold separating convergent and escaping trajectories — is identified as a transcendental object whose closed form is an open analytic problem. These results fill a gap in the contact-ODE stability literature: no prior work gave closed-form saddle analysis for systems with exponential coupling of this structure.</p>
   </div>
 
   <!-- THE SYSTEM -->
@@ -207,7 +207,7 @@ a{color:var(--t);text-decoration:none;}
     <p><strong>Plasma confinement:</strong> The Whitney fold at r* controls the ionisation threshold. Below r*, the coupling term drives exponential escape — the plasma corona discharge is the fold made visible.</p>
     <p><strong>Magnetic reconnection:</strong> The Sweet-Parker threshold maps to the fold at r* (poster companion: MHD reconnection, this conference). The unified geometric invariant controls three systems simultaneously.</p>
     <div class="badge-row">
-      <div class="badge gd"><div class="v">r* ≈ 0.7759</div><div class="vl">Whitney Fold · Safety Margin</div></div>
+      <div class="badge gd"><div class="v">r* ≈ 0.77594059</div><div class="vl">Whitney Fold · Safety Margin</div></div>
       <div class="badge or"><div class="v">ε = 2 = τ</div><div class="vl">Contact Fixed Point</div></div>
     </div>
   </div>
@@ -302,7 +302,7 @@ a{color:var(--t);text-decoration:none;}
         <tr><td>tr(J)|<sub>s</sub></td><td>2cos(2π/7) ≈ 1.2470</td><td style="color:#34d399;">✓ Closed form (B.3)</td><td>Divergence at saddle</td></tr>
         <tr><td>λ<sub>+</sub></td><td>≈ 1.1097</td><td style="color:#34d399;">✓ Exact formula (B.5)</td><td>Unstable manifold rate</td></tr>
         <tr><td>λ<sub>−</sub></td><td>≈ −0.2443</td><td style="color:#34d399;">✓ Exact formula (B.5)</td><td>Stable saddle direction</td></tr>
-        <tr><td>r*</td><td>0.775940575502295</td><td style="color:#f97316;">⊙ Numerical only</td><td>Whitney A₁ fold · basin edge</td></tr>
+        <tr><td>r*</td><td>0.77594059</td><td style="color:#f97316;">⊙ Numerical only</td><td>Whitney A₁ fold · basin edge</td></tr>
         <tr><td>ε₀</td><td>1/3</td><td style="color:#34d399;">✓ Lyapunov estimate</td><td>Lyapunov stability radius (V=(r−1)²/2)</td></tr>
         <tr><td>μ</td><td>−2</td><td style="color:#34d399;">✓ Lyapunov rate</td><td>Convergence exponent</td></tr>
         <tr><td>g<sub>33</sub></td><td>33</td><td style="color:#34d399;">✓ Lean 4 decide</td><td>Orthogonality constraints</td></tr>
@@ -319,7 +319,7 @@ a{color:var(--t);text-decoration:none;}
   <div class="sec">
     <div class="sec-head re">Open Problem — The Basin Boundary r*</div>
     <div class="box re">
-      <p><strong>r* ≈ 0.775940575502295</strong> is certified to 15 significant figures (DOP853, rtol=10⁻¹², bisection tol=10⁻⁷). It is NOT the saddle. It is the Whitney A₁ fold threshold of the operator F in the chain G = U∘F∘K∘C.</p>
+      <p><strong>r* ≈ 0.77594059</strong> is certified to 8 decimal places (DOP853, rtol=10⁻¹², bisection tol=10⁻⁷). It is NOT the saddle. It is the Whitney A₁ fold threshold of the operator F in the chain G = U∘F∘K∘C.</p>
       <p style="margin-top:.4rem;"><strong>Why no closed form exists:</strong> The fold F is irreversible — its pre-image is not unique. GTCT time flows strictly forward (Whitney A₁ singularity, per chIV-time.html §VI). Backward integration is inadmissible. Therefore r* cannot be recovered algebraically by inverting any map in the chain.</p>
       <p style="margin-top:.4rem;font-style:italic;color:rgba(248,113,113,.8);">A closed-form expression for r* in terms of ε = 2 and the ODE coefficients is an open analytic problem. Theorems B.1–B.5 solve the saddle; the fold boundary remains transcendental.</p>
     </div>
