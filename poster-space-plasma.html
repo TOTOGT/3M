@@ -308,7 +308,7 @@ a{color:var(--t);text-decoration:none;}
   <!-- WHITNEY FOLD -->
   <div class="sec">
     <div class="sec-head pu">Whitney A₁ Fold at r*</div>
-    <p>The coarse Lyapunov bound predicts a basin boundary at r = 2/3. The certified boundary r* = 0.776 lies strictly above this estimate. The discrepancy has a geometric explanation: the projection of the basin boundary onto the radial axis is not an embedding — it folds. At r*, two distinct convergence paths in the full (r, z) phase space project to a single point on the r-axis, producing a Whitney A₁ fold singularity.</p>
+    <p>The coarse Lyapunov bound predicts a basin boundary at r = 2/3. The certified boundary r* = 0.77594059 lies strictly above this estimate. The discrepancy has a geometric explanation: the projection of the basin boundary onto the radial axis is not an embedding — it folds. At r*, two distinct convergence paths in the full (r, z) phase space project to a single point on the r-axis, producing a Whitney A₁ fold singularity.</p>
     <p>The fold is detected by two signatures: <strong>(1)</strong> the escape time diverges logarithmically as r → r*⁺ from above, precisely as predicted by A₁ fold theory; <strong>(2)</strong> the derivative F'(r*) of the boundary function F is positive (F' > 0), confirming that r* is an unstable fixed point of the projected dynamics. Both signatures are verified numerically in the certification script.</p>
     <p>The structural consequence is immediate: no smooth local coordinate change can eliminate the fold. The basin boundary is not an artifact of the coupling strength or integration tolerance — it is a geometric invariant of the contact manifold structure.</p>
   </div>
@@ -318,7 +318,7 @@ a{color:var(--t);text-decoration:none;}
     <div class="sec-head or">Physical Interpretation — Rotating Plasma</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;">
       <div class="box or">
-        <p><strong>Corona discharge at r*.</strong> The coupling term 2(r−1)e⁻ᶻ models ionisation dynamics of a rotating electromagnetic disk. At r = r* = 0.776, the coupling reaches ionisation threshold. Plasma corona discharge occurs at the Whitney fold — a structural prediction, not a parameter fit. The fold geometry forces the plasma boundary to be sharp and reproducible regardless of initial conditions.</p>
+        <p><strong>Corona discharge at r*.</strong> The coupling term 2(r−1)e⁻ᶻ models ionisation dynamics of a rotating electromagnetic disk. At r = r* = 0.77594059, the coupling reaches ionisation threshold. Plasma corona discharge occurs at the Whitney fold — a structural prediction, not a parameter fit. The fold geometry forces the plasma boundary to be sharp and reproducible regardless of initial conditions.</p>
       </div>
       <div class="box">
         <p><strong>Lift profile ż = r².</strong> The contact condition dz = r²dθ fixes the hover profile directly. At the helical attractor Γ (r=1), ż = 1 and lift is sustained indefinitely. At r*, ż ≈ 0.602. The three-disk geometry is not engineered — it follows from the contact form as the minimal realisation of the manifold at 120° symmetry. The disk cross-section is geometrically inevitable.</p>
@@ -361,7 +361,7 @@ a{color:var(--t);text-decoration:none;}
         <div class="hr-val" style="color:#f87171;">Γ</div>
       </div>
     </div>
-    <p style="margin-top:.5rem;">The r* = 0.776 boundary lies above the Lyapunov bound 2/3 by a gap of 0.109 — more than 16% of the unit interval. This asymmetry is not numerical noise; it is a theorem consequence of the Whitney fold. The hierarchy is asserted and verified in certify_rstar.py (PASS).</p>
+    <p style="margin-top:.5rem;">The r* = 0.77594059 boundary lies above the Lyapunov bound 2/3 by a gap of 0.109 — more than 16% of the unit interval. This asymmetry is not numerical noise; it is a theorem consequence of the Whitney fold. The hierarchy is asserted and verified in certify_rstar.py (PASS).</p>
   </div>
 
   <!-- TRISKELION -->

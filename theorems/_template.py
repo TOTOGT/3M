@@ -161,7 +161,7 @@ b1_gap = """
 
 b1_physics = """
 <div class="box gr">
-  <p><strong>Rotating EM energy systems:</strong> Any conducting rotor reaching orbital resonance at r = 1 with contact coupling ε = 2 has its saddle equilibrium at exactly r<sub>s</sub> = 2cos(3π/7) ≈ 0.445. This gives an analytically exact safety boundary: perturbations with r &lt; r<sub>s</sub> lie in the saddle's unstable manifold; perturbations above r<sub>s</sub> but below r* ≈ 0.776 are recoverable.</p>
+  <p><strong>Rotating EM energy systems:</strong> Any conducting rotor reaching orbital resonance at r = 1 with contact coupling ε = 2 has its saddle equilibrium at exactly r<sub>s</sub> = 2cos(3π/7) ≈ 0.445. This gives an analytically exact safety boundary: perturbations with r &lt; r<sub>s</sub> lie in the saddle's unstable manifold; perturbations above r<sub>s</sub> but below r* ≈ 0.77594059 are recoverable.</p>
   <p style="margin-top:.6rem;"><strong>Plasma confinement:</strong> The r<sub>s</sub> threshold marks the inner edge of the recovery zone. Below r<sub>s</sub>, plasma discharge collapses irreversibly. The value 2cos(3π/7) is now a fixed design parameter for contact-geometric confinement systems.</p>
 </div>
 """
