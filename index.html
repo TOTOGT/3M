@@ -568,6 +568,40 @@ footer a:hover { color:#c8a96e; }
 
 <span class="lk">end</span> <span class="lt">GCTC</span></div>
 
+<p style="margin-top:1.5rem;"><b>Added 29 August 2026 &mdash;
+<a href="LogisticRadial.lean" style="color:#f97316;font-weight:700;">LogisticRadial.lean</a>.</b>
+In the block above, <code>mu_max</code> is <em>declared</em> to be &minus;2. It does not have to be:
+it follows from the radial field. The new file derives it, and locates where the sigmoid enters.</p>
+
+<ul style="line-height:1.85;">
+  <li><code>sq_is_logistic</code> &mdash; with u = r&sup2;, the radial law &#7771; = r(1&minus;r&sup2;)
+      becomes <em>exactly</em> the logistic equation u&#775; = 2u(1&minus;u). This is what the word
+      &ldquo;logistic&rdquo; on <a href="law3m.html" style="color:#f97316;">LAW3M</a> means, checked
+      rather than asserted.</li>
+  <li><code>mu_max_eq_neg_two</code> &mdash; linearising at the limit cycle r = 1 gives exactly
+      &minus;2, the transverse Lyapunov exponent. Derived, not declared.</li>
+  <li><code>sigmoid2_solves_logistic</code> &mdash; t &#8614; 1/(1+e<sup>&minus;2t</sup>) solves it.
+      The neuron&rsquo;s a = 1/(1+e<sup>&minus;z</sup>) appears here as the <em>time course</em> of the
+      approach to the cycle, with z = 2t.</li>
+  <li><code>Neuron.sigmoid_injective</code>, <code>Neuron.unit_invariant_on_kernel</code> &mdash;
+      &sigma; is strictly monotone, hence injective: it is <em>not</em> a fold. A unit forgets only
+      along the kernel of w. The collapse is in the sum, not in the squash.</li>
+</ul>
+
+<p><b>Status.</b> Compiled against Mathlib, lean4 v4.33.1, 29 August 2026. All ten declarations
+probed with <code>#print axioms</code>, each reporting exactly
+<code>[propext, Classical.choice, Quot.sound]</code> &mdash; no <code>sorryAx</code>, no
+<code>native_decide</code>. Tier 1 by the
+<a href="https://sluing.github.io/neuro/SBM/1080.html" style="color:#f97316;">registry</a> definition.
+Unlike the block above, this file carries no <code>sorry</code>. It also states what it does
+<em>not</em> establish: the &minus;2 is forced by the cubic normal form, so it is a structural
+consequence and not independent evidence for the physical reading of LAW3M.</p>
+
+<p style="margin-top:1rem;">See also:
+<a href="https://totogt.github.io/AXLE/Journal/hexagon-and-rings.html" style="color:#f97316;">Hexagon &amp; Rings</a>
+&mdash; the same attractor as an exhibition piece, where ambient sound moves Saturn&rsquo;s polar jet
+and leaves the ring plane untouched.</p>
+
 <!-- §8 -->
 <div class="sec-num" id="s8">§ 8</div>
 <h2 class="sec">Connection to the GTCT Operator Chain</h2>
