@@ -43,7 +43,13 @@
   no `sorryAx`, no `native_decide`. Tier 1 by the registry definition. Regenerate
   with `lake env lean LogisticRadial.lean` in any project that requires Mathlib.
 -/
-import Mathlib
+import Mathlib.Analysis.Calculus.Deriv.Basic
+import Mathlib.Analysis.Calculus.Deriv.Pow
+import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Inv
+import Mathlib.Analysis.SpecialFunctions.ExpDeriv
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+import Mathlib.Tactic
 
 open Real
 
